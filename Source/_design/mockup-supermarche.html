@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<!-- MOCKUP v0 — Supermarché marketplace · design clone of LEGION proto aesthetics -->
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SUPERMARCHÉ — mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b1018; --header:#141b28; --card:#161f2e; --card2:#101722;
+    --line:#263349; --cyan:#35b6e8; --cyan-dim:rgba(53,182,232,.35);
+    --text:#e8eef5; --muted:#8b98ab; --green:#34d399; --red:#e35d6a;
+    --gold:#e8c95a;
+  }
+  *{box-sizing:border-box;margin:0}
+  body{background:var(--bg);color:var(--text);font-family:Rajdhani,system-ui,sans-serif;font-size:16px}
+  .tech{font-family:Audiowide,'Segoe UI',sans-serif}
+
+  /* ---------- header ---------- */
+  header{display:flex;align-items:center;gap:12px;background:var(--header);
+    border-bottom:1px solid var(--line);padding:10px 28px;position:sticky;top:0;z-index:5}
+  .logo-tile{width:42px;height:42px;border-radius:9px;display:grid;place-items:center;
+    background:linear-gradient(145deg,#1c94c9,#0d5f8a);font-size:22px}
+  .brand h1{font-size:24px;letter-spacing:1px}
+  .brand p{color:var(--cyan);font-size:13px;margin-top:-2px}
+  nav{margin-left:auto;display:flex;gap:26px;font-weight:600;font-size:15px}
+  nav a{color:var(--text);text-decoration:none}
+  nav a.on{color:var(--cyan)}
+  .live{margin-left:26px;color:var(--muted);font-size:14px;white-space:nowrap}
+  .live i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);
+    margin-right:6px;box-shadow:0 0 8px var(--green)}
+
+  /* ---------- banner pill ---------- */
+  .banner{display:flex;justify-content:center;padding:22px 0 8px}
+  .pill{border:1px solid var(--cyan-dim);border-radius:999px;background:#0f1522;
+    color:var(--cyan);padding:9px 26px;font-size:14px;letter-spacing:.5px}
+
+  /* ---------- toolbar ---------- */
+  .toolbar{display:grid;grid-template-columns:1fr 200px 200px auto;gap:18px;
+    max-width:1360px;margin:18px auto 0;padding:0 28px;align-items:end}
+  label{display:block;color:var(--muted);font-size:14px;margin-bottom:6px}
+  .search{display:flex;align-items:center;gap:10px;background:#fff;border-radius:12px;padding:12px 16px}
+  .search svg{flex:none}
+  .search input{border:0;outline:0;background:transparent;width:100%;font:inherit;color:#0b1018}
+  select{width:100%;background:#0f1522;border:1px solid var(--line);border-radius:10px;
+    color:var(--text);font:inherit;padding:12px 14px}
+  .cartbtn{background:var(--card);border:1px solid var(--cyan-dim);border-radius:12px;
+    color:var(--text);padding:12px 18px;font:inherit;font-weight:600;white-space:nowrap}
+  .cartbtn b{color:var(--gold)}
+
+  /* ---------- status row ---------- */
+  .row{max-width:1360px;margin:18px auto 0;padding:0 28px;display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .row h2{font-size:26px}
+  .count{color:var(--muted);margin-left:auto;font-size:14px}
+  .scanning{color:var(--muted);font-size:13px;letter-spacing:1px}
+  .scanning i{color:var(--cyan)}
+
+  /* ---------- aisle chips ---------- */
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+  .chip{border:1px solid var(--line);background:#0f1522;color:var(--muted);
+    border-radius:999px;padding:6px 16px;font-size:14px;font-weight:600}
+  .chip.on{border-color:var(--cyan);color:var(--cyan)}
+  .chip.illegal{border-color:rgba(227,93,106,.6);color:var(--red)}
+
+  /* ---------- product grid ---------- */
+  .grid{max-width:1360px;margin:20px auto 60px;padding:0 28px;
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:22px}
+  .prod{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    overflow:hidden;display:flex;flex-direction:column}
+  .prod .cap{height:118px;background:var(--card2);position:relative;
+    border-bottom:1px solid var(--line);display:grid;place-items:center}
+  .prod .cap img{width:100%;height:100%;object-fit:cover}
+  .cat{position:absolute;left:12px;top:12px;border:1px solid var(--cyan-dim);border-radius:999px;
+    background:rgba(10,16,25,.85);color:var(--cyan);font-size:12px;font-weight:700;padding:3px 12px;letter-spacing:.5px}
+  .arrow{position:absolute;right:12px;top:8px;color:var(--cyan);font-size:22px}
+  .permis{position:absolute;right:10px;bottom:10px;font-size:11px;font-weight:700;letter-spacing:1px;
+    border-radius:6px;padding:3px 8px;background:rgba(10,16,25,.85)}
+  .pm-M{color:var(--red);border:1px solid rgba(227,93,106,.5)}
+  .pm-S{color:var(--gold);border:1px solid rgba(232,201,90,.5)}
+  .pm-I{color:#ff7b7b;border:1px solid rgba(227,93,106,.8)}
+  .pm-P{color:var(--cyan);border:1px solid var(--cyan-dim)}
+  .pm-V{color:#c084fc;border:1px solid rgba(192,132,252,.5)}
+  .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .name{font-size:20px;letter-spacing:.5px}
+  .desc{color:var(--muted);font-size:14.5px;line-height:1.45}
+  .stats{display:flex;gap:6px;flex-wrap:wrap}
+  .st{border:1px solid var(--line);border-radius:6px;background:#0f1522;color:var(--text);
+    font-size:12.5px;font-weight:600;padding:2px 9px}
+  .st b{color:var(--cyan)}
+  .foot{margin-top:auto;display:flex;align-items:center;gap:10px}
+  .price{font-size:22px;font-weight:700;color:var(--gold)}
+  .price small{color:var(--muted);font-size:12px;font-weight:600;margin-left:2px}
+  .price.free{color:var(--green)}
+  .price.ill{color:var(--red);font-size:15px}
+  .add{margin-left:auto;background:var(--cyan);border:0;border-radius:9px;color:#06121c;
+    font:inherit;font-weight:700;font-size:14px;padding:9px 16px;cursor:pointer;letter-spacing:.5px}
+  .add.ghost{background:transparent;color:var(--cyan);border:1px solid var(--cyan-dim)}
+  .promo{position:absolute;left:0;top:14px;background:var(--red);color:#fff;font-size:11px;
+    font-weight:700;padding:3px 10px;border-radius:0 6px 6px 0;letter-spacing:.5px}
+  .faction{border-top:2px solid transparent}
+  .f-ares{border-top-color:var(--red)}
+  .f-alpha{border-top-color:var(--cyan)}
+
+  footer{max-width:1360px;margin:0 auto;padding:26px 28px;border-top:1px solid var(--line);
+    color:var(--muted);font-size:13px;display:flex;gap:20px;align-items:center}
+  footer .pill{font-size:12px;padding:5px 14px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-tile">🛒</div>
+  <div class="brand">
+    <h1 class="tech">SUPERMARCHÉ</h1>
+    <p class="tech">Hub marchand certifié · Système de Sirius</p>
+  </div>
+  <nav>
+    <a class="on" href="#">Catalogue</a>
+    <a href="#">Rayons</a>
+    <a href="#">Contrebande</a>
+    <a href="#">Panier</a>
+  </nav>
+  <span class="live"><i></i>Stock live</span>
+</header>
+
+<div class="banner"><span class="pill tech">Prix en Crédits (₡) — taxes incluses, ni repris ni échangés</span></div>
+
+<div class="toolbar">
+  <div>
+    <label>Rechercher un article</label>
+    <div class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8b98ab" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input placeholder="monowire, combi, fusil…">
+    </div>
+  </div>
+  <div><label>Rayon</label><select><option>Tous les rayons</option></select></div>
+  <div><label>Permis</label><select><option>Aucun filtrage</option></select></div>
+  <button class="cartbtn">PANIER · 4 art. — <b>47 ₡</b></button>
+</div>
+
+<div class="row">
+  <h2 class="tech">Articles en rayon</h2>
+  <div class="chips" style="width:100%">
+    <span class="chip on">Tout</span><span class="chip">Starter packs</span><span class="chip">Mods & implants</span>
+    <span class="chip">Cosmétique</span><span class="chip">Vêtements</span><span class="chip">Skillsofts</span>
+    <span class="chip">Armes cinétiques</span><span class="chip">Armes à énergie</span><span class="chip">Armures</span>
+    <span class="chip">Explosifs</span><span class="chip">Vaisseaux</span><span class="chip">Pokebots</span>
+    <span class="chip illegal">◉ Sous le comptoir</span>
+    <span class="count">● 187 références · <span class="scanning"><i>INVENTAIRE SYNCHRONISÉ</i></span></span>
+  </div>
+</div>
+
+<main class="grid">
+
+  <!-- starter -->
+  <article class="prod">
+    <div class="cap"><span class="promo">−10% !</span><span class="cat">Starter pack</span><span class="arrow">→</span>
+      <span class="permis pm-M">PERMIS M</span></div>
+    <div class="body">
+      <div class="name tech">Ares Legion</div>
+      <div class="desc">Corps 5, Processeur 4, Réflexes 1, overclock 1, batterie 3, vision IR, armure dermale, ossature+, nopain, smartblood, fusil d’assaut (gel), magknife, armure Ares.</div>
+      <div class="stats"><span class="st"><b>20</b> art.</span><span class="st">nation <b>Ares</b></span></div>
+      <div class="foot"><span class="price">18 <small>₡ promo</small></span><button class="add">AJOUTER</button></div>
+    </div>
+  </article>
+
+  <article class="prod">
+    <div class="cap"><span class="cat">Starter pack</span>
+      <span class="permis pm-P">ALPHA</span></div>
+    <div class="body">
+      <div class="name tech">Alpha Scholarship</div>
+      <div class="desc">Corps 5 / Processeur 4, overclock 1, bricokit, medkit, imprimante, tous les skillsofts à 4. Financez votre rêve transhumain.</div>
+      <div class="stats"><span class="st"><b>0</b> ₡</span><span class="st">citoyenneté <b>Alpha</b></span></div>
+      <div class="foot"><span class="price free">GRATUIT</span><button class="add">AJOUTER</button></div>
+    </div>
+  </article>
+
+  <!-- mod -->
+  <article class="prod f-alpha">
+    <div class="cap"><span class="cat">Mods & implants</span><span class="permis">S</span></div>
+    <div class="body">
+      <div class="name tech">Smartblood</div>
+      <div class="desc">Arrête le saignement, prévient les infections et immunise aux toxines standard. Programmable.</div>
+      <div class="stats"><span class="st">sang <b>auto</b></span><span class="st">mod <b>int.</b></span></div>
+      <div class="foot"><span class="price">2 <small>₡</small></span><button class="add">AJOUTER</button></div>
+    </div>
+  </article>
+
+  <article class="prod">
+    <div class="cap"><span class="cat">Mods & implants</span><span class="permis pm-S">PERMIS S</span></div>
+    <div class="body">
+      <div class="name tech">Nopain</div>
+      <div class="desc">Pas de malus de douleur. Dangereux pour la santé.</div>
+      <div class="stats"><span class="st">douleur <b>ignore</b></span></div>
+      <div class="foot"><span class="price">1 <small>₡</small></span><button class="add">AJOUTER</button></div>
+    </div>
+  </article>
+
+  <!-- weapon melee -->
+  <article class="prod">
+    <div class="cap"><span class="cat">Armes · mêlée</span></div>
+    <div class="body">
+      <div class="name tech">Monowire</div>
+      <div class="desc">Fil quasi-monocouche, tranche l’armure comme du beurre. Se love dans un contenant de la taille d’un doigt. La direction décline toute responsabilité en cas de blessure à soi-même.</div>
+      <div class="stats"><span class="st">Dég <b>0+</b></span><span class="st">PA <b>5</b></span><span class="st">portée <b>5 m</b></span><span class="st">taille <b>−3</b></span></div>
+      <div class="foot"><span class="price">5 <small>₡</small></span><button class="add">AJOUTER</button></div>
+    </div>
+  </article>
+
+  <!-- weapon kinetic -->
+  <article class="prod">
+    <div class="cap"><span class="cat">Armes · cinétique</span></div>
+    <div class="body">
+      <div class="name tech">Precision rifle</div>
+      <div class="desc">Coilgun. Sonic crack, impact assourdissant. 2 mm, e0 kJ.</div>
+      <div class="stats"><span class="st">Dég <b>3+</b></span><span class="st">PA <b>4</b></span><span class="st">cad <b>x1</b></span><span class="st">portée <b>1 km</b></span></div>
+      <div class="foot"><span class="price">5 <small>₡</small></span><button class="add">AJOUTER</button></div>
+    </div>
+  </article>
+
+  <!-- electronics -->
+  <article class="prod">
+    <div class="cap"><span class="cat">Électronique</span><span class="permis pm-M">PERMIS M</span></div>
+    <div class="body">
+      <div class="name tech">Jammer</div>
+      <div class="desc">Surcharge les ondes sauf sur une bande. −i/2 dés à toutes communications non autorisées. Indice = i.</div>
+      <div class="stats"><span class="st">portée <b>zone</b></span><span class="st">effet <b>−i/2D</b></span></div>
+      <div class="foot"><span class="price">i <small>₡</small></span><button class="add">AJOUTER</button></div>
+    </div>
+  </article>
+
+  <!-- explosive illegal -->
+  <article class="prod">
+    <div class="cap" style="background:#1a0f14"><span class="cat" style="border-color:rgba(227,93,106,.5);color:var(--red)">Explosifs · classifié</span>
+      <span class="permis pm-I">INTERDIT</span></div>
+    <div class="body">
+      <div class="name tech">Nuke</div>
+      <div class="desc">+ radiations létales. Dégâts 5000 → 250 m. Vente interdite sur tous les marchés certifiés.</div>
+      <div class="stats"><span class="st">TNT eq <b>e7 kg</b></span><span class="st">zone <b>5 km</b></span></div>
+      <div class="foot"><span class="price ill">☠ RÉQUISITION</span><button class="add ghost">DOSSIER</button></div>
+    </div>
+  </article>
+
+  <!-- ship -->
+  <article class="prod f-ares">
+    <div class="cap"><img src="Attachments/Hyperion.webp" alt="Ares Hyperion"><span class="cat">Vaisseaux</span></div>
+    <div class="body">
+      <div class="name tech">Ares Hyperion</div>
+      <div class="desc">Cuirassé. Taille 7, 1 Mt, 200 × 800 m, Propulsion 5, CPU 5, Sensors 5.</div>
+      <div class="stats"><span class="st">taille <b>7</b></span><span class="st">1 <b>Mt</b></span><span class="st">armure <b>4</b></span></div>
+      <div class="foot"><span class="price ill">INDISPONIBLE</span><button class="add ghost">BROCHURE</button></div>
+    </div>
+  </article>
+
+  <!-- suit -->
+  <article class="prod">
+    <div class="cap"><span class="cat">Combinaisons</span><span class="permis pm-M">PERMIS M</span></div>
+    <div class="body">
+      <div class="name tech">Combi Predator</div>
+      <div class="desc">Hermétique (1 semaine), 0g, camouflage optique et thermique. Protection = armure de combat.</div>
+      <div class="stats"><span class="st">cin <b>2</b></span><span class="st">therm <b>+1</b></span><span class="st">0g</span></div>
+      <div class="foot"><span class="price">5 <small>₡</small></span><button class="add">AJOUTER</button></div>
+    </div>
+  </article>
+
+  <!-- habitat -->
+  <article class="prod">
+    <div class="cap"><span class="cat">Immobilier</span><span class="permis pm-V">VIP</span></div>
+    <div class="body">
+      <div class="name tech">Terra VIP</div>
+      <div class="desc">Arcologie paradisiaque. Indice 6. La corpo vous déroule le tapis rouge dans tout le système.</div>
+      <div class="stats"><span class="st"> Terra <b>VIP</b></span></div>
+      <div class="foot"><span class="price">1k+ <small>₡</small></span><button class="add">AJOUTER</button></div>
+    </div>
+  </article>
+
+  <!-- pokebot -->
+  <article class="prod">
+    <div class="cap"><span class="cat">Pokebots</span><span class="permis pm-S">PERMIS S</span></div>
+    <div class="body">
+      <div class="name tech">Pokebot (évolution)</div>
+      <div class="desc">Corps 5, Proc 4, réflexes 2, overclock 1, ossature renforcée + armure dermale. Options vendues séparément.</div>
+      <div class="stats"><span class="st">taille <b>−2→0</b></span><span class="st">É+<b>5</b>/P<b>4</b></span></div>
+      <div class="foot"><span class="price">20 <small>₡</small></span><button class="add">AJOUTER</button></div>
+    </div>
+  </article>
+
+</main>
+
+<footer>
+  <span class="pill tech">© 2491 Supermarché Général — Franchise Sirius</span>
+  <span>Toutes les transactions sont monitorées par le Consortium. La modération se réserve le droit de réquisition.</span>
+</footer>
+
+</body>
+</html>

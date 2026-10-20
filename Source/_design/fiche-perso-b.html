@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Fiche — Transhumains</title>
+<style>
+:root{
+  --fond:#06090f; --surf:#0d1420; --surf2:#0b1220;
+  --ligne:#3f88bd; --linha:rgba(63,136,189,.42); --ligne3:rgba(63,136,189,.16);
+  --texte:#d5e3ee; --texte2:#7f97ad;
+  --accent:#63e0ff; --accA:rgba(99,224,255,.14);
+  --alert:#ffbb55; --alertA:rgba(255,187,85,.5); --crit:#ff7867; --ok:#5fdcae;
+  --inv:#06090f;
+  --mono:"Cascadia Mono","Consolas","Menlo",monospace;
+  --sans:"Bahnschrift","Helvetica Neue",Verdana,sans-serif;
+  --r:6px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;overflow-x:hidden}
+body{
+  background:
+    radial-gradient(900px 420px at 110% -6%, rgba(63,136,189,.07), transparent 62%),
+    radial-gradient(700px 380px at -8% 108%, rgba(99,224,255,.05), transparent 60%),
+    var(--fond);
+  color:var(--texte); font-family:var(--sans); font-size:13.5px; line-height:1.38;
+  min-height:100svh; -webkit-text-size-adjust:100%;
+}
+[hidden]{display:none !important}
+.num{font-family:var(--mono); font-variant-numeric:tabular-nums}
+.equerre{
+  background-color:var(--surf);
+  background-image:
+    linear-gradient(var(--ligne) 0 0), linear-gradient(var(--ligne) 0 0),
+    linear-gradient(var(--ligne) 0 0), linear-gradient(var(--ligne) 0 0),
+    linear-gradient(var(--ligne) 0 0), linear-gradient(var(--ligne) 0 0),
+    linear-gradient(var(--ligne) 0 0), linear-gradient(var(--ligne) 0 0);
+  background-position:0 0, 0 0, 100% 0, 100% 0, 0 100%, 0 100%, 100% 100%, 100% 100%;
+  background-size:14px 2px, 2px 14px, 14px 2px, 2px 14px, 14px 2px, 2px 14px, 14px 2px, 2px 14px;
+  background-repeat:no-repeat;
+}
+#rail{position:sticky; top:0; z-index:6; display:flex; gap:8px; overflow-x:auto;
+  padding:10px 12px 8px; scrollbar-width:none;
+  background:linear-gradient(180deg, var(--fond) 86%, rgba(6,9,15,0));}
+#rail::-webkit-scrollbar{display:none}
+.rchip{flex:0 0 auto; min-width:66px; min-height:48px; padding:7px 9px 6px; text-align:left;
+  border:1px solid var(--ligne3); border-radius:var(--r); background:var(--surf);
+  color:var(--texte); font-family:var(--mono); font-size:10.5px; line-height:1.2;
+  display:flex; flex-direction:column; justify-content:space-between; gap:3px; cursor:pointer}
+.rchip b{font-weight:600; max-width:88px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.rchip .tag{font-size:8.5px; color:var(--texte2); letter-spacing:.06em; font-style:normal}
+.rchip.cur{border-color:var(--accent); background:var(--surf2); color:#bfeaff; box-shadow:0 0 0 1px var(--accA)}
+.rchip.cur .tag{color:var(--accent)}
+.rchip .tag.og{color:var(--alert)}
+#hero{margin:10px 12px 12px; border:1px solid var(--ligne3); border-radius:var(--r); padding:12px 12px 10px}
+.hname{display:flex; align-items:center; gap:10px; min-height:44px}
+.hname .nom{font-family:var(--mono); font-size:24px; font-weight:700; letter-spacing:-.01em;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0}
+.hname .vers{font-family:var(--mono); font-size:10px; padding:3px 8px; border-radius:999px;
+  border:1px solid var(--ligne3); color:var(--texte2); flex:0 0 auto}
+.hname .vers.v2{color:var(--accent); border-color:rgba(99,224,255,.45)}
+.hname .vers.og{color:var(--alert); border-color:var(--alertA)}
+.tiles{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; padding-top:6px}
+.tile{min-height:64px; border:1px solid var(--ligne3); border-radius:var(--r); padding:7px 8px 5px;
+  display:flex; flex-direction:column; justify-content:space-between; gap:2px;
+  background:linear-gradient(180deg, rgba(63,136,189,.10), rgba(63,136,189,.02) 72%)}
+.tile .l{font-family:var(--mono); font-size:9.5px; letter-spacing:.09em; color:var(--texte2)}
+.tile.tr{border-color:rgba(99,224,255,.4)}
+.tile .v{font-family:var(--mono); font-size:23px; font-weight:700; font-variant-numeric:tabular-nums}
+.mets{display:flex; align-items:center; gap:8px; margin-top:8px; min-height:44px}
+.mets .m{font-family:var(--mono); font-size:12px; color:var(--texte);
+  border-radius:var(--r); padding:6px 2px; display:inline-flex; align-items:center; font-variant-numeric:tabular-nums}
+.mini{font-family:var(--mono); font-size:11.5px; letter-spacing:.05em; min-height:44px; padding:6px 12px;
+  margin-left:auto; border:1px solid var(--accent); border-radius:var(--r); color:var(--accent);
+  background:var(--accA); cursor:pointer}
+.bloc{border-top:1px solid var(--ligne3)}
+.bh{display:flex; align-items:center; gap:10px; width:100%; min-height:52px; padding:0 12px;
+  background:none; border:0; cursor:pointer; text-align:left; color:inherit}
+.bh .bt{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--texte2); flex:0 0 auto}
+.bh .bs{flex:1; min-width:0; font-family:var(--mono); font-size:12px; color:var(--texte);
+  font-variant-numeric:tabular-nums; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:right}
+.bh .ch{flex:0 0 auto; font-family:var(--mono); font-size:10px; color:var(--texte2); transition:transform .18s}
+.bloc.on .ch{transform:rotate(180deg)}
+.bc{padding:2px 12px 16px}
+.card{border:1px solid var(--ligne3); border-radius:var(--r); padding:10px 10px 8px}
+.cvr{display:flex; align-items:center; gap:10px; min-height:44px}
+.cvr .vn{font-family:var(--mono); font-size:16px; font-weight:700; flex:1; min-width:0;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.btn{font-family:var(--mono); font-size:11px; letter-spacing:.04em; min-height:44px; padding:6px 11px;
+  border:1px solid var(--ligne); border-radius:var(--r); background:none; color:var(--texte); cursor:pointer}
+.btn.acc{border-color:var(--accent); color:var(--accent); background:var(--accA)}
+.vmeta{display:flex; flex-wrap:wrap; gap:4px 14px; font-family:var(--mono); font-size:12px; color:var(--texte2);
+  padding:8px 2px 2px; min-height:44px; align-items:center; font-variant-numeric:tabular-nums}
+.vmeta b{color:var(--texte); font-weight:600}
+.mods{display:flex; flex-direction:column}
+.mod{display:flex; align-items:center; gap:8px; width:100%; min-height:48px; padding:4px;
+  border:0; border-top:1px solid var(--ligne3); background:none; color:inherit; cursor:pointer; text-align:left}
+.mod .mn{flex:1; min-width:0; font-size:12.5px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.mod .mi,.mod .me,.mod .mp{font-family:var(--mono); font-size:10.5px; color:var(--texte2);
+  border:1px solid var(--ligne3); border-radius:4px; padding:2px 6px; flex:0 0 auto;
+  font-variant-numeric:tabular-nums; white-space:nowrap}
+.mod .mi{color:var(--accent); border-color:rgba(99,224,255,.35)}
+.mod .me{color:var(--alert); border-color:rgba(255,187,85,.3)}
+.mod.acti .mn{color:var(--accent)}
+.mod.acti:after{content:"a"; color:var(--accent); font-family:var(--mono); font-size:9px; flex:0 0 auto}
+.zbeam{display:grid; grid-template-columns:1fr 118px; gap:10px; align-items:start}
+.zcolu{display:flex; flex-direction:column; min-width:0}
+.zrow{display:flex; align-items:center; gap:4px; min-height:50px; border-top:1px solid var(--ligne3)}
+.zrow:first-child{border-top:0}
+.zrow .zl{flex:1; min-width:0; background:none; border:0; color:var(--texte2); font-family:var(--mono);
+  font-size:10px; letter-spacing:.02em; text-align:left; padding:6px 2px; min-height:44px; cursor:pointer;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.zrow .zc{flex:0 0 44px; width:44px; min-height:44px; display:flex; align-items:center; justify-content:center;
+  font-family:var(--mono); font-size:15px; font-weight:700; border:1px solid var(--ligne3); border-radius:var(--r);
+  background:none; color:var(--texte); font-variant-numeric:tabular-nums; cursor:pointer; padding:0}
+.zrow .zb{flex:0 0 44px; width:44px; min-height:44px; margin:0; font-family:var(--mono); font-size:15px;
+  border:0; border-radius:var(--r); background:rgba(63,136,189,.12); color:var(--texte2); cursor:pointer; padding:0}
+.zrow .zb:active{background:rgba(63,136,189,.24)}
+.amb{border-bottom:1px dashed rgba(255,187,85,.55)}
+.figcol svg{width:104px; height:218px; display:block; margin:6px auto 0}
+.zn{font-family:var(--mono); font-weight:700; font-size:10px}
+.crows{display:flex; flex-direction:column; min-width:0}
+.crow{display:flex; align-items:baseline; gap:8px; min-height:50px; padding:6px 4px;
+  border-top:1px solid var(--ligne3)}
+.crow:first-child{border-top:0}
+.crow .cn{flex:1; min-width:0; font-size:12.5px}
+.crow .cv{flex:0 0 54px; min-height:44px; display:flex; align-items:center; justify-content:flex-end;
+  font-family:var(--mono); font-size:18px; font-weight:700; font-variant-numeric:tabular-nums; padding:0 4px}
+.crow .cx{flex:0 0 auto; font-family:var(--mono); font-size:10.5px; color:var(--texte2); padding:0 4px;
+  font-variant-numeric:tabular-nums; white-space:nowrap}
+.dtag{font-family:var(--mono); font-size:9.5px; color:var(--texte2); letter-spacing:.08em; margin:10px 2px 2px; display:block}
+.hrow{display:flex; gap:6px; align-items:baseline; min-height:44px; padding:4px 2px;
+  border-top:1px solid var(--ligne3)}
+.hrow:first-child{border-top:0}
+.hrow .hp{flex:0 0 auto; font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; color:var(--texte2)}
+.hrow .hx{flex:1; min-width:0; font-size:12.5px; color:var(--texte)}
+#vel{position:fixed; inset:0; background:rgba(2,5,10,.62); z-index:30; opacity:0; transition:opacity .2s;
+  pointer-events:none}
+#vel.on{opacity:1; pointer-events:auto}
+#pop{position:fixed; left:0; right:0; bottom:0; z-index:40; border-radius:10px 10px 0 0;
+  border:1px solid var(--ligne); border-bottom:0; background:var(--surf);
+  transform:translateY(105%); transition:transform .22s cubic-bezier(.2,.7,.2,1);
+  max-height:50vh; overflow:auto; overscroll-behavior:contain;
+  padding-bottom:env(safe-area-inset-bottom)}
+#pop.sw{max-height:55vh}
+#pop.on{transform:translateY(0)}
+.pip{height:30px; display:flex; align-items:center; justify-content:center; cursor:grab}
+.pip:before{content:""; width:44px; height:4px; border-radius:2px; background:var(--ligne)}
+.pbody{padding:2px 14px 16px}
+.ptit{display:flex; align-items:baseline; gap:8px; min-height:44px; padding:2px 0 6px}
+.ptit b{font-family:var(--mono); font-size:14px; flex:1; min-width:0;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.vrow{display:flex; align-items:center; gap:8px; width:100%; min-height:52px; padding:8px 4px;
+  border:0; border-top:1px solid var(--ligne3); background:none; color:inherit; cursor:pointer; text-align:left}
+.vrow .vn2{flex:0 0 auto; max-width:40%; font-family:var(--mono); font-size:13px; font-weight:600;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.vrow .vs{font-family:var(--mono); font-size:10px; color:var(--texte2); flex:1; min-width:0; text-align:right;
+  font-variant-numeric:tabular-nums; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.vrow .vtag{font-family:var(--mono); font-size:9px; color:var(--accent); border:1px solid rgba(99,224,255,.4);
+  border-radius:999px; padding:2px 7px; flex:0 0 auto}
+.jrow{display:flex; align-items:center; gap:8px; width:100%; min-height:52px; padding:8px 4px;
+  border:0; border-top:1px solid var(--ligne3); background:none; color:inherit; cursor:pointer; text-align:left}
+.jrow .jn{flex:1; min-width:0; font-family:var(--mono); font-size:13px}
+.jrow .jv{font-family:var(--mono); font-size:16px; font-weight:700; font-variant-numeric:tabular-nums}
+.dice{display:flex; flex-wrap:wrap; gap:6px; min-height:44px; align-items:center; padding:8px 0}
+.dice i{font-family:var(--mono); font-style:normal; font-size:15px; font-weight:700; min-width:34px;
+  min-height:34px; display:inline-flex; align-items:center; justify-content:center;
+  border:1px solid var(--ligne3); border-radius:var(--r); background:var(--surf2);
+  font-variant-numeric:tabular-nums}
+.dice i.hi{color:var(--accent); border-color:var(--accent)}
+.tot{font-family:var(--mono); font-size:12px; color:var(--texte2); min-height:44px; display:flex; align-items:center}
+.tot b{color:var(--accent); font-size:20px; margin-left:6px}
+.pact{display:flex; gap:10px; padding-top:10px; flex-wrap:wrap}
+[data-e]{min-height:44px; display:flex; align-items:center; cursor:text; outline:none}
+[data-e][contenteditable="true"]{outline:2px solid var(--accent); outline-offset:-2px; border-radius:4px;
+  background:var(--accA); caret-color:var(--accent)}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important; animation:none !important; scroll-behavior:auto !important}
+}
+</style>
+</head>
+<body>
+<div id="vel" aria-hidden="true"></div>
+<div id="pop" role="dialog" aria-modal="true" hidden>
+  <div class="pip"></div>
+  <div class="pbody" id="pbody"></div>
+</div>
+<nav id="rail" aria-label="Fiches"></nav>
+<header id="hero" class="equerre"></header>
+<main id="blocs" aria-label="Fiche"></main>
+<script>
+"use strict";
+
+var ZONES = [["tete","Tête"],["poitrine","Poitrine"],["bras_d","Bras droit"],["bras_g","Bras gauche"],["abdomen","Abdomen"],["jambes","Jambes"]];
+var SEVSTOP = ["#5fdcae", "#7fc8a0", "#9fb492", "#bfa083", "#df8c75", "#ff7867"];
+function sevCol(s){ return SEVSTOP[Math.min(5, Math.max(0, Math.round(s || 0)))]; }
+function zonesZero(){ return {tete:0, poitrine:0, bras_d:0, bras_g:0, abdomen:0, jambes:0}; }
+var VIVIER_SEED = {
+  haz2:{nom:"Posthumain Hazat", filon:"Mars 2", corps:5, proc:5, ecout:5, actif:true, mods:[
+    {n:"Corps", i:"5", e:1, p:0},
+    {n:"Processeur", i:"5", e:1, p:0},
+    {n:"Pompe à adrénaline", i:"réflexes +2", e:2, p:4},
+    {n:"Overclock", i:"+1", e:1, p:0},
+    {n:"Ossature renforcée", cib:"tête · torse · abdomen · jambes", p:0},
+    {n:"Smartblood", p:0},
+    {n:"Régénération", i:"?", p:0, amb:1}
+  ]},
+  gol2:{nom:"Golem", filon:"Golem 2", corps:6, proc:6, ecout:null, actif:false, mods:[
+    {n:"Batterie", i:"6", p:3},
+    {n:"Réflexes", i:"4", p:8},
+    {n:"Overclock", i:"2", p:2},
+    {n:"Jambes cyber", p:1},
+    {n:"Hermétique", p:0},
+    {n:"Smartblood", p:1},
+    {n:"Nopain", p:0},
+    {n:"Interface neurale", p:0},
+    {n:"Datajack", p:0},
+    {n:"Lockpick", p:0},
+    {n:"Injecteur", p:0},
+    {n:"Régénération", i:"1", p:1},
+    {n:"Vision IR / Sonar / Radio / X-Ray", p:2},
+    {n:"Scanner Biometrique Implémenté", p:0},
+    {n:"Glande", p:0},
+    {n:"Gecko", p:0},
+    {n:"Armor Plating (Full body)", p:3},
+    {n:"Ossature Renforcée (Full Body)", p:3},
+    {n:"Double mantis blade implanté", p:2},
+    {n:"monowire implanté", p:3}
+  ]},
+  lud2:{nom:"Ludo", filon:"Ludo 2", corps:7, proc:3, ecout:null, actif:false, mods:[
+    {n:"Corps", i:"6", p:5},
+    {n:"Réflexes", i:"+2D", p:4},
+    {n:"Batterie", i:"4", p:3},
+    {n:"No pain", p:0},
+    {n:"Datajack", p:0},
+    {n:"Injecteur", p:0},
+    {n:"Bio moniteur", p:0},
+    {n:"Cyber-legs", p:1},
+    {n:"Vision IR", p:0},
+    {n:"Smartblood", p:1},
+    {n:"Armor plating x6", p:5},
+    {n:"Ossature renforcée x6", p:5}
+  ]},
+  toro:{nom:"Clone Ares Trooper", filon:"Toro", corps:5, proc:null, ecout:null, actif:false, mods:[
+    {n:"Infrarouge", i:"2", p:3.5},
+    {n:"Réflexes câblés", i:"1"},
+    {n:"Nopain"},
+    {n:"Armure dermale", cib:"tête"}
+  ]},
+  marsogc:{nom:"Liam Hazat", filon:"Mars (og)", corps:3, proc:4, ecout:null, actif:false, mods:[
+    {n:"Pompe Adrenaline", i:"2", p:5}
+  ]}
+};
+
+var FICHES_SEED = {
+  mars2:{id:"mars2", nom:"Mars 2", tag:"v2", chassis:"haz2",
+    ident:{civil:"—", nat:"—", ec:"—", ageP:"—", ageR:"—", tail:"—", poids:"—", pro:"—", employeur:"—",
+      xp:null, credit:null,
+      histo:[{p:"Étudiant", r:["Posthumain Hazat","Officier de la Legion","+1D en Corps","+1 en Empathie","Augments, mods et implants : -1 crédits","Immun vieillesse / maladies / toxines"]},{p:"Adulte", r:[]},{p:"Vétéran", r:[]}],
+      passions:[{n:"Wargame (50k, neochess, Hunter...)"}],
+      relance:1, permis:["Miltaire (Ares)","Hazat"], casier:"—"},
+    car:{corps:5, proc:5, esprit:3, empathie:4, taux:"2D"},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(),
+    armure:{tete:"3/3", poitrine:"3/3", bras_d:"3", bras_g:"3", abdomen:"3/3", jambes:"3/3"},
+    comp:[{n:"Aerospatiale", v:6, xp:15},{n:"Biologie", v:4},{n:"Communication", v:6, xp:15},{n:"Culture", v:4},
+      {n:"Economie", v:4},{n:"Electronique", v:4},{n:"Ingénierie", v:4},{n:"Militaire", v:6, xp:21},{n:"Richesse"},
+      {n:"Réputation", v:4},{n:"Sciences", v:4},{n:"Sécurité", v:4}],
+    exp:[{n:"Tactique", d:"+1D"}],
+    pos:[{n:"Nano-armure", p:5},{n:"Monolame", p:0},{n:"Pistolet laser", p:0},{n:"Fusil d'assaut", p:0},
+      {n:"Plans fusil laser"},{n:"Skillsoft 5 Aerospatiale", p:5},{n:"Skillsoft 5 Communication", p:5},{n:"Skillsoft 5 Militaire", p:5}],
+    notes:"—"},
+  gabdark:{id:"gabdark", nom:"gabdark", tag:"",
+    ident:{civil:"—", nat:"—", ec:"—", ageP:"—", ageR:"—", tail:"—", poids:"—", pro:"—", employeur:"—",
+      xp:null, credit:null, histo:[{p:"Étudiant", r:[]},{p:"Adulte", r:[]},{p:"Vétéran", r:[]}],
+      passions:[], relance:null, permis:[], casier:"—"},
+    car:{corps:null, proc:null, esprit:null, empathie:null, taux:null},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(), armure:{tete:"—", poitrine:"—", bras_d:"—", bras_g:"—", abdomen:"—", jambes:"—"},
+    comp:[], exp:[], pos:[], chassis:null, notes:"—"},
+  golem2:{id:"golem2", nom:"Golem 2", tag:"v2", chassis:"gol2",
+    ident:{civil:"David Drumond Estevez", nat:"Ares", ec:"Militaire", ageP:"57", ageR:"???",
+      tail:"2m23", poids:"390", pro:"Mercenaire", employeur:"Patrol",
+      xp:null, credit:4,
+      histo:[{p:"Étudiant", r:["Cyborg","Cout cyber divisé deux","Visite cyberdoc régulière","Esprit / Empathie +1"]},
+        {p:"Adulte", r:["Spec Ops","+1D Corps","Exercice physique régulier / entretien matériel"]},
+        {p:"Vétéran", r:[]}],
+      passions:[{n:"Sports violents (Hunter, Motorball)"}], relance:1, permis:["Militaire"],
+      passep:["Alpha centauri","Proxima centauri"], casier:"—"},
+    car:{corps:6, proc:6, esprit:6, empathie:2, taux:null, bcorps:"3", bproc:"3"},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(),
+    armure:{tete:"3/3/3", poitrine:"3/3/3", bras_d:"3/3/3", bras_g:"3/3/3", abdomen:"3/3/3", jambes:"3/3/3"},
+    comp:[{n:"Aerospatiale", v:4, xp:2},{n:"Biologie", v:4},{n:"Communication", v:3},{n:"Culture", v:3},
+      {n:"Economie", v:3},{n:"Electronique", v:5, xp:15},{n:"Ingénierie", v:3},{n:"Militaire", v:6, xp:21},
+      {n:"Richesse"},{n:"Réputation", v:3},{n:"Sciences", v:3},{n:"Sécurité", v:6, xp:21}],
+    exp:[{n:"Combat", v:5},{n:"Cyber-sec", v:5}], expd:"+1D",
+    pos:[{n:"Armure Ares", p:3},{n:"Combi et Bottes"},{n:"Vetements renforcés"},{n:"Poings choc"},
+      {n:"Pistolet"},{n:"Fusils d'assault"},{n:"Maglame"},{n:"Dopant du Doc +1 C/E/P", p:7},
+      {n:"Fusils de Precision"},{n:"grenade frag", p:2},{n:"combi predator"},{n:"Scalpel laser implanté"}],
+    notes:"—"},
+
+  sam:{id:"sam", nom:"SAM", tag:"",
+    ident:{civil:"—", nat:"alpha", ec:"citoyen", ageP:"150", ageR:"150", tail:"—", poids:"—", pro:"—", employeur:"—",
+      xp:null, credit:null, histo:[{p:"Étudiant", r:[]},{p:"Adulte", r:[]},{p:"Vétéran", r:[]}],
+      passions:[{n:"60k"}], relance:1, permis:[], casier:"a fait tomber la Corpo orasaka 23 ème"},
+    car:{corps:null, proc:null, esprit:null, empathie:null, taux:null},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(), armure:{tete:"—", poitrine:"—", bras_d:"—", bras_g:"—", abdomen:"—", jambes:"—"},
+    comp:[], exp:[], pos:[], chassis:null, notes:"—"},
+  stark:{id:"stark", nom:"Stark (sam)", tag:"",
+    ident:{civil:"—", nat:"alpha", ec:"citoyen", ageP:"176", ageR:"176", tail:"—", poids:"—", pro:"—", employeur:"—",
+      xp:null, credit:249, histo:[{p:"Étudiant", r:[]},{p:"Adulte", r:[]},{p:"Vétéran", r:[]}],
+      passions:[{n:"60k"},{n:"magic"}], relance:1, permis:[], casier:"a fait tomber la Corpo orasaka 23 ème"},
+    car:{corps:null, proc:null, esprit:null, empathie:null, taux:null},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(), armure:{tete:"—", poitrine:"—", bras_d:"—", bras_g:"—", abdomen:"—", jambes:"—"},
+    comp:[], exp:[], pos:[], chassis:null, notes:"—"},
+  jb:{id:"jb", nom:"JB", tag:"",
+    ident:{civil:"Daemon <John Carter>", nat:"Xenos", ec:"Xenobiologiste/Mercenaire", ageP:"140", ageR:"?",
+      tail:"185cm", poids:"90Kg", pro:"—", employeur:"—",
+      xp:null, credit:14,
+      histo:[{p:"Étudiant", r:["Xenobiologiste","Cout -1 Biologie","curieux"]},
+        {p:"Adulte", r:["Mercenaire","+1D en Corps","Blagueur (peut blaguer dans des situation sous tension)"]},
+        {p:"Vétéran", r:["Symbiote","Problème de Mémoire"]}],
+      passions:[{n:"Wargame en compétitif / jeux de stratégie"},{n:"coach d'une équipe 50k"},{n:"Vaisseaux"}],
+      relance:1, permis:["Militaire"], casier:"instrument de la chute de Saburo / Arasaka"},
+    car:{corps:5, proc:4, esprit:5, empathie:4, taux:"2D"},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(),
+    armure:{tete:"3/3", poitrine:"3/3", bras_d:"3/3", bras_g:"3/3", abdomen:"3/3", jambes:"3/3"},
+    comp:[{n:"Aerospatiale", v:4},{n:"Biologie", v:6, xp:6},{n:"Communication", v:3, xp:1},{n:"Culture", v:3},
+      {n:"Economie", v:1},{n:"Electronique", v:1},{n:"Ingénierie", v:1},{n:"Militaire", v:5},{n:"Réputation"},
+      {n:"Sciences", v:2},{n:"Sécurité", v:5}],
+    exp:[{n:"Soldat"},{n:"Explorateur"},{n:"Éloquent"}], expd:"+1D",
+    pos:[{n:"Cuve bakta"},{n:"Pistolet (gel)"},{n:"Needler"},{n:"Combi Solis Prédator"},{n:"Katana monolame"},
+      {n:"Tenue Holographique"},{n:"Fusil laser"},{n:"Drone Souris"},{n:"Drone Bakta"},{n:"Scanner Xenos"},
+      {n:"Échantilloneur Biologique"},{n:"Stock de MaxDoc"},{n:"Medkit"},{n:"Fusil précision railgun"}],
+    notes:"Ancien militaire scientifique, passé à la xenobiologie. A oublié des choses de son passé, dates flou."},
+  toro:{id:"toro", nom:"Toro", tag:"", chassis:"toro",
+    ident:{civil:"D.E.R.D.I.S", nat:"Wall Street (Alpha)", ec:"Citoyen", ageP:"101", ageR:"100+", tail:"cf Clone",
+      poids:"cf Clone", pro:"—", employeur:"—",
+      xp:null, credit:null,
+      histo:[{p:"Fantôme", r:["conscience digitalisée"]},{p:"Cloné", r:["-50% sur les clones (interface)"]},
+        {p:"Netrunner", r:["+1D sur les actions de Processeur","défaut frénésie","défaut guerre de succession","défaut addict (2h/jour)"]}],
+      passions:[{n:"Trading haute fréquence (wall street)"}], relance:1,
+      permis:["Clonage","Power armor","Hot sim"], casier:"—"},
+    car:{corps:5, proc:null, esprit:null, empathie:null, taux:null},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(), armure:{tete:"—", poitrine:"—", bras_d:"—", bras_g:"—", abdomen:"—", jambes:"—"},
+    comp:[{n:"Diplomatie", v:1, xp:1},{n:"Economie", v:3, xp:6},{n:"Electronique", v:5, xp:10},{n:"Ingénierie", v:1, xp:1},
+      {n:"Medias"},{n:"Militaire", v:1, xp:1},{n:"Recherche", v:3, xp:6},{n:"Richesse", v:6, xp:21},{n:"Sécurité", v:5, xp:15}],
+    exp:[{n:"Hacking"}], pos:[{n:"Fusil à pompe"},{n:"Maglame"},{n:"Hot sim"},
+      {n:"Firewall éveillé ind 1"},{n:"Virus éveillé ind 1"},{n:"Jammer ind 5"}],
+    notes:"incarne le clone d'un riche un peu taré qui a plusieurs clones de lui-même qui se baladent (ce qui est illégal)."},
+  golem:{id:"golem", nom:"Golem", tag:"og", chassis:null,
+    ident:{civil:"—", nat:"—", ec:"Militaire", ageP:"—", ageR:"—", tail:"—", poids:"—", pro:"—", employeur:"—",
+      xp:null, credit:null,
+      histo:[{p:"Backgrounds", r:["Cyborg : corps full cyber, Hermétique 1h, permis militaire","Antipathique","Dispo -2 pour les augmentations"]},
+        {p:"Augmenté", r:["10 crédits en cyberware","s'adapte plus vite au cyber","entretien régulier"]}],
+      passions:[{n:"Sports violents (Hunter, Motorball)"}], relance:1, permis:["Militaire (Ares)"], casier:"—"},
+    car:{corps:6, proc:1, esprit:2, empathie:0, taux:null},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(), armure:{tete:"4", poitrine:"3", bras_d:"2", bras_g:"2", abdomen:"—", jambes:"2"},
+    comp:[{n:"Aerospatiale", v:1},{n:"Diplomatie", v:1},{n:"Economie", v:3},{n:"Medias", v:3},{n:"Militaire", v:5},
+      {n:"Richesse", v:3},{n:"Sécurité", v:3}],
+    exp:[{n:"Mêlée", v:1},{n:"Course", v:1}],
+    pos:[{n:"Ares Armor", p:3},{n:"Maglame"},{n:"Vêtements"},{n:"Pistolet"},{n:"Combinaison, bottes magnétiques"}],
+    notes:"—"},
+  vincent:{id:"vincent", nom:"Vincent", tag:"",
+    ident:{civil:"Toubib", nat:"—", ec:"Militaire", ageP:"—", ageR:"—", tail:"—", poids:"—", pro:"—", employeur:"—",
+      xp:null, credit:null,
+      histo:[{p:"Augmenté", r:["permis militaire, dispo plus facile","défaut PTSD"]},
+        {p:"Interfacé", r:["+1D en plongée","reste conscient même interfacé","défaut : virtuel > réel"]},
+        {p:"Médecin", r:["+1D médecine","contacts, réputation"]}],
+      passions:[{n:"Fan des séries retro préspatiales"}], relance:1, permis:["Militaire"], casier:"—"},
+    car:{corps:2, proc:5, esprit:3, empathie:1, taux:null},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(), armure:{tete:"1", poitrine:"2", bras_d:"1", bras_g:"1", abdomen:"2", jambes:"1"},
+    comp:[{n:"Aerospatiale", v:2},{n:"Biologie", v:6},{n:"Diplomatie", v:2},{n:"Electronique", v:2},
+      {n:"Ingénierie", v:4},{n:"Militaire", v:3},{n:"Recherche", v:1},{n:"Richesse", v:2},{n:"Sécurité", v:1}],
+    exp:[{n:"Médecine", v:1}],
+    pos:[{n:"Vêtements renforcés"},{n:"Medkit implanté"},{n:"BricoKit"},{n:"Cuve Bakta"},{n:"Pistolet"}],
+    notes:"—"},
+
+  ludo:{id:"ludo", nom:"Ludo", tag:"og", chassis:null,
+    ident:{civil:"—", nat:"Alpha Azat", ec:"Militaire", ageP:"60", ageR:"—", tail:"1m85", poids:"180", pro:"—", employeur:"—",
+      xp:null, credit:null,
+      histo:[{p:"Fantôme", r:[]},{p:"Cyborg", r:[]},{p:"Défaut: choc post-traumatique", r:[]}],
+      passions:[{n:"La grande vitesse et l'adrénaline"},{n:"Les fusées"}], relance:1,
+      permis:["Militaire"], casier:"—"},
+    car:{corps:5, proc:2, esprit:null, empathie:null, taux:null, bcorps:"+4D"},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(), armure:{tete:"—", poitrine:"—", bras_d:"—", bras_g:"—", abdomen:"—", jambes:"—"},
+    comp:[{n:"Aerospatiale", v:2, xp:3},{n:"Biologie", v:3, xp:6},{n:"Militaire", v:6, xp:21},{n:"Sécurité", v:1, xp:1}],
+    exp:[{n:"Tir"}],
+    pos:[{n:"Ares Armor"},{n:"Fusil d'assault"},{n:"Maglame"}],
+    notes:"—"},
+  ludo2:{id:"ludo2", nom:"Ludo 2", tag:"v2", chassis:"lud2",
+    ident:{civil:"—", nat:"Alpha Azat", ec:"Militaire", ageP:"62", ageR:"100+", tail:"—", poids:"64", pro:"—", employeur:"—",
+      xp:null, credit:14,
+      histo:[{p:"Étudiant", r:["Cyborg","Coût augments et mods -1","prototype (gimmick)","+1 mental: Esprit"]},
+        {p:"Adulte", r:["Fantôme","Peut transposer conscience","choc post-traumatique (gimmick)"]},
+        {p:"Vétéran", r:[]}],
+      passions:[{n:"La grande vitesse et l'adrénaline"},{n:"Les fusées"}], relance:1,
+      permis:["Militaire"], casier:"—"},
+    car:{corps:7, proc:3, esprit:6, empathie:2, taux:"+4D"},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(),
+    armure:{tete:"3/3 · 3/3 · 3/3", poitrine:"3/3 · 3/3 · 3/3", bras_d:"3/3 · 3/3 · 3/3", bras_g:"3/3 · 3/3 · 3/3",
+      abdomen:"3/3 · 3/3 · 3/3", jambes:"3/3 · 3/3 · 3/3"},
+    comp:[{n:"Aerospatiale", v:2, xp:3},{n:"Biologie", v:3, xp:6},{n:"Electronique", v:2, xp:3},
+      {n:"Ingénierie", v:3, xp:6},{n:"Militaire", v:6, xp:21},{n:"Richesse", v:4},{n:"Sécurité", v:1, xp:1}],
+    exp:[{n:"Combat"}], expd:"+1D",
+    pos:[{n:"Armure de combat", p:3},{n:"Fusil d'assaut", p:2},{n:"Monolame", p:2},
+      {n:"Pistolet laser implanté (bouche)", p:3},{n:"Grenade EM"}],
+    notes:"—"},
+  marsog:{id:"marsog", nom:"Mars (og)", tag:"og", chassis:"marsogc",
+    ident:{civil:"Liam Hazat", nat:"Armada Hazat", ec:"Militaire", ageP:"20", ageR:"—", tail:"1,80", poids:"90",
+      pro:"—", employeur:"—",
+      xp:null, credit:null,
+      histo:[{p:"Transhumain", r:["Soldat genoforgé (+1D action Physique)","Corps parfait · immunisé vieillissement / maladies / toxines / parasites","Contacts · Arrogant"]},
+        {p:"Eveillé", r:["Processeur sentient · copie parfaite de sa pensée","peut continuer à utiliser Processeur même inconscient","peut devenir un fantôme après la mort","ils ne connaitront pas la peur (illusion d'immortalité)"]}],
+      passions:[{n:"Wargame (50k, neochess)"}], relance:1,
+      permis:["Militaire (Ares)","Hazat · nanotech militaire"], casier:"—"},
+    car:{corps:3, proc:4, esprit:null, empathie:null, taux:null},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(), armure:{tete:"—", poitrine:"—", bras_d:"—", bras_g:"—", abdomen:"—", jambes:"—"},
+    comp:[{n:"Aerospatiale", v:"2 · 3 · 5", amb:1},{n:"Diplomatie", v:"2 · 3 · 5", amb:1},{n:"Economie"},
+      {n:"Electronique", v:"1 · 1", amb:1},{n:"Ingénierie"},{n:"Medias", v:"1 · 1", amb:1},
+      {n:"Militaire", v:"3 · 6 · 5", amb:1},{n:"Recherche"},{n:"Richesse", v:6, xp:"21(1)"},{n:"Sécurité"}],
+    exp:[{n:"Tactique", v:"2", amb:1}],
+    pos:[{n:"Nano-armure", p:3},{n:"Monolame", p:2},{n:"Skill Militaire", p:5},{n:"Skill Areo", p:5},
+      {n:"Skill Diplo", p:5},{n:"Pistolet laser"},{n:"Plans de fusil d'assaut (incomplets)"},{n:"Pompe Adrenaline 2", p:5}],
+    notes:"ancien lexique : Physique / Instinct / Processeur / Social"},
+  hanako:{id:"hanako", nom:"Hanako (Jb)", tag:"",
+    ident:{civil:"Hanako Arasaka", nat:"Ares", ec:"—", ageP:"100+", ageR:"300+", tail:"1m70", poids:"65kg",
+      pro:"—", employeur:"—",
+      xp:null, credit:null,
+      histo:[{p:"Étudiant", r:["Femme d'affaire","passif en argent +1 par mois (actif 1 par an sommeil)","Pokerface"]},
+        {p:"Adulte", r:["Fantôme","Lassitude"]},
+        {p:"Vétéran", r:["Scientifique","Double xp science / biologie","Casual"]}],
+      passions:[{n:"Science"}], relance:1, permis:[], casier:"—"},
+    car:{corps:3, proc:4, esprit:4, empathie:5, taux:null},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(), armure:{tete:"—", poitrine:"—", bras_d:"—", bras_g:"—", abdomen:"—", jambes:"—"},
+    comp:[{n:"Aerospatiale", v:0},{n:"Biologie", v:5},{n:"Communication", v:5},{n:"Culture", v:3},{n:"Economie", v:5},
+      {n:"Electronique", v:0},{n:"Ingénierie", v:3},{n:"Militaire", v:0},{n:"Réputation", v:0},{n:"Sciences", v:5},{n:"Sécurité", v:0}],
+    exp:[], pos:[], chassis:null, notes:"—"},
+  strato:{id:"strato", nom:"Stratios gabdark", tag:"vaisseau", chassis:null,
+    ident:{civil:"—", nat:"—", ec:"—", ageP:"—", ageR:"—", tail:"—", poids:"—", pro:"—", employeur:"—",
+      xp:null, credit:null, histo:[{p:"", r:[]}], passions:[], relance:null, permis:[], casier:"—"},
+    car:{corps:null, proc:null, esprit:null, empathie:null, taux:null},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(), armure:{tete:"—", poitrine:"—", bras_d:"—", bras_g:"—", abdomen:"—", jambes:"—"},
+    comp:[], exp:[], pos:[], notes:"—"},
+  cruiser:{id:"cruiser", nom:"Ares cruiser", tag:"vaisseau", chassis:null,
+    ident:{civil:"—", nat:"—", ec:"—", ageP:"—", ageR:"—", tail:"—", poids:"—", pro:"—", employeur:"—",
+      xp:null, credit:null, histo:[{p:"", r:[]}], passions:[], relance:null, permis:[], casier:"—"},
+    car:{corps:null, proc:null, esprit:null, empathie:null, taux:null},
+    pool:{e:{c:null, m:null}, douleur:null, proc_m:null, proc_a:null},
+    sons:zonesZero(), armure:{tete:"—", poitrine:"—", bras_d:"—", bras_g:"—", abdomen:"—", jambes:"—"},
+    comp:[], exp:[], pos:[], notes:"—"}
+};
+var ORDRE = ["mars2","gabdark","golem2","sam","stark","jb","toro","golem","vincent","ludo","ludo2","marsog","hanako","strato","cruiser"];
+var KEY = "th.perso.proto.b1";
+function seedNow(){
+  return {v:1, cur:"mars2", vivier:VIVIER_SEED, fiches:FICHES_SEED,
+    ouvert:{corps:0, integ:0, cap:0, eq:0, dos:0}};
+}
+var state = (function(){
+  try{
+    var raw = localStorage.getItem(KEY);
+    if (raw){
+      var o = JSON.parse(raw);
+      if (o && o.v === 1 && o.fiches && o.vivier){
+        if (!o.ouvert) o.ouvert = {};
+        return o;
+      }
+    }
+  }catch(e){}
+  var s = seedNow();
+  try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e2){}
+  return s;
+})();
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+function fiche(){ return state.fiches[state.cur]; }
+
+function $q(s, r){ return (r || document).querySelector(s); }
+function $a(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+function esc(t){ return String(t === null || t === undefined ? "" : t).replace(/[&<>"']/g, function(c){ return c === "&" ? "&amp;" : c === "<" ? "&lt;" : c === ">" ? "&gt;" : c === '"' ? "&quot;" : "&#39;"; }); }
+function dash(v){ return (v === null || v === undefined || v === "") ? "…" : v; }
+function bool(v){ return (v === null || v === undefined) ? "…" : String(v); }
+var FIG_SHAPES = {
+  tete:'<ellipse id="zp-tete" cx="50" cy="15" rx="10.5" ry="11.5"/>',
+  poitrine:'<path id="zp-poitrine" d="M36 30 H64 Q68 30 68 35 V56 Q68 63 60 63 H40 Q32 63 32 56 V35 Q32 30 36 30 Z"/>',
+  bras_d:'<path id="zp-bras_d" d="M28 30 Q18 32 18 40 V92 Q18 100 24 100 Q31 100 31 92 V40 Q31 32 28 30 Z"/>',
+  bras_g:'<path id="zp-bras_g" d="M72 30 Q82 32 82 40 V92 Q82 100 76 100 Q69 100 69 92 V40 Q69 32 72 30 Z"/>',
+  abdomen:'<path id="zp-abdomen" d="M37 65 H63 Q66 65 66 69 V92 Q66 96 62 96 H38 Q34 96 34 92 V69 Q34 65 37 65 Z"/>',
+  jambes:'<path id="zp-jambes" d="M38 98 H49 V196 Q49 204 44 204 Q39 204 39 196 V98 Z"/><path id="zp-jambes2" d="M51 98 H62 V196 Q62 204 57 204 Q52 204 51 196 V98 Z"/>'
+};
+var FIG_TXT = {
+  tete:[50, 19], poitrine:[50, 50], bras_d:[24.5, 68], bras_g:[75.5, 68], abdomen:[50, 83], jambes:[44.5, 150]
+};
+function figSVG(){
+  var s = '<svg viewBox="0 0 100 210" aria-hidden="true">';
+  ZONES.forEach(function(z){
+    var k = z[0];
+    s += FIG_SHAPES[k];
+    var t = FIG_TXT[k];
+    s += '<text class="zn" data-zn="' + k + '" x="' + t[0] + '" y="' + t[1] + '" text-anchor="middle" fill="#06090f"></text>';
+  });
+  s += '</svg>';
+  return s;
+}
+function paintFig(f){
+  ZONES.forEach(function(z){
+    var k = z[0], n = (f.sons[k] || 0), co = sevCol(n);
+    var el = document.getElementById("zp-" + k);
+    if (el) el.setAttribute("fill", co);
+    var el2 = document.getElementById("zp-" + k + "2");
+    if (el2) el2.setAttribute("fill", co);
+    var tx = document.querySelector('[data-zn="' + k + '"]');
+    if (tx) tx.textContent = n > 0 ? String(n) : "";
+  });
+}
+function renderRail(){
+  var h = "";
+  ORDRE.forEach(function(id){
+    var f = state.fiches[id]; if (!f) return;
+    var tag = f.tag ? '<i class="tag' + (f.tag === "og" ? " og" : "") + '">' + esc(f.tag) + '</i>' : '<i class="tag">&nbsp;</i>';
+    h += '<button class="rchip' + (state.cur === id ? " cur" : "") + '" data-f="' + id + '"><b>' + esc(f.nom) + '</b>' + tag + '</button>';
+  });
+  $q("#rail").innerHTML = h;
+}
+function tileHTML(k, lab){
+  var f = fiche(), v = f.car[k];
+  return '<div class="tile' + (k === "corps" || k === "proc" ? " tr" : "") + '"><span class="l">' + lab + '</span>' +
+    '<span class="v num" data-e="car.' + k + '" data-num="1">' + dash(v) + '</span></div>';
+}
+function renderHero(){
+  var f = fiche();
+  var v = f.tag ? '<span class="vers' + (f.tag === "og" ? " og" : "") + '">' + esc(f.tag) + '</span>' : '';
+  var h = '<div class="hname"><span class="nom num" data-e="nom">' + esc(f.nom) + '</span>' + v + '</div>';
+  h += '<div class="tiles">' + tileHTML("corps", "Corps") + tileHTML("proc", "Proc") +
+       tileHTML("esprit", "Esprit") + tileHTML("empathie", "Empathie") + '</div>';
+  var cr = (f.ident.credit === null || f.ident.credit === undefined) ? "₡ …" : "₡ " + f.ident.credit;
+  var xp = (f.ident.xp === null || f.ident.xp === undefined) ? "xp …" : "xp " + f.ident.xp;
+  h += '<div class="mets"><span class="m num" data-e="ident.credit" data-num="1">' + esc(cr) + '</span>' +
+    '<span class="m num" data-e="ident.xp" data-num="1">' + esc(xp) + '</span>' +
+    '<button class="mini" id="bjets">Jet</button></div>';
+  $q("#hero").innerHTML = h;
+}
+function somCorps(){
+  var f = fiche(), ch = f.chassis ? state.vivier[f.chassis] : null;
+  var e = ch ? (ch.ecout === null || ch.ecout === undefined ? "—" : "-" + ch.ecout) : "—";
+  return "Corps " + bool(f.car.corps) + " · Proc " + bool(f.car.proc) + " · énergie " + e;
+}
+function somInteg(){
+  var f = fiche(), t = 0, n = 0;
+  ZONES.forEach(function(z){ var v = f.sons[z[0]] || 0; t += v; if (v > 0) n++; });
+  return "blessures " + t + " · zones " + n + "/6";
+}
+function somCap(){
+  var f = fiche(), best = null, n = f.comp.length + f.exp.length;
+  f.comp.forEach(function(c){
+    if (typeof c.v === "number" && (!best || c.v > best[0])) best = [c.v, c.n];
+  });
+  f.exp.forEach(function(c){
+    if (typeof c.v === "number" && (!best || c.v > best[0])) best = [c.v, c.n];
+  });
+  var s = n + (n === 1 ? " branche" : " branches");
+  if (best) s += " · max " + esc(best[1]) + " " + best[0];
+  return s;
+}
+function somEq(){ return fiche().pos.length + " pièces"; }
+function somDos(){
+  var f = fiche();
+  var s = f.ident.histo.length + " étapes · " + f.ident.passions.length + (f.ident.passions.length === 1 ? " passion" : " passions");
+  if (f.ident.relance) s += " · relance " + f.ident.relance;
+  return s;
+}
+var SECTIONS = [
+  {k:"corps", t:"Corps actuel", som:somCorps},
+  {k:"integ", t:"Intégrité", som:somInteg},
+  {k:"cap", t:"Capacités", som:somCap},
+  {k:"eq", t:"Équipement", som:somEq},
+  {k:"dos", t:"Dossier", som:somDos}
+];
+
+function corpsBody(){
+  var f = fiche(), ch = f.chassis ? state.vivier[f.chassis] : null;
+  var h = '<div class="card">';
+  h += '<div class="cvr"><span class="vn num">' + (ch ? esc(ch.nom) : "…") + '</span>' +
+       '<button class="btn acc" id="bchassis">Changer de corps</button></div>';
+  var vv = "Corps <b>" + bool(f.car.corps) + "</b> · Proc <b>" + bool(f.car.proc) + "</b>";
+  if (f.car.taux) vv += " · acc <b>" + esc(f.car.taux) + "</b>";
+  if (f.car.bcorps) vv += " · +<b>" + esc(f.car.bcorps) + "</b>";
+  h += '<div class="vmeta">' + vv + '</div>';
+  var eTxt = ch ? (ch.ecout == null ? "—" : "-" + ch.ecout) : "—";
+  h += '<div class="vmeta">énergie <b>' + eTxt + '</b> · réserve <b class="num" data-e="pool.e.c" data-num="1">' + dash(f.pool.e.c) + '</b> / <b class="num" data-e="pool.e.m" data-num="1">' + dash(f.pool.e.m) + '</b></div>';
+  h += '<div class="mods">';
+  if (ch){
+    ch.mods.forEach(function(m, i){
+      var cls = "mod" + (m.act ? " acti" : "");
+      var cbs = '';
+      if (m.i !== undefined) cbs += '<span class="mi">' + esc(m.i) + '</span>';
+      if (m.e !== undefined) cbs += '<span class="me">é -' + m.e + '</span>';
+      if (m.p !== undefined) cbs += '<span class="mp">₡' + m.p + '</span>';
+      h += '<button class="' + cls + '" data-mod="' + i + '"><span class="mn">' + esc(m.n) + (m.cib ? ' · ' + esc(m.cib) : '') + '</span>' + cbs + '</button>';
+    });
+  } else h += '<span class="mod"><span class="mn">…</span></span>';
+  h += '</div></div>';
+  return h;
+}
+function integBody(){
+  var f = fiche();
+  var h = '<div class="zbeam"><div class="zcolu">';
+  ZONES.forEach(function(z){
+    var k = z[0];
+    h += '<div class="zrow"><button class="zl" data-zm="' + k + '">' + esc(z[1]) + ' ' + esc(dash(f.armure[k])) + '</button>' +
+      '<button class="zc num" data-zc="' + k + '">' + (f.sons[k] || 0) + '</button>' +
+      '<button class="zb" data-zmoins="' + k + '" aria-label="moins">−</button>' +
+      '<button class="zb" data-zplus="' + k + '" aria-label="plus">+</button></div>';
+  });
+  h += '</div><div class="figcol">' + figSVG() + '</div></div>';
+  h += '<div class="vmeta" style="padding-top:10px">Douleur / Fatigue <b class="num" data-e="pool.douleur" data-num="1">' + dash(f.pool.douleur) + '</b> · Proc max <b class="num" data-e="pool.proc_m" data-num="1">' + dash(f.pool.proc_m) + '</b> · Proc actuel <b class="num" data-e="pool.proc_a" data-num="1">' + dash(f.pool.proc_a) + '</b></div>';
+  return h;
+}
+function capBody(){
+  var f = fiche(), h = '<div class="crows">';
+  if (f.expd) h += '<span class="dtag">expertises · ' + esc(f.expd) + '</span>';
+  f.exp.forEach(function(c){
+    h += '<div class="crow"><span class="cn">' + esc(c.n) + '</span>' +
+      '<span class="cv num' + (c.amb ? " amb" : "") + '" data-num="1" data-e="erow.' + esc(c.n) + '">' + esc(dash(c.v)) + '</span><span class="cx"></span></div>';
+  });
+  h += '<span class="dtag">compétences</span>';
+  f.comp.forEach(function(c){
+    h += '<div class="crow"><span class="cn">' + esc(c.n) + '</span>' +
+      '<span class="cv num' + (c.amb ? " amb" : "") + '" data-num="1" data-e="crow.' + esc(c.n) + '">' + esc(dash(c.v)) + '</span>' +
+      '<span class="cx">' + esc(c.xp === undefined || c.xp === null ? "" : c.xp + " xp") + '</span></div>';
+  });
+  h += '</div>';
+  return h;
+}
+function eqBody(){
+  var f = fiche(), h = '<div class="crows">';
+  f.pos.forEach(function(p){
+    var pr = (p.p === undefined) ? '<span class="cx"></span>' : '<span class="cx">₡' + p.p + '</span>';
+    h += '<div class="crow"><span class="cn">' + esc(p.n) + '</span>' + pr + '</div>';
+  });
+  h += '</div>';
+  return h;
+}
+function dosBody(){
+  var f = fiche(), d = f.ident;
+  var h = '<div class="crows">';
+  h += '<div class="hrow"><span class="hp">Noms</span><span class="hx num" data-e="ident.civil" data-s="1">' + esc(dash(d.civil)) + '</span></div>';
+  h += '<div class="hrow"><span class="hp">État civil</span><span class="hx num" data-e="ident.ec" data-s="1">' + esc(dash(d.ec)) + '</span></div>';
+  h += '<div class="hrow"><span class="hp">Corporation</span><span class="hx num" data-e="ident.nat" data-s="1">' + esc(dash(d.nat)) + '</span></div>';
+  h += '<div class="hrow"><span class="hp">Age</span><span class="hx num">' + esc(dash(d.ageP)) + (d.ageR ? " · " + esc(d.ageR) : "") + '</span></div>';
+  h += '<div class="hrow"><span class="hp">Taille · Poids</span><span class="hx num">' + esc(dash(d.tail)) + ' · ' + esc(dash(d.poids)) + '</span></div>';
+  h += '<div class="hrow"><span class="hp">Profession</span><span class="hx num">' + esc(dash(d.pro)) + (d.employeur ? ' · ' + esc(dash(d.employeur)) : '') + '</span></div>';
+  h += '<div class="hrow"><span class="hp">Casier</span><span class="hx num">' + esc(dash(d.casier)) + '</span></div>';
+  if (d.passep && d.passep.length){
+    h += '<div class="hrow"><span class="hp">Passeports</span><span class="hx">' + d.passep.map(esc).join(" · ") + '</span></div>';
+  }
+  if (d.relance) h += '<div class="hrow"><span class="hp">Relance</span><span class="hx">' + d.relance + ' jet</span></div>';
+  if (d.passions.length){
+    h += '<span class="dtag">Passions</span>';
+    d.passions.forEach(function(p){ h += '<div class="hrow"><span class="hx">' + esc(p.n) + '</span></div>'; });
+  }
+  if (d.permis.length){
+    h += '<span class="dtag">Permis</span>';
+    d.permis.forEach(function(p){ h += '<div class="hrow"><span class="hx">' + esc(p) + '</span></div>'; });
+  }
+  h += '<span class="dtag">Parcours</span>';
+  d.histo.forEach(function(p){
+    if (p.r.length){
+      h += '<div class="hrow"><span class="hp">' + esc(p.p) + '</span><span class="hx">' + p.r.map(esc).join(" · ") + '</span></div>';
+    }
+  });
+  h += '<span class="dtag">Notes</span>';
+  h += '<div class="hrow"><span class="hx num" data-e="ident.notes" data-s="1">' + esc(dash(f.notes)) + '</span></div>';
+  h += '</div>';
+  return h;
+}
+var SECBODY = {corps:corpsBody, integ:integBody, cap:capBody, eq:eqBody, dos:dosBody};
+function renderBlocs(){
+  var h = "";
+  SECTIONS.forEach(function(s){
+    var on = !!state.ouvert[s.k];
+    h += '<section class="bloc' + (on ? " on" : "") + '" data-sec="' + s.k + '">' +
+      '<button class="bh" aria-expanded="' + on + '"><span class="bt">' + esc(s.t) + '</span>' +
+      '<span class="bs num">' + s.som() + '</span><span class="ch" aria-hidden="true">▾</span></button>' +
+      '<div class="bc"' + (on ? "" : " hidden") + '></div></section>';
+  });
+  $q("#blocs").innerHTML = h;
+  SECTIONS.forEach(function(s){
+    if (state.ouvert[s.k]) $q('.bloc[data-sec="' + s.k + '"] .bc').innerHTML = SECBODY[s.k]();
+  });
+}
+function render(){
+  renderRail(); renderHero(); renderBlocs();
+  paintFig(fiche());
+}
+
+function pathOf(el){ var d = el.getAttribute("data-e"); return d ? d.split(".") : null; }
+function setIn(o, pr, v){
+  for (var i = 0; i < pr.length - 1; i++){
+    if (typeof o[pr[i]] !== "object" || o[pr[i]] === null) o[pr[i]] = {};
+    o = o[pr[i]];
+  }
+  o[pr[pr.length - 1]] = v;
+}
+var editingEl = null;
+function commitEdit(el){
+  var pr = pathOf(el); if (!pr) return;
+  var t = el.textContent.trim();
+  var isNum = el.getAttribute("data-num") === "1";
+  if (isNum){
+    if (t.slice(0, 2) === "₡ ") t = t.slice(2);
+    else if (t.slice(0, 3) === "xp ") t = t.slice(3);
+  }
+  var v;
+  if (t === "…" || t === "—"){
+    v = (pr[0] === "sons") ? 0 : null;
+  } else if (isNum){
+    var n = parseFloat(t.replace(",", "."));
+    v = isNaN(n) ? null : n;
+  } else v = t;
+  if (pr[0] === "sons" && typeof v === "number") v = Math.max(0, Math.min(9, v));
+  if (pr[0] === "crow" || pr[0] === "erow"){
+    var list = pr[0] === "crow" ? fiche().comp : fiche().exp;
+    var rw = list.filter(function(x){ return x.n === pr[1]; })[0];
+    if (rw) rw.v = v;
+  } else setIn(fiche(), pr, v);
+  el.setAttribute("contenteditable", "false");
+  el.classList.remove("edit");
+  editingEl = null;
+  save(); render();
+}
+function cancelEdit(el){
+  editingEl = null;
+  if (!el){ render(); return; }
+  el.setAttribute("contenteditable", "false");
+  el.classList.remove("edit");
+  render();
+}
+document.addEventListener("click", function(ev){
+  var e = ev.target;
+  var t = e.closest ? e.closest(".bh") : null;
+  if (t){
+    var sec = t.closest(".bloc"); var k = sec.getAttribute("data-sec");
+    state.ouvert[k] = state.ouvert[k] ? 0 : 1;
+    sec.classList.toggle("on", !!state.ouvert[k]);
+    t.setAttribute("aria-expanded", state.ouvert[k] ? "true" : "false");
+    var bc = sec.querySelector(".bc");
+    if (state.ouvert[k]){ bc.hidden = false; bc.innerHTML = SECBODY[k](); paintFig(fiche()); }
+    else bc.hidden = true;
+    save(); return;
+  }
+  var rc = e.closest ? e.closest(".rchip") : null;
+  if (rc){
+    var id = rc.getAttribute("data-f");
+    if (id && state.fiches[id]){ state.cur = id; save(); render(); }
+    return;
+  }
+  var zp = e.closest ? e.closest("[data-zplus]") : null;
+  if (zp){ bump(zp.getAttribute("data-zplus"), 1); return; }
+  var zm = e.closest ? e.closest("[data-zmoins]") : null;
+  if (zm){ bump(zm.getAttribute("data-zmoins"), -1); return; }
+  var zl = e.closest ? e.closest("[data-zm]") : null;
+  if (zl){ openZone(zl.getAttribute("data-zm")); return; }
+  var mod = e.closest ? e.closest("[data-mod]") : null;
+  if (mod){ openMod(parseInt(mod.getAttribute("data-mod"), 10)); return; }
+  var chb = e.closest ? e.closest("[data-ch]") : null;
+  if (chb){ doSwap(chb.getAttribute("data-ch")); return; }
+  var jr = e.closest ? e.closest(".jrow") : null;
+  if (jr){ jet(jr.getAttribute("data-jet")); return; }
+  var de = e.closest ? e.closest("[data-e]") : null;
+  if (de){
+    if (e.closest("#pop")) return;
+    var ce = de.getAttribute("contenteditable");
+    if (ce !== "true"){
+      de.setAttribute("contenteditable", "true");
+      de.classList.add("edit");
+      de.focus();
+      try{
+        var rg = document.createRange(); rg.selectNodeContents(de);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(rg);
+      }catch(e3){}
+      editingEl = de;
+    }
+    return;
+  }
+  var fer = e.closest ? e.closest("#vjfermer,#zfermer,#jfermer,#mfermer,#bjets") : null;
+  if (fer){
+    if (fer.id === "bjets") openJet(); else closePop();
+    return;
+  }
+});
+document.addEventListener("focusout", function(ev){
+  var el = ev.target;
+  if (el && el.getAttribute && el.getAttribute("data-e") && el.getAttribute("contenteditable") === "true"){
+    commitEdit(el);
+  }
+});
+function blurCommit(){ if (editingEl){ commitEdit(editingEl); } }
+document.addEventListener("focusin", function(ev){
+  var el = ev.target;
+  if (el && el.getAttribute && el.getAttribute("data-e") && el.getAttribute("contenteditable") === "true"){
+    editingEl = el;
+  }
+});
+document.addEventListener("keydown", function(ev){
+  if (ev.key === "Escape"){
+    if (popKind){ closePop(); return; }
+    if (editingEl){ cancelEdit(editingEl); return; }
+    return;
+  }
+  if (ev.key === "Enter" && editingEl){
+    ev.preventDefault();
+    commitEdit(editingEl);
+    return;
+  }
+});
+function bump(k, d){
+  var f = fiche(), v = f.sons[k] || 0;
+  f.sons[k] = Math.max(0, Math.min(9, v + d));
+  save();
+  var el = $q('[data-zc="' + k + '"]');
+  if (el) el.textContent = String(f.sons[k]);
+  paintFig(f);
+  syncInteg();
+}
+function syncInteg(){
+  var bs = $q('.bloc[data-sec="integ"] .bs');
+  if (bs) bs.textContent = somInteg();
+  paintFig(fiche());
+}
+var popKind = null, popArg = null;
+function realOpen(html, sw){
+  popKind = sw ? "sw" : "pop";
+  var pp = $q("#pop");
+  if (sw) pp.classList.add("sw"); else pp.classList.remove("sw");
+  $q("#pbody").innerHTML = html;
+  pp.hidden = false;
+  pp.style.transform = "";
+  requestAnimationFrame(function(){ pp.classList.add("on"); });
+  var v = $q("#vel");
+  v.hidden = false;
+  requestAnimationFrame(function(){ v.classList.add("on"); });
+  pp.scrollTop = 0;
+}
+function closePop(){
+  var pp = $q("#pop"), v = $q("#vel");
+  pp.classList.remove("on"); v.classList.remove("on");
+  popKind = null; popArg = null;
+  setTimeout(function(){ if (!popKind){ pp.hidden = true; v.hidden = true; $q("#pbody").innerHTML = ""; } }, 240);
+}
+$q("#vel").addEventListener("click", closePop);
+(function(){
+  var y0 = null, dy = 0;
+  var pip = $q(".pip"), pp = $q("#pop");
+  pip.addEventListener("pointerdown", function(ev){ y0 = ev.clientY; dy = 0; ev.currentTarget.setPointerCapture(ev.pointerId); });
+  pip.addEventListener("pointermove", function(ev){
+    if (y0 === null) return;
+    dy = ev.clientY - y0;
+    pp.style.transform = "translateY(" + Math.max(0, dy) + "px)";
+    ev.preventDefault();
+  });
+  function end(){
+    if (y0 === null) return;
+    pp.style.transform = "";
+    if (dy > 70) closePop();
+    y0 = null; dy = 0;
+  }
+  pip.addEventListener("pointerup", end);
+  pip.addEventListener("pointercancel", end);
+})();
+function openJet(){
+  var f = fiche();
+  var h = '<div class="ptit"><b>Jet</b><span class="vtag num">2 × carac</span></div>';
+  h += '<div id="jlist">';
+  [["corps","Corps"],["proc","Proc"],["esprit","Esprit"],["empathie","Empathie"]].forEach(function(cc){
+    var v = f.car[cc[0]];
+    h += '<button class="jrow" data-jet="' + cc[0] + '"><span class="jn">' + cc[1] + '</span><span class="jv num">' + dash(v) + '</span></button>';
+  });
+  h += '</div><div id="jdice" hidden></div>';
+  h += '<div class="pact"><button class="btn" id="jfermer">Fermer</button></div>';
+  realOpen(h, false);
+}
+function jet(key){
+  var f = fiche(), v = f.car[key];
+  var n = parseInt(v, 10); if (isNaN(n)) n = 0;
+  var dice = 2 * n;
+  var vals = [];
+  for (var i = 0; i < dice; i++) vals.push(1 + Math.floor(Math.random() * 6));
+  var tot = vals.reduce(function(a, b){ return a + b; }, 0);
+  var box = $q("#jdice"); box.hidden = false;
+  var h = '<div class="dice">';
+  vals.forEach(function(x){ h += '<i class="num' + (x >= 5 ? " hi" : "") + '">' + x + '</i>'; });
+  h += '</div><div class="tot num">2 × ' + n + ' → ' + dice + ' dés · somme <b>' + tot + '</b></div>';
+  box.innerHTML = h;
+}
+function openZone(z){
+  var f = fiche();
+  var nom = ZONES.filter(function(x){ return x[0] === z; })[0][1];
+  var v = f.sons[z] || 0;
+  var h = '<div class="ptit"><b>' + esc(nom) + '</b></div>';
+  h += '<div class="dice"><i class="num" id="bzi">' + v + '</i></div>';
+  h += '<div class="pact"><button class="btn acc" id="bzplus">+1</button>' +
+       '<button class="btn" id="bzmoins">Retirer 1</button>' +
+       '<button class="btn" id="zfermer">Fermer</button></div>';
+  popArg = z;
+  realOpen(h, false);
+  $q("#bzplus").addEventListener("click", function(){
+    bump(popArg, 1);
+    var i = $q("#bzi"); if (i) i.textContent = String(fiche().sons[popArg] || 0);
+  });
+  $q("#bzmoins").addEventListener("click", function(){
+    bump(popArg, -1);
+    var i2 = $q("#bzi"); if (i2) i2.textContent = String(fiche().sons[popArg] || 0);
+  });
+}
+function openVivier(){
+  var f = fiche();
+  var h = '<div class="ptit"><b>Vivier</b><span class="vtag">échange de châssis</span></div>';
+  Object.keys(state.vivier).forEach(function(id){
+    var c = state.vivier[id];
+    var m1 = (c.corps === null || c.corps === undefined) ? "—" : c.corps;
+    var m2 = (c.proc === null || c.proc === undefined) ? "—" : c.proc;
+    var e = (c.ecout == null) ? "—" : "-" + c.ecout;
+    var cur = f.chassis === id;
+    h += '<button class="vrow' + (cur ? " currow" : "") + '" data-ch="' + id + '">' +
+      '<span class="vn2">' + esc(c.nom) + '</span>' +
+      '<span class="vs">Corps ' + m1 + ' · Proc ' + m2 + ' · énergie ' + e + ' · ' + esc(c.filon || "") + '</span>' +
+      (cur ? '<span class="vtag">actuel</span>' : '') + '</button>';
+  });
+  h += '<div class="pact"><button class="btn" id="vjfermer">Fermer</button></div>';
+  realOpen(h, true);
+}
+function doSwap(id){
+  var f = fiche();
+  if (id === f.chassis || !state.vivier[id]){ closePop(); return; }
+  var old = f.chassis;
+  var nu = state.vivier[id];
+  if (old && state.vivier[old]) state.vivier[old].actif = false;
+  state.vivier[id].actif = true;
+  f.chassis = id;
+  f.car.corps = (nu.corps === null || nu.corps === undefined) ? null : nu.corps;
+  f.car.proc = (nu.proc === null || nu.proc === undefined) ? null : nu.proc;
+  save(); closePop(); render();
+}
+function openMod(idx){
+  var f = fiche(), ch = f.chassis ? state.vivier[f.chassis] : null;
+  if (!ch){ closePop(); return; }
+  var m = ch.mods[idx]; if (!m){ closePop(); return; }
+  var h = '<div class="ptit"><b>' + esc(m.n) + '</b>' + (m.i !== undefined ? '<span class="vtag num">' + esc(m.i) + '</span>' : '') + '</div>';
+  var bits = [];
+  if (m.e !== undefined) bits.push('é -' + m.e);
+  if (m.p !== undefined) bits.push('₡' + m.p);
+  if (m.cib) bits.push(esc(m.cib));
+  h += '<div class="vmeta">' + (bits.join(" · ")) + '</div>';
+  h += '<div class="pact">' +
+    '<button class="btn acc" id="bmact">' + (m.act ? "Ranger" : "Activer") + '</button>' +
+    '<button class="btn" id="mfermer">Fermer</button></div>';
+  popArg = idx;
+  realOpen(h, false);
+  $q("#bmact").addEventListener("click", function(){
+    var mm = state.vivier[fiche().chassis].mods[popArg];
+    if (mm){
+      if (mm.act){ mm.act = false; if (typeof fiche().pool.e.c === "number" && mm.e) fiche().pool.e.c += mm.e; }
+      else { mm.act = true; if (typeof fiche().pool.e.c === "number" && mm.e) fiche().pool.e.c -= mm.e; }
+      save();
+    }
+    closePop(); render();
+  });
+}
+document.addEventListener("click", function(ev){
+  var e2 = ev.target;
+  var bc = e2.closest ? e2.closest("#bchassis") : null;
+  if (bc){ openVivier(); return; }
+  var bm = e2.closest ? e2.closest("#bmact") : null;
+  if (bm && popArg !== null){
+    var mm = state.vivier[fiche().chassis].mods[popArg];
+    if (mm){
+      if (mm.act){ mm.act = false; if (typeof fiche().pool.e.c === "number" && mm.e) fiche().pool.e.c += mm.e; }
+      else { mm.act = true; if (typeof fiche().pool.e.c === "number" && mm.e) fiche().pool.e.c -= mm.e; }
+      save();
+    }
+    closePop(); render();
+  }
+});
+window.__b1 = {
+  state:function(){ return state; },
+  snap:function(){ return JSON.parse(JSON.stringify(state)); },
+  swapTo:function(id){ doSwap(id); },
+  setZone:function(z, n){ fiche().sons[z] = n; save(); render(); },
+  figFill:function(z){
+    var el = document.getElementById("zp-" + z);
+    return el ? (getComputedStyle(el).fill) : null;
+  },
+  zoneN:function(z){
+    var el = document.querySelector('[data-zn="' + z + '"]');
+    return el ? el.textContent : null;
+  },
+  ready:true, lid:1
+};
+render();
+</script>
+</body>
+</html>
+

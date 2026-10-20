@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="fr" data-style="reticule" data-screen="crise" data-blocs="4" data-rail="non">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Transhumains — maquette comparative des styles</title>
+<style>
+/* ============================================================================
+   TRANSHUMAINS — MAQUETTE COMPARATIVE DE STYLES
+   Document de decision. Un seul fichier, aucune ressource externe.
+
+   DECISION (2026-10-08, Mandal) : style retenu = SIGNAL. Les autres blocs restent
+   comme trace de la comparaison, ils ne sont plus des candidats.
+
+   ATTENTION — CONTENU PLACEHOLDER. Les noms, chiffres, articles et textes de ce
+   fichier sont des bouchons de mise en page. Ils ne sont PAS canoniques et ne
+   font autorite sur rien : les reges viennent de Regles/, le lore de Lore/, le
+   catalogue de Equipement/Rayons/, les groupes de crise du coffre. Aucune donnee
+   d'application ne doit etre lue, copied ou inspiree d'ici. La maquette ne prete
+   que sa forme.
+   Tout composant lit des variables. Aucun hexadecimal en dur hors des blocs
+   de variables et hors de la charte du papier (--papier-*).
+   Ajouter un style = coller un bloc de variables + une pastille de commande.
+   ========================================================================= */
+
+/* ---------------------------------------------------------------- 0. OUTILS */
+/* Deux paliers d'espacement seulement : --u et --u2 = 2 x --u. Densite posee
+   par l'attribut data-blocs sur la racine, pas par des media queries. */
+:root{
+  --u:8px;  --u2:16px;  --demi:4px; --trait:1px;
+  --famillex-sans: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --famille-mono: ui-monospace, "Cascadia Mono", Consolas, "SF Mono", Menlo, monospace;
+  --duree:120ms;
+  --mesure:64ch;                 /* largeur de lecture, en caracteres */
+  --papier-fond:#f4f1ea; --papier-texte:#16181c; --papier-filets:#8f8a7d;
+  --papier-secondaire:#6b6559; --papier-accent:#2f5f78;
+}
+
+/* ============================================================ 1. RETICULE ==
+   PALETTE (six gris mesures + trois etats)
+     fond            #0b1018
+     surface         #1b2431
+     filet           #7987a0   5,25:1 sur fond
+     texte           #d6dee9  14,06:1 sur fond · 11,53:1 sur surface
+     texte second.   #8fa0b5   7,14:1 sur fond ·  5,85:1 sur surface
+     accent          #2bbfd1   8,60:1 sur fond ·  7,05:1 sur surface
+     accent second   #6f88b0   5,29:1 sur fond
+     alerte          #d9a24a   8,37:1 sur fond
+     ok              #84d4b4  10,95:1 sur fond
+     critique        #fa5750   5,94:1 sur fond
+     inversion       #e6eaf0 avec texte #0b1018 = 15,79:1
+   REGLE : aucun element porteur d'information sous 3:1 ni dans la bande
+   1,15–3:1 ; l'accent est reserve a UN seul evenement a l'ecran ; aucun etat
+   ne se signale par la couleur seule (toujours double par un glyphe ou un
+   mot). Niveaux de gris : les deux premiers paliers s'inversent (le filet
+   #7987a0 reste au-dessus du fond), les filets restent pleins.
+   ------------------------------------------------------------------------- */
+[data-style=reticule]{
+  --fond:#0b1018; --surface:#1b2431; --surface-2:#1b2431; --ligne:#7987a0;
+  --texte:#d6dee9; --texte-2:#8fa0b5;
+  --accent:#2bbfd1; --accent-2:#6f88b0;
+  --critique:#fa5750; --outil:#84d4b4; --alerte:#d9a24a;
+  --inversion-fond:#e6eaf0; --inversion-texte:#0b1018;
+  --corps-texte:16px; --corps-inter:24px;              /* 16 / 1,5 */
+  --lecture-texte:16px; --lecture-inter:24px;
+  --titre-taille:11px; --titre-inter:16px; --titre-casse:uppercase; --titre-graisse:600;
+  --micro-taille:11px; --micro-inter:15.5px; --micro-espace:.08em; --micro-casse:uppercase;
+  --index-taille:13px; --index-inter:19.5px;
+  --plaque-12-texte:#0b1018; --plaque-24-texte:#d6dee9; --plaque-36-texte:#e6eaf0;
+  --serif-humain:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+}
+
+/* ======================================================== 2. BILLET CUIVRE ==
+   PALETTE FERMEE, NEUF HEXES, AUCUN AUTRE N'EST ADMIS
+     fond            #070708
+     surface         #2a2012   (sous la ligne selectionnee et pendant l'appui)
+     filet           #b0a894   8,51:1 sur fond
+     texte           #e9e4d6  15,85:1 sur fond · 12,58:1 sur surface
+     texte second.   #87806f   5,13:1 sur fond ·  4,07:1 sur surface
+     accent          #edaa52  10,04:1 sur fond ·  7,97:1 sur surface
+     accent second   #cf8a48   7,08:1 sur fond
+     texture haute   #8f5d2a   3,61:1 — GRAND TEXTE UNIQUEMENT
+     texture basse   #4f341a   1,76:1 — DECOR PUR, jamais un filet porteur
+   REGLE : la bande 1,15–3:1 de l'ancien design est interdite pour tout
+   element porteur ; tout texte tient 4,5:1 sur fond ET sur surface ; aucun
+   cyan, aucun jeton herite. Sous grayscale(1) la hierarchie tient par la
+   luminance (texte 15,9 > accent 10,0 > filet 8,5 > secondaire 5,1) et par
+   le semaphore de formes. Impression N&B : fond -> papier, encres -> noir,
+   dither -> trame, et les formes seules distinguent les etats.
+   ------------------------------------------------------------------------- */
+[data-style=cuivre]{
+  --fond:#070708; --surface:#2a2012; --surface-2:#2a2012; --ligne:#b0a894;
+  --texte:#e9e4d6; --texte-2:#87806f;
+  --accent:#edaa52; --accent-2:#cf8a48;
+  --critique:#e9e4d6; --outil:#b0a894; --alerte:#edaa52;
+  --texture-haute:#8f5d2a; --texture-basse:#4f341a;
+  --inversion-fond:#edaa52; --inversion-texte:#070708;
+  --corps-texte:16px; --corps-inter:24px;
+  --lecture-texte:16px; --lecture-inter:24.5px;
+  --titre-taille:27px; --titre-inter:39px; --titre-casse:none; --titre-graisse:400;
+  --micro-taille:12px; --micro-inter:17.5px; --micro-espace:.08em; --micro-casse:uppercase;
+  --index-taille:12px; --index-inter:17.5px;
+  --plaque-12-texte:#070708; --plaque-24-texte:#e9e4d6; --plaque-36-texte:#e9e4d6;
+  --serif-humain:var(--famillex-sans);
+}
+
+/* ============================================================= 3. GRAVURE ==
+   PALETTE EN CREUX — la structure est creusee, pas posee. Le rail est un
+   demi-ton plus clair que le fond, les liseres un demi-ton plus sombres.
+     fond            #16181c
+     filet           #8a8578   4,83:1 sur fond   (lisere structurel)
+     rail            #7e7a6d   4,14:1 sur fond   (rail de 44 px)
+     texte           #f2efe6  15,46:1 sur fond
+     texte second.   #a9a49a   7,16:1 sur fond
+     accent          #b6c3d6   9,96:1 sur fond   (inversion video)
+     plaque 12 %     #dfe5ee avec texte #16181c = 14,03:1
+     plaque 24 %     #2e3136 avec texte #dfe5ee = 10,31:1
+     plaque 36 %     #474a51 avec texte #e8ecf1 =  7,48:1
+   Couples texte/plaque (jamais de couleur en dur dans un composant) :
+     #16181c sur #dfe5ee = 14,03:1 · #dfe5ee sur #2f3237 = 10,16:1 · #e8ecf1 sur #4a4d54 = 7,13:1
+   DOUBLURE IMPRIMABLE (encre noire sur papier clair)
+     texte #16181c sur #f4f1ea = 15,76:1 · secondaire #6b6559 = 5,13:1
+     liseres #8f8a7d = 3,05:1 · accent #2f5f78 = 6,15:1
+   REGLE : plus aucune carte ; la hierarchie passe par des plaques pleines
+   empilees sans bordure ni arrondi ; l'attention est une inversion video
+   statique qui reste jusqu'au tap ; deux voix typographiques (machine en
+   sans-serif a chiffres tabulaires, humain en serif italique bas de casse).
+   ------------------------------------------------------------------------- */
+[data-style=gravure]{
+  --fond:#16181c; --surface:#dfe5ee; --surface-2:#2e3136; --ligne:#8a8578;
+  --texte:#f2efe6; --texte-2:#a9a49a;
+  --accent:#b6c3d6; --accent-2:#a9a49a;
+  --critique:#dfe5ee; --outil:#a9a49a; --alerte:#dfe5ee;
+  --rail:#7e7a6d;
+  --plaque-12:#dfe5ee; --plaque-24:#2f3237; --plaque-36:#4a4d54;
+  --inversion-fond:#dfe5ee; --inversion-texte:#16181c;
+  --plaque-12-texte:#16181c; --plaque-24-texte:#dfe5ee; --plaque-36-texte:#e8ecf1;
+  --corps-texte:16px; --corps-inter:24px;
+  --lecture-texte:17px; --lecture-inter:26px;
+  --titre-taille:13px; --titre-inter:19px; --titre-casse:uppercase; --titre-graisse:600;
+  --micro-taille:12px; --micro-inter:17.5px; --micro-espace:.08em; --micro-casse:uppercase;
+  --index-taille:13px; --index-inter:19.5px;
+  --serif-humain:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+}
+
+/* ------------------------------------------------------ 4. CHARTE D'IMPRESSION
+   Doublure commune : encre noire sur papier, paliers inverses, aucun decor.
+   C'est l'apercu « lecture » et le cas de test N&B. */
+/* Palier de densite : attribut sur la racine, aucune media query dupliquee. */
+[data-blocs="3"]{--u:12px}
+
+[data-print=on]{
+  --fond:var(--papier-fond); --texte:var(--papier-texte);
+  --texte-2:var(--papier-secondaire); --ligne:var(--papier-filets);
+  --accent:var(--papier-accent); --accent-2:var(--papier-secondaire);
+  --critique:var(--papier-texte); --outil:var(--papier-secondaire); --alerte:var(--papier-texte);
+  --surface:var(--papier-fond); --surface-2:var(--papier-fond);
+  --inversion-fond:var(--papier-texte); --inversion-texte:var(--papier-fond);
+  --rail:#d8d3c6; --plaque-12:#d8d3c6; --plaque-24:#c9c4b6; --plaque-36:#b9b4a6;
+  --plaque-12-texte:#16181c; --plaque-24-texte:#16181c; --plaque-36-texte:#16181c;
+  --texture-haute:var(--papier-secondaire); --texture-basse:var(--papier-filets);
+}
+
+/* ================================================= 4-6. PROPOSITIONS DOUCES ==
+/* Nahant, Vitre, Signal : trois lectures du meme brief — lignes fines bleu clair,
+   arrondis, cadre porte par les quatre coins seulement, typographie en bas de
+   casse (NASA : la casse mixtee pour tout ce qui n'est pas un acronyme).
+   Contrastes verifies en couleur ET apres filter:grayscale(1) (matrice sRGB).
+   NAHANT  texte 15,39 · second. 7,45 · ligne 7,34 · accent vif 12,07 · inversion 16,64
+   VITRE   texte 15,85 · second. 7,87 · ligne 7,32 · accent vif 13,26 · inversion 17,00
+   SIGNAL  texte 15,23 · second. 6,58 · ligne 6,84 · accent vif 12,94 · inversion 16,68
+   Le filet est volontairement plus sombre que le texte secondaire dans les trois
+   palettes : en niveaux de gris, un trait ne doit jamais se confondre avec une
+   syllabe. */
+[data-style=nahant]{
+  --fond:#080d14; --surface:#0f1824; --surface-2:#0f1824; --ligne:#4f97bd;
+  --texte:#dbe6f0; --texte-2:#8ba3b8;
+  --accent:#7fd8f2; --accent-2:#4a90b8;
+  --critique:#ff8a7a; --outil:#7fe3bd; --alerte:#ffc46b;
+  --inversion-fond:#e8f3fb; --inversion-texte:#08131c;
+  --rayon:10px; --equerre:7px;
+  --corps-texte:16px; --corps-inter:25px;
+  --lecture-texte:17px; --lecture-inter:27px;
+  --titre-taille:13px; --titre-inter:19px; --titre-casse:none; --titre-graisse:650;
+  --micro-taille:11px; --micro-inter:16px; --micro-espace:.06em; --micro-casse:none;
+  --index-taille:13px; --index-inter:20px;
+  --plaque-12-texte:#dbe6f0; --plaque-24-texte:#dbe6f0; --plaque-36-texte:#e8f3fb;
+}
+[data-style=vitre]{
+  --fond:#0a1017; --surface:#121d2a; --surface-2:#16222f; --ligne:#4e8bab;
+  --texte:#e2ebf4; --texte-2:#93a9bd;
+  --accent:#9fe0ff; --accent-2:#5b9dc0;
+  --critique:#ff9c8c; --outil:#8fe9c6; --alerte:#ffd08a;
+  --inversion-fond:#eef6fc; --inversion-texte:#0a141d;
+  --rayon:16px; --equerre:9px;
+  --corps-texte:16px; --corps-inter:26px;
+  --lecture-texte:17px; --lecture-inter:28px;
+  --titre-taille:14px; --titre-inter:20px; --titre-casse:none; --titre-graisse:600;
+  --micro-taille:12px; --micro-inter:17px; --micro-espace:.04em; --micro-casse:none;
+  --index-taille:14px; --index-inter:21px;
+  --plaque-12-texte:#e2ebf4; --plaque-24-texte:#e2ebf4; --plaque-36-texte:#eef6fc;
+}
+[data-style=signal]{
+  --fond:#06090f; --surface:#0d1420; --surface-2:#0d1420; --ligne:#3f88bd;
+  --texte:#d5e3ee; --texte-2:#7f97ad;
+  --accent:#63e0ff; --accent-2:#3d86b4;
+  --critique:#ff7867; --outil:#5fdcae; --alerte:#ffbb55;
+  --inversion-fond:#dff2ff; --inversion-texte:#061019;
+  --rayon:6px; --equerre:10px;
+  --corps-texte:16px; --corps-inter:24px;
+  --lecture-texte:16px; --lecture-inter:25px;
+  --titre-taille:12px; --titre-inter:18px; --titre-casse:none; --titre-graisse:700;
+  --micro-taille:11px; --micro-inter:16px; --micro-espace:.09em; --micro-casse:none;
+  --index-taille:13px; --index-inter:19px;
+  --plaque-12-texte:#d5e3ee; --plaque-24-texte:#d5e3ee; --plaque-36-texte:#dff2ff;
+}
+
+
+
+
+/* --------------------------------------------------------------- 5. BASE */
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--fond);color:var(--texte)}
+body{
+  font-family:var(--famillex-sans); font-size:var(--corps-texte); line-height:var(--corps-inter);
+  background:var(--fond); color:var(--texte);
+  -webkit-text-size-adjust:100%;
+  padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right);
+}
+/* Une seule transition, sur l'etat seulement. Rien d'autre ne bouge. */
+.bascule{transition:background-color var(--duree) linear, color var(--duree) linear,
+         border-color var(--duree) linear, opacity var(--duree) linear}
+.mono,.chiffre{font-family:var(--famille-mono);font-variant-numeric:tabular-nums}
+.micro{font-family:var(--famillex-sans);font-size:var(--micro-taille);line-height:var(--micro-inter);
+  letter-spacing:var(--micro-espace);text-transform:var(--micro-casse);font-weight:500}
+.serif{font-family:var(--serif-humain);font-style:italic;text-transform:none}
+.secondaire{color:var(--texte-2)}
+.glyphe{font-family:var(--famille-mono);font-style:normal;font-weight:400}
+.g12{color:var(--accent);font-style:normal;font-weight:700}
+.gd{color:var(--texte);font-style:normal;font-weight:700}
+
+/* ---------------------------------------------------- 6. FILTRE DE RACINE */
+/* grayscale : tout passe en niveaux de gris. photocopie : contraste ecrase,
+   comme une photocopie de troisieme generation. */
+html[data-gris=on] body{filter:grayscale(1)}
+html[data-photo=on] body{filter:grayscale(1) contrast(.35) brightness(1.15)}
+
+/* ------------------------------------------------------------- 7. COMMANDE */
+.commande{position:sticky;top:0;z-index:30;background:var(--fond);
+  border-bottom:var(--trait) solid var(--ligne);
+  padding:var(--u2) var(--u2) var(--u);display:flex;flex-direction:column;gap:var(--u2);
+  max-width:var(--mesure);margin:0 auto;width:100%}
+.groupe{display:flex;flex-wrap:wrap;gap:var(--u) var(--u2);align-items:center}
+.groupe>.micro{flex:0 0 auto}
+.groupe.basc{display:grid;grid-template-columns:1fr 1fr;gap:var(--u);align-items:center}
+@media (min-width:721px){.groupe.basc{grid-template-columns:repeat(4,auto)}}
+
+.ctl{min-height:48px;min-width:48px;padding:var(--u) var(--u2);
+  background:var(--fond);color:var(--texte-2);border:var(--trait) solid var(--ligne);
+  border-radius:var(--rayon,0px);font-family:var(--famillex-sans);font-size:var(--index-taille);line-height:var(--index-inter);
+  cursor:pointer;display:inline-flex;align-items:center;gap:var(--u);text-align:left}
+.ctl:hover,.ctl:focus-visible{color:var(--texte)}
+.ctl[aria-pressed=true]{background:var(--inversion-fond);color:var(--inversion-texte);border-color:var(--inversion-fond)}
+.ctl .etat{font-family:var(--famille-mono);font-size:var(--micro-taille);letter-spacing:.06em}
+.ctl[aria-pressed=true] .etat{font-weight:700}
+.ctl:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* -------------------------------------------------- 8. SQUELETTE IDENTIQUE */
+.grille{display:grid;grid-template-columns:1fr;gap:var(--u2);
+  max-width:var(--mesure);margin:0 auto;padding:var(--u2) var(--u2) calc(var(--u2)*8)}
+html[data-rail=oui] .zone{padding-left:calc(44px + var(--u2))}
+.zone{min-width:0}
+.bandeau{padding:var(--u) 0;border-bottom:var(--trait) solid var(--ligne);
+  display:flex;justify-content:space-between;gap:var(--u)}
+
+<style>
+/* =================================================================== 9. COMPOSANTS
+   Aucun hexadecimal ici : tout passe par les variables de style. */
+
+.pile{display:flex;flex-direction:column;gap:var(--u2)}
+.col{display:flex;flex-direction:column;gap:0}
+.grille-2{display:grid;grid-template-columns:1fr;gap:var(--u2)}
+@media (min-width:721px){.grille-2{grid-template-columns:1fr 1fr;gap:var(--u2) calc(var(--u2)*2)}}
+
+/* Titre de section : precede d'au moins 32 px, suivi d'un filet de separation. */
+.titre-section{margin-top:calc(var(--u2)*2);margin-bottom:var(--u2);
+  padding-bottom:var(--u);border-bottom:var(--trait) solid var(--ligne);color:var(--texte)}
+.pile>.titre-section:first-child,.col>.titre-section:first-child{margin-top:0}
+.bandeau+.grille-2 .titre-section:first-child,.bandeau+.titre-section:first-child{margin-top:var(--u2)}
+
+/* Ligne de donnee : hauteur utile >= 48 px, filet de separation apres le bloc. */
+.liste{list-style:none;border-bottom:var(--trait) solid var(--ligne)}
+.ligne{display:flex;align-items:center;gap:var(--u2);min-height:48px;
+  padding:var(--u) 0;border-top:var(--trait) solid var(--ligne)}
+.ligne:first-child{border-top:0}
+.ligne.compacte{min-height:48px;padding:var(--u) 0}
+/* Liste dense de consultation : hauteur de cible conservee, padding reduit. */
+.liste.serree .ligne{min-height:48px;padding:var(--demi) 0}
+.liste.dense .ligne{min-height:40px;padding:var(--demi) 0}
+.corps{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:var(--u);flex-wrap:wrap}
+.meta{flex:0 0 auto;display:flex;align-items:center;gap:var(--u)}
+.indice{flex:0 0 auto;color:var(--texte-2)}
+.losange{width:10px;height:10px;flex:0 0 auto;background:var(--accent);
+  clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.jauge{display:inline-flex;gap:2px;flex:0 0 auto}
+.jauge i{display:block;width:10px;height:16px;background:var(--accent)}
+.jauge i.vide{background:transparent;box-shadow:inset 0 0 0 var(--trait) var(--ligne)}
+.val{flex:0 0 auto;min-width:2ch;text-align:right}
+.ok{color:var(--outil)}
+.blesse{color:var(--critique)}
+
+/* Caracteristiques : cases de meme poids, chiffre en machine. */
+.carac{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--trait);background:var(--ligne);
+  border:var(--trait) solid var(--ligne)}
+.case{background:var(--fond);color:var(--texte);padding:var(--u2);
+  display:flex;flex-direction:column;gap:var(--demi);min-height:48px}
+.case .v{font-size:calc(var(--corps-texte)*1.5);line-height:1.2;font-weight:600}
+
+/* Appel : bloc encadre de 1 px, libelle en capitales. */
+.appel{border:var(--trait) solid var(--ligne);padding:var(--u2);min-height:48px;display:flex;align-items:center}
+
+/* Action : large, lisible, statut double par un glyphe. */
+.action{min-height:56px;width:100%;padding:var(--u2);border:var(--trait) solid var(--accent);
+  background:var(--fond);color:var(--accent);border-radius:var(--rayon,0px);cursor:pointer;text-align:left;
+  font-family:var(--famille-mono);font-size:var(--corps-texte);line-height:var(--corps-inter);
+  display:flex;align-items:center;justify-content:space-between;gap:var(--u2);flex-wrap:wrap}
+.action:hover,.action:focus-visible{background:var(--inversion-fond);color:var(--inversion-texte);border-color:var(--inversion-fond)}
+.action:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.action .micro{color:inherit;opacity:.85}
+
+/* Articles du supermarche : grille 1 / 2 colonnes, jamais trois. */
+.articles{display:grid;grid-template-columns:1fr;gap:0;border-top:var(--trait) solid var(--ligne);
+  border-bottom:var(--trait) solid var(--ligne)}
+@media (min-width:721px){.articles{grid-template-columns:1fr 1fr}}
+.article{display:flex;flex-direction:column;gap:var(--u);padding:var(--u2) 0;
+  border-top:var(--trait) solid var(--ligne);min-height:48px}
+.articles>.article:first-child,.articles>.article:nth-child(2){border-top:0}
+@media (max-width:720px){.article+.article{border-top:var(--trait) solid var(--ligne)}}
+@media (min-width:721px){.article:nth-child(odd){padding-right:var(--u2);border-right:var(--trait) solid var(--ligne)}
+  .article:nth-child(even){padding-left:var(--u2)}}
+.a-tete{display:flex;align-items:baseline;justify-content:space-between;gap:var(--u2)}
+.a-nom{font-size:var(--corps-texte);line-height:var(--corps-inter);font-weight:600;letter-spacing:0}
+.article p{max-width:52ch}
+.prix{flex:0 0 auto;white-space:nowrap;font-weight:700;font-size:var(--corps-texte);letter-spacing:0}
+.permis{align-self:flex-start;border:var(--trait) solid var(--accent);color:var(--accent);
+  padding:var(--demi) var(--u);min-height:0}
+.permis .micro{font-weight:700}
+
+/* Lecture : prose longue, deux voix typographiques. */
+.article-lecture{max-width:var(--mesure);display:flex;flex-direction:column;gap:var(--u2);
+  border-bottom:var(--trait) solid var(--ligne);padding-bottom:var(--u2)}
+.titre-lecture{font-size:calc(var(--corps-texte)*1.25);line-height:1.3;font-weight:600}
+.lecture{font-size:var(--lecture-texte);line-height:var(--lecture-inter);max-width:100%}
+.lecture+.lecture{margin-top:var(--u2)}
+.journal{margin-top:var(--u2);display:flex;flex-direction:column;gap:var(--u);align-items:flex-start}
+.journal p{font-size:var(--lecture-texte);line-height:var(--lecture-inter);
+  border-left:calc(var(--trait)*2) solid var(--ligne);padding-left:var(--u2)}
+
+
+/* ============================================================ 9. COMPOSANTS
+   Couche GENERIQUE partagee par les trois styles : structure, rythme,
+   dimensions, etats communs. Aucun hexadecimal. Aucun selecteur [data-style].
+   Tout ce qui distingue un style vit dans sa propre couche de formes. */
+
+/* --- ossature de page ------------------------------------------------- */
+.grille{display:grid;grid-template-columns:1fr;gap:var(--u2);
+  max-width:var(--mesure);margin:0 auto;padding:var(--u2) var(--u2) calc(var(--u)*8)}
+.zone{min-width:0}
+.pile{display:flex;flex-direction:column;gap:var(--u2)}
+.col{display:flex;flex-direction:column;gap:0}
+.grille-2{display:grid;grid-template-columns:1fr;gap:var(--u2)}
+@media (min-width:721px){.grille-2{grid-template-columns:1fr 1fr;gap:var(--u2)}}
+
+/* --- barre de commande ------------------------------------------------ */
+.commande{position:sticky;top:0;z-index:30;background:var(--fond);
+  border-bottom:var(--trait) solid var(--ligne);
+  padding:var(--u2) var(--u2) var(--u);display:flex;flex-direction:column;gap:var(--u2);
+  max-width:var(--mesure);margin:0 auto;width:100%}
+.groupe{display:flex;flex-wrap:wrap;gap:var(--u) var(--u2);align-items:center}
+.groupe.basc{display:grid;grid-template-columns:1fr 1fr;gap:var(--u);align-items:center}
+@media (min-width:721px){.groupe.basc{grid-template-columns:repeat(4,auto)}}
+
+.ctl{min-height:48px;min-width:48px;padding:var(--u) var(--u2);
+  background:var(--fond);color:var(--texte-2);border:var(--trait) solid var(--ligne);
+  border-radius:var(--rayon,0px);font-family:var(--famillex-sans);font-size:var(--index-taille);
+  line-height:var(--index-inter);cursor:pointer;display:inline-flex;align-items:center;gap:var(--u);
+  text-align:left}
+.ctl:hover,.ctl:focus-visible{color:var(--texte)}
+.ctl[aria-pressed=true]{background:var(--inversion-fond);color:var(--inversion-texte);
+  border-color:var(--inversion-fond)}
+.ctl[aria-pressed=true] .etat{font-weight:700}
+.ctl .etat{font-family:var(--famille-mono);font-size:var(--micro-taille);letter-spacing:.06em}
+.ctl:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* --- bandeau d'ecran -------------------------------------------------- */
+.bandeau{padding:var(--u) 0;border-bottom:var(--trait) solid var(--ligne);
+  display:flex;justify-content:space-between;gap:var(--u);flex-wrap:wrap}
+
+/* --- titres de section ------------------------------------------------
+   Le rythme vertical vient d'ici et de nulle part ailleurs : un seul palier,
+   4 x --u = 32 px, quelle que soit la densite choisie. Filet de separation
+   apres le titre (donc apres le bloc precedent). */
+.titre-section{margin-top:calc(var(--u)*4);margin-bottom:var(--u2);
+  padding-bottom:var(--u);border-bottom:var(--trait) solid var(--ligne);
+  color:var(--texte);font-size:var(--titre-taille);line-height:var(--titre-inter);
+  text-transform:var(--titre-casse);font-weight:var(--titre-graisse)}
+.pile>.titre-section:first-child,.col>.titre-section:first-child,
+.bandeau+.titre-section:first-child,.bandeau+.grille-2 .titre-section:first-child{margin-top:0}
+
+/* --- listes de donnees ------------------------------------------------ */
+.liste{list-style:none;border-bottom:var(--trait) solid var(--ligne)}
+.ligne{display:flex;align-items:center;gap:var(--u2);min-height:48px;
+  padding:var(--u) 0;border-top:var(--trait) solid var(--ligne)}
+.ligne:first-child{border-top:0}
+.corps{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:var(--u);flex-wrap:wrap}
+.meta{flex:0 0 auto;display:flex;align-items:center;gap:var(--u)}
+.indice{flex:0 0 auto;color:var(--texte-2)}
+.val{flex:0 0 auto;min-width:2ch;text-align:right}
+.losange{width:10px;height:10px;flex:0 0 auto;background:var(--accent);
+  clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+.jauge{display:inline-flex;gap:2px;flex:0 0 auto}
+.jauge i{display:block;width:10px;height:16px;background:var(--accent)}
+.jauge i.vide{background:transparent;box-shadow:inset 0 0 0 var(--trait) var(--ligne)}
+.ok{color:var(--outil)}
+.blesse{color:var(--critique)}
+/* Fiche dense : hauteur de ligne reduite, ce n'est pas une cible tactile. */
+.liste.serree .ligne{min-height:40px;padding:var(--demi) 0}
+.liste.dense .ligne{min-height:36px;padding:var(--demi) 0}
+.liste.serree .ligne,.liste.dense .ligne{gap:var(--u)}
+
+/* --- caracteristiques ------------------------------------------------- */
+.carac{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--trait);background:var(--ligne);
+  border:var(--trait) solid var(--ligne)}
+.case{background:var(--fond);color:var(--texte);padding:var(--u2);
+  display:flex;flex-direction:column;gap:var(--demi);min-height:48px}
+.case .v{font-size:calc(var(--corps-texte)*1.5);line-height:1.4;font-weight:600}
+
+/* --- appel, action, permis -------------------------------------------- */
+.appel{border:var(--trait) solid var(--ligne);padding:var(--u2);min-height:48px;display:flex;align-items:center}
+.action{min-height:56px;width:100%;padding:var(--u2);border:var(--trait) solid var(--accent);
+  background:var(--fond);color:var(--accent);border-radius:var(--rayon,0px);cursor:pointer;text-align:left;
+  font-family:var(--famille-mono);font-size:var(--corps-texte);line-height:var(--corps-inter);
+  display:flex;align-items:center;justify-content:space-between;gap:var(--u2);flex-wrap:wrap;
+  margin-top:var(--u2)}
+.action:hover,.action:focus-visible{background:var(--inversion-fond);color:var(--inversion-texte);
+  border-color:var(--inversion-fond)}
+.action:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.action .micro{color:inherit}
+.permis{align-self:flex-start;border:var(--trait) solid var(--accent);color:var(--accent);
+  padding:var(--demi) var(--u)}
+.permis .micro{font-weight:700}
+
+/* --- rayons (supermarche) --------------------------------------------- */
+.articles{display:grid;grid-template-columns:1fr;gap:0;
+  border-top:var(--trait) solid var(--ligne);border-bottom:var(--trait) solid var(--ligne)}
+@media (min-width:721px){.articles{grid-template-columns:1fr 1fr}}
+.article{display:flex;flex-direction:column;gap:var(--u);padding:var(--u2) 0;
+  border-top:var(--trait) solid var(--ligne)}
+.articles>.article:first-child,.articles>.article:nth-child(2){border-top:0}
+@media (max-width:720px){.article+.article{border-top:var(--trait) solid var(--ligne)}}
+@media (min-width:721px){
+  .article:nth-child(odd){padding-right:var(--u2);border-right:var(--trait) solid var(--ligne)}
+  .article:nth-child(even){padding-left:var(--u2)}}
+.a-tete{display:flex;align-items:baseline;justify-content:space-between;gap:var(--u2)}
+.a-nom{font-size:var(--corps-texte);line-height:var(--corps-inter);font-weight:600}
+.article p{max-width:52ch}
+.prix{flex:0 0 auto;white-space:nowrap;font-weight:700;font-size:var(--corps-texte);
+  line-height:var(--corps-inter);letter-spacing:0}
+
+/* --- lecture ---------------------------------------------------------- */
+.article-lecture{max-width:var(--mesure);display:flex;flex-direction:column;gap:var(--u2);
+  border-bottom:var(--trait) solid var(--ligne);padding-bottom:var(--u2)}
+.titre-lecture{font-size:calc(var(--corps-texte)*1.25);line-height:1.4;font-weight:600;
+  color:var(--texte)}
+.lecture{font-size:var(--lecture-texte);line-height:var(--lecture-inter)}
+.journal{margin-top:var(--u2);display:flex;flex-direction:column;gap:var(--u);align-items:flex-start}
+.journal p{font-size:var(--lecture-texte);line-height:var(--lecture-inter);
+  border-left:calc(var(--trait)*2) solid var(--ligne);padding-left:var(--u2)}
+
+/* --- pastilles de commande : trois formes, jamais la couleur seule ----- */
+.puce{display:inline-block;width:10px;height:10px;flex:0 0 auto;background:var(--accent)}
+.puce.a{clip-path:polygon(0 0,100% 0,100% 4px,4px 4px,4px 100%,0 100%)}
+.puce.b{clip-path:polygon(0 0,100% 0,100% calc(100% - 4px),calc(100% - 4px) 100%,0 100%)}
+.puce.c{background:var(--texte-2);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}
+
+/* --- dither Bayer 8x8 en 1 bit (deux pixels sur seize) ----------------- */
+.dither{position:fixed;inset:0;z-index:1;pointer-events:none;display:none;
+  background-repeat:repeat;background-size:var(--u2) var(--u2)}
+[data-dither=on] .dither{
+  display:block;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='none'/%3E%3Crect x='0' y='2' width='1' height='1' fill='%23e9e4d6' fill-opacity='.28'/%3E%3Crect x='4' y='5' width='1' height='1' fill='%23e9e4d6' fill-opacity='.28'/%3E%3C/svg%3E")}
+[data-print=on] .dither{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='none'/%3E%3Crect x='0' y='2' width='1' height='1' fill='%2316181c' fill-opacity='.30'/%3E%3Crect x='4' y='5' width='1' height='1' fill='%2316181c' fill-opacity='.30'/%3E%3C/svg%3E")}
+
+.hachure{display:none}
+.semaphore span{display:none}
+@media (prefers-reduced-motion: reduce){.bascule{transition:none}}
+</style>
+<style>
+/* ============================================== 10. RETICULE — FORMES =====
+   Coins en reticule : quatre tirets de 1 px, 6 px de long, un par coin,
+   JAMAIS de cadre complet, rayon 0. Selection par inversion de surface.
+   Aucune ombre, aucun degrade, aucun flou. Un seul cyan a l'ecran.
+   Palette : fond #0b1018 · surface #1b2431 · filet #7987a0 · texte #d6dee9
+   (14,06:1) · secondaire #8fa0b5 (7,14:1) · accent #2bbfd1 (8,60:1) ·
+   accent 2 #6f88b0 (5,29:1) · alerte #d9a24a (8,37:1) · ok #84d4b4 (10,95:1) ·
+   critique #fa5750 (5,94:1).
+   CAS DE TEST N&B : le secondaire #8fa0b5 ne tient que 2,21:1 sur
+   l'inversion #e6eaf0 : sous grayscale il est donc INTERDIT sur un aplat
+   inverse, et tous les etats inverses le repassent a #0b1018 (15,79:1).
+   Les filets restent pleins : c'est eux qui portent encore la structure
+   une fois la couleur partie. */
+
+/* Coins en reticule sur les blocs encadres : composant .article. */
+[data-style=reticule] .article{position:relative;padding:var(--u2)}
+[data-style=reticule] .article::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(var(--ligne),var(--ligne)) 6px 6px/6px 1px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 6px 6px/1px 6px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) calc(100% - 6px) 6px/6px 1px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) calc(100% - 6px) 6px/1px 6px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 6px calc(100% - 6px)/6px 1px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 6px calc(100% - 6px)/1px 6px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) calc(100% - 6px) calc(100% - 6px)/6px 1px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) calc(100% - 6px) calc(100% - 6px)/1px 6px no-repeat}
+[data-style=reticule] .articles{border-top:0;border-bottom:0;gap:var(--u2)}
+[data-style=reticule] .articles>.article:first-child,
+[data-style=reticule] .articles>.article:nth-child(2){border-top:0}
+[data-style=reticule] .article+.article{border-top:0}
+@media (min-width:721px){
+  [data-style=reticule] .article:nth-child(odd){border-right:0}
+  [data-style=reticule] .article:nth-child(even){padding-left:var(--u2)}}
+
+/* Coins en reticule sur les caracteristiques. */
+[data-style=reticule] .case{position:relative;border:0;padding:calc(var(--u2) + var(--u))}
+[data-style=reticule] .carac{background:transparent;border:0;gap:var(--u2)}
+[data-style=reticule] .case::before{content:"";position:absolute;inset:6px;pointer-events:none;
+  background:
+    linear-gradient(var(--ligne),var(--ligne)) 0 0/6px 1px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 0 0/1px 6px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 100% 0/6px 1px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 100% 0/1px 6px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 0 100%/6px 1px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 0 100%/1px 6px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 100% 100%/6px 1px no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 100% 100%/1px 6px no-repeat}
+
+/* Selection : inversion de surface. Tout le texte se repasse a l'encre
+   d'inversion, y compris le texte secondaire (sinon 3,2:1 sur #e6eaf0). */
+[data-style=reticule] .ligne-active{background:var(--inversion-fond);color:var(--inversion-texte);
+  --texte-2:var(--inversion-texte);--accent:var(--inversion-texte)}
+[data-style=reticule] .ligne-active .corps,
+[data-style=reticule] .ligne-active .meta,
+[data-style=reticule] .ligne-active .micro,
+[data-style=reticule] .ligne-active .secondaire,
+[data-style=reticule] .ligne-active .indice{color:var(--inversion-texte)}
+[data-style=reticule] .ligne-active .jauge i{background:var(--inversion-texte)}
+[data-style=reticule] .ligne-active .jauge i.vide{box-shadow:inset 0 0 0 var(--trait) var(--inversion-texte)}
+[data-style=reticule] .ligne-active .losange{background:var(--inversion-texte)}
+
+/* Action : survol par inversion complete, texte secondaire compris. */
+[data-style=reticule] .action .micro{color:var(--texte-2)}
+[data-style=reticule] .action:hover .micro,
+[data-style=reticule] .action:focus-visible .micro{color:var(--inversion-texte)}
+[data-style=reticule] .action:hover,[data-style=reticule] .action:focus-visible{border-color:var(--inversion-fond)}
+
+/* Le filet de la ligne forte reste plein : il porte la hierarchie. */
+[data-style=reticule] .ligne-forte .corps{font-weight:600}
+[data-style=reticule] .commande .ctl[aria-pressed=true] .puce{background:var(--inversion-texte)}
+</style>
+<style>
+/* ========================================== 11. BILLET CUIVRE — FORMES ====
+   PALETTE FERMEE, NEUF HEXES : fond #070708 · surface #2a2012 · filet
+   #b0a894 · texte #e9e4d6 · secondaire #87806f · accent #edaa52 · accent 2
+   #cf8a48 · texture haute #8f5d2a (grand texte seulement) · texture basse
+   #4f341a (decor pur, jamais un filet porteur). Aucun cyan.
+   Contrastes : texte/fond 15,85 · secondaire/fond 5,13 · filet/fond 8,51 ·
+   accent/fond 10,04 · accent 2/fond 7,08 · texte/surface 12,58 ·
+   secondaire/surface 4,07 · accent/surface 7,97. Toute paire entre 1,15:1
+   et 3:1 est interdite pour un element porteur d'information.
+   INVERSE AUTORISE : le seul aplat du style est la surface #2a2012 sous la
+   ligne selectionnee (texte #e9e4d6 = 12,58:1). L'accent #edaa52 est cette
+   fois SOUS la surface : #e9e4d6 sur #edaa52 ne donne que 1,58:1, donc la
+   surface et l'accent ne se composent JAMAIS en fond et en texte ; le
+   losange et la barre de selection sont des traces non textuels (>= 3:1).
+   SEMAPHORE EXCLUSIF : coin bas-droit coupe = interactif ; quatre coins
+   droits sans encadrement = passif ; losange = donnee reservee au MJ ;
+   hachures 45 degres + etiquette capitales = action irreversible. */
+
+/* ZERO fond de carte : des filets a 8,51:1 separent les blocs. */
+[data-style=cuivre] .bandeau{border-bottom:var(--trait) solid var(--ligne)}
+[data-style=cuivre] .titre-section{border-bottom:var(--trait) solid var(--ligne)}
+[data-style=cuivre] .liste{border-bottom:0}
+[data-style=cuivre] .ligne{padding:calc(var(--u) + var(--demi)) 0}
+/* 56 px des qu'un chiffre cotoie le libelle sur la meme ligne. */
+[data-style=cuivre] .ligne-forte{min-height:56px}
+/* 56 px des que la ligne porte un chiffre : le HTML marque ces lignes .chiffre
+   et la regle ci-dessus suffit ; aucun :has() n'est necessaire. */
+
+/* Selection : barre pleine de 3 px en accent + surface. Le texte secondaire
+   remonte a --texte (4,07:1 sur la surface serait insuffisant). */
+[data-style=cuivre] .ligne-active{background:var(--surface);
+  box-shadow:inset 3px 0 0 0 var(--accent);--texte-2:var(--texte)}
+[data-style=cuivre] .ligne-active .corps,
+[data-style=cuivre] .ligne-active .meta,
+[data-style=cuivre] .ligne-active .micro,
+[data-style=cuivre] .ligne-active .secondaire{color:var(--texte)}
+[data-style=cuivre] .ligne-active .jauge i{background:var(--accent)}
+[data-style=cuivre] .ligne-active .jauge i.vide{box-shadow:inset 0 0 0 var(--trait) var(--texte-2)}
+
+/* Interactif : coin bas-droit coupe a 10 px + filet 1 px. Focus = 2 px. */
+[data-style=cuivre] .action,
+[data-style=cuivre] .ctl{position:relative}
+[data-style=cuivre] .action{clip-path:polygon(0 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%);
+  border-color:var(--ligne);color:var(--texte);padding-right:calc(var(--u2) + var(--u))}
+[data-style=cuivre] .action:hover,[data-style=cuivre] .action:focus-visible{
+  background:var(--surface);color:var(--texte);border-color:var(--accent)}
+[data-style=cuivre] .action .micro{color:var(--texte-2)}
+[data-style=cuivre] .action:hover .micro,
+[data-style=cuivre] .action:focus-visible .micro{color:var(--texte)}
+[data-style=cuivre] .ctl[aria-pressed=true]{background:var(--surface);color:var(--texte);
+  border-color:var(--accent);box-shadow:inset 0 -3px 0 0 var(--accent);--texte-2:var(--texte)}
+[data-style=cuivre] .ctl[aria-pressed=true] .etat{color:var(--texte)}
+
+/* Hachures 45 degres a arrets durs, pas de 6 px : action irreversible. */
+[data-style=cuivre] .hachure{display:block;height:var(--u2);
+  background-image:repeating-linear-gradient(45deg,
+    var(--texture-haute) 0 1px,transparent 1px 6px)}
+
+/* Donnee reservee au MJ : losange de 10 px en accent. */
+[data-style=cuivre] .losange{background:var(--accent)}
+
+/* Jauges : accent 2 en barre pleine, filet pour le vide. */
+[data-style=cuivre] .jauge i{background:var(--accent-2)}
+[data-style=cuivre] .jauge i.vide{background:transparent;
+  box-shadow:inset 0 0 0 var(--trait) var(--texte-2)}
+[data-style=cuivre] .permis{border-color:var(--accent-2);color:var(--accent)}
+[data-style=cuivre] .case{background:transparent;padding:var(--u2)}
+[data-style=cuivre] .carac{background:var(--ligne);border-color:var(--ligne)}
+[data-style=cuivre] .appel{background:transparent;border-color:var(--ligne)}
+[data-style=cuivre] .article{border-top:var(--trait) solid var(--ligne)}
+[data-style=cuivre] .articles{border-top:var(--trait) solid var(--ligne)}
+[data-style=cuivre] .article-lecture{border-bottom:var(--trait) solid var(--ligne)}
+[data-style=cuivre] .journal p{border-left-color:var(--accent-2)}
+[data-style=cuivre] .a-nom{font-weight:400}
+[data-style=cuivre] .prix{color:var(--accent)}
+</style>
+<style>
+/* ============================================================= 12. GRAVURE ==
+   Plus aucune carte : la structure est CREUSEE en negatif. L'ecran est une
+   seule colonne d'environ 21 caracteres avec un rail vertical de 44 px a
+   gauche qui fait office de navigation. La hierarchie passe par des plaques
+   pleines empilees, sans bordure ni arrondi. L'attention est une INVERSION
+   VIDEO statique (texte sombre sur aplat clair) qui reste jusqu'au tap.
+   Deux voix typographiques : la machine en sans-serif a chiffres tabulaires,
+   l'humain en serif italique bas de casse.
+   Couleurs : fond #16181c · filet #8a8578 (4,83:1) · rail #7e7a6d (4,14:1) ·
+   texte #f2efe6 (15,46:1) · secondaire #a9a49a (7,16:1) · accent #b6c3d6
+   (9,96:1) · plaque 12 % #dfe5ee / texte #16181c (14,03:1) · plaque 24 %
+   #2f3237 / texte #dfe5ee (10,16:1) · plaque 36 % #4a4d54 / texte #e8ecf1
+   (7,13:1). L'inversion video : #16181c sur #dfe5ee = 14,03:1.
+   SEUIL ASSUME, ET LE SEUL : une plaque de gris moyen vue DEPUIS le fond ne
+   pese que 1,38:1 (24 %) ou 2,10:1 (36 %). Ce n'est pas un defaut : une
+   plaque n'est pas un trait porteur d'information, c'est un APLAT DE FOND,
+   et le texte qu'elle porte tient 10,16:1 et 7,13:1. Aucun element
+   d'information n'est donc dans la bande 1,15-3:1 : la hierarchie des
+   plaques se lit par leur seule luminance sous grayscale(1), ou 12 % / 24 %
+   / 36 % restent distincts. */
+
+[data-style=gravure]{--rail-l:44px}
+
+/* La commande devient une barre de plaques, sans encadrement. */
+[data-style=gravure] .commande{max-width:100%;border-bottom:0;background:var(--plaque-24);
+  padding:var(--u) var(--u2)}
+[data-style=gravure] .commande .micro{color:var(--plaque-24-texte)}
+[data-style=gravure] .ctl{background:transparent;border:0;color:var(--plaque-24-texte);
+  padding:var(--u);min-height:44px;min-width:44px}
+[data-style=gravure] .ctl:hover,[data-style=gravure] .ctl:focus-visible{color:var(--plaque-12)}
+[data-style=gravure] .ctl[aria-pressed=true]{background:var(--plaque-12);color:var(--plaque-12-texte)}
+[data-style=gravure] .ctl:focus-visible{outline:2px solid var(--plaque-12);outline-offset:-4px}
+[data-style=gravure] .commande .puce{background:var(--plaque-12)}
+[data-style=gravure] .ctl[aria-pressed=true] .puce{background:var(--plaque-12-texte)}
+
+/* Colonne unique, rail vertical de 44 px a gauche. */
+[data-style=gravure] .grille{max-width:660px;padding:0 0 calc(var(--u)*8)}
+[data-style=gravure] .zone{position:relative;padding-left:calc(var(--rail-l) + var(--u2));
+  padding-right:var(--u2)}
+[data-style=gravure] .zone::before{content:"";position:absolute;left:0;top:0;bottom:0;
+  width:var(--rail-l);background:var(--rail);opacity:.32}
+
+/* Plaques empilees : bordure zero, arrondi zero, aucune carte. */
+[data-style=gravure] .pile{gap:0;border-bottom:var(--trait) solid var(--ligne)}
+[data-style=gravure] .grille-2{gap:0}
+[data-style=gravure] .col{gap:0}
+[data-style=gravure] .bandeau{background:var(--plaque-24);color:var(--plaque-24-texte);
+  border-bottom:0;padding:var(--u) var(--u2);margin:0 calc(-1 * var(--u2))}
+[data-style=gravure] .bandeau .micro{color:var(--plaque-24-texte)}
+[data-style=gravure] .titre-section{background:var(--plaque-36);color:var(--plaque-36-texte);
+  border-bottom:0;margin:0 calc(-1 * var(--u2));padding:var(--u2);
+  text-transform:var(--titre-casse)}
+
+/* Lignes : creusees par un lisere d'un demi-ton, pas encadrees. */
+[data-style=gravure] .liste{border-bottom:0}
+[data-style=gravure] .ligne{border-top:var(--trait) solid var(--ligne);
+  padding:var(--u) var(--u2);margin:0 calc(-1 * var(--u2))}
+[data-style=gravure] .ligne:first-child{border-top:0}
+
+/* Attention : inversion video statique, texte sombre sur aplat clair. */
+[data-style=gravure] .ligne-active{background:var(--plaque-12);color:var(--plaque-12-texte);
+  --texte-2:var(--plaque-12-texte);--accent:var(--plaque-12-texte);--outil:var(--plaque-12-texte);
+  --critique:var(--plaque-12-texte)}
+[data-style=gravure] .ligne-active .corps,
+[data-style=gravure] .ligne-active .meta,
+[data-style=gravure] .ligne-active .micro,
+[data-style=gravure] .ligne-active .secondaire,
+[data-style=gravure] .ligne-active .indice,
+[data-style=gravure] .ligne-active .chiffre{color:var(--plaque-12-texte)}
+[data-style=gravure] .ligne-active .jauge i,
+[data-style=gravure] .ligne-active .losange{background:var(--plaque-12-texte)}
+[data-style=gravure] .ligne-active .jauge i.vide{box-shadow:inset 0 0 0 var(--trait) var(--plaque-12-texte)}
+[data-style=gravure] .ligne-forte{background:var(--plaque-24);color:var(--plaque-24-texte);
+  --texte-2:var(--plaque-24-texte);--accent:var(--plaque-24-texte)}
+[data-style=gravure] .ligne-forte .chiffre,
+[data-style=gravure] .ligne-forte .secondaire{color:var(--plaque-24-texte)}
+
+[data-style=gravure] .appel{border:0;border-left:6px solid var(--plaque-12);
+  background:var(--plaque-24);color:var(--plaque-24-texte);margin:0 calc(-1 * var(--u2));
+  padding:var(--u2)}
+[data-style=gravure] .carac{background:var(--ligne);border:0;gap:var(--trait)}
+[data-style=gravure] .case{background:var(--plaque-24);color:var(--plaque-24-texte);padding:var(--u2)}
+[data-style=gravure] .case::before{content:none}
+[data-style=gravure] .action{border:0;background:var(--rail);color:var(--texte);
+  margin:0 calc(-1 * var(--u2));padding:var(--u2)}
+[data-style=gravure] .action:hover,[data-style=gravure] .action:focus-visible{
+  background:var(--plaque-12);color:var(--plaque-12-texte);border-color:transparent}
+[data-style=gravure] .action .micro{color:var(--texte)}
+[data-style=gravure] .action:hover .micro,
+[data-style=gravure] .action:focus-visible .micro{color:var(--plaque-12-texte)}
+[data-style=gravure] .permis{border-color:var(--plaque-12);color:var(--texte)}
+
+/* Rayons : une seule colonne, plaques pleines, aucun encadrement. */
+[data-style=gravure] .articles{border:0;grid-template-columns:1fr}
+[data-style=gravure] .article{border-top:var(--trait) solid var(--ligne);
+  margin:0 calc(-1 * var(--u2));padding:var(--u2)}
+[data-style=gravure] .articles>.article:first-child{border-top:0}
+[data-style=gravure] .article:nth-child(n){border-right:0;padding-right:var(--u2)}
+[data-style=gravure] .article:nth-child(even){padding-left:var(--u2)}
+[data-style=gravure] .a-nom{font-weight:600}
+[data-style=gravure] .prix{color:var(--texte)}
+
+/* Lecture : deux voix. La machine garde le sans-serif a chiffres tabulaires,
+   l'humain passe en serif italique bas de casse. */
+[data-style=gravure] .article-lecture{border-bottom:0;gap:0}
+[data-style=gravure] .titre-lecture{background:var(--plaque-36);color:var(--plaque-36-texte);
+  margin:0 calc(-1 * var(--u2));padding:var(--u2)}
+[data-style=gravure] .lecture{font-family:var(--serif-humain);font-style:italic;
+  text-transform:none;padding:var(--u2) 0}
+[data-style=gravure] .journal{background:var(--plaque-24);color:var(--plaque-24-texte);
+  margin:0 calc(-1 * var(--u2));padding:var(--u2);gap:var(--u)}
+[data-style=gravure] .journal .micro{color:var(--plaque-24-texte)}
+[data-style=gravure] .journal p{font-family:var(--serif-humain);font-style:italic;
+  text-transform:none;border-left:4px solid var(--plaque-12);padding-left:var(--u2)}
+/* Le semaphore de formes reste vrai sous grayscale : les plaques portent la
+   hierarchie par leur seule luminance (12 % / 24 % / 36 %). */
+</style>
+<style>
+/* ============================================ 13. FORMES DOUCES (nahant/vitre/signal)
+   Meme cahier des charges que les trois premiers, sauf la matiere : ligne fine
+   bleu clair, arrondis, et un cadre porte par les quatre coins seulement.
+   Les blocs .article et .case perdent leur bordure complete et gardent des
+   equerres ; les rangees de registre conservent un filet bas (sans lui, un
+   tableau de 12 lignes devient illegible). L'inversion de la ligne active est
+   gardee — c'est le signal le plus fort de la maquette (16,6:1) — mais arrondie.
+   -------------------------------------------------------------------------- */
+[data-forme=douce] .article,[data-forme=douce] .case,[data-forme=douce] .appel{position:relative;border:0;
+  border-radius:var(--rayon);padding:calc(var(--u2) + var(--u))}
+[data-forme=douce] .article::before,[data-forme=douce] .case::before,[data-forme=douce] .appel::before{content:"";
+  position:absolute;inset:0;border-radius:var(--rayon);pointer-events:none;
+  background:
+    linear-gradient(var(--ligne),var(--ligne)) var(--equerre) 0/var(--equerre) var(--trait) no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 0 var(--equerre)/var(--trait) var(--equerre) no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) calc(100% - var(--equerre)) 0/var(--equerre) var(--trait) no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 100% var(--equerre)/var(--trait) var(--equerre) no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) var(--equerre) 100%/var(--equerre) var(--trait) no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 0 calc(100% - var(--equerre))/var(--trait) var(--equerre) no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) calc(100% - var(--equerre)) 100%/var(--equerre) var(--trait) no-repeat,
+    linear-gradient(var(--ligne),var(--ligne)) 100% calc(100% - var(--equerre))/var(--trait) var(--equerre) no-repeat}
+/* Sur l'element vivant, l'equerre passe a l'accent : le regard trouve le bloc
+   actif sans bordure complete ni aplat. */
+[data-forme=douce] .article:focus-within::before,[data-forme=douce] .case:focus-within::before,
+[data-forme=douce] .action[aria-busy=true]::before{
+  background-image:
+    linear-gradient(var(--accent),var(--accent)) var(--equerre) 0,
+    linear-gradient(var(--accent),var(--accent)) 0 var(--equerre),
+    linear-gradient(var(--accent),var(--accent)) calc(100% - var(--equerre)) 0,
+    linear-gradient(var(--accent),var(--accent)) 100% var(--equerre),
+    linear-gradient(var(--accent),var(--accent)) var(--equerre) 100%,
+    linear-gradient(var(--accent),var(--accent)) 0 calc(100% - var(--equerre)),
+    linear-gradient(var(--accent),var(--accent)) calc(100% - var(--equerre)) 100%,
+    linear-gradient(var(--accent),var(--accent)) 100% calc(100% - var(--equerre));
+  background-repeat:no-repeat}
+[data-forme=douce] .ligne-active{position:relative;background:var(--surface);
+  border-radius:var(--rayon)}
+/* Le tour actif ne s'annonce plus par un aplat inverse mais par quatre equerres
+   d'accent : meme signal, beaucoup plus discret, et lisible en gris (l'accent
+   est plus clair que le filet dans les trois palettes). Le numero de tour passe
+   a l'accent ; le nom reste a l'encre, 14:1 sur la surface. */
+/* Les equerres se posent A L'EXTERIEUR de la ligne (la gouttiere fait 16 px) :
+   ainsi elles encadrent le rang sans jamais manger le nombre aligne a droite. */
+[data-forme=douce] .ligne-active::before{content:"";position:absolute;inset:-7px;
+  border-radius:calc(var(--rayon) + 7px);pointer-events:none;
+  background:
+    linear-gradient(var(--accent),var(--accent)) var(--equerre) 0/var(--equerre) var(--trait) no-repeat,
+    linear-gradient(var(--accent),var(--accent)) 0 var(--equerre)/var(--trait) var(--equerre) no-repeat,
+    linear-gradient(var(--accent),var(--accent)) calc(100% - var(--equerre)) 0/var(--equerre) var(--trait) no-repeat,
+    linear-gradient(var(--accent),var(--accent)) 100% var(--equerre)/var(--trait) var(--equerre) no-repeat,
+    linear-gradient(var(--accent),var(--accent)) var(--equerre) 100%/var(--equerre) var(--trait) no-repeat,
+    linear-gradient(var(--accent),var(--accent)) 0 calc(100% - var(--equerre))/var(--trait) var(--equerre) no-repeat,
+    linear-gradient(var(--accent),var(--accent)) calc(100% - var(--equerre)) 100%/var(--equerre) var(--trait) no-repeat,
+    linear-gradient(var(--accent),var(--accent)) 100% calc(100% - var(--equerre))/var(--trait) var(--equerre) no-repeat}
+[data-forme=douce] .ligne-active .indice,[data-forme=douce] .ligne-active .jauge i{color:var(--accent)}
+[data-forme=douce] .ligne-active .corps{font-weight:600}
+[data-forme=douce] .action{position:relative;border-width:var(--trait)}
+[data-forme=douce] .action:hover,[data-forme=douce] .action:focus-visible{
+  box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent)}
+/* Chaque style signe sa nuance : la vitre a un reflet, le signal une ligne de
+   piqure, nahant reste nu. */
+[data-style=vitre] .article,[data-style=vitre] .case,[data-style=vitre] .ligne-active,
+[data-style=vitre] .action{box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+[data-style=signal] .article::after{content:"";position:absolute;left:var(--u2);right:var(--u2);
+  top:0;height:var(--trait);background:var(--surface-2)}
+.avertissement{margin:14px var(--u2) 0;padding:var(--u) var(--u2);border-left:2px solid var(--accent);color:var(--texte-2)}
+.puce.d,.puce.e,.puce.f{border-radius:3px;clip-path:none}
+.puce.d{background:var(--accent)}
+.puce.e{background:linear-gradient(160deg,var(--accent),var(--accent-2))}
+.puce.f{background:var(--accent);box-shadow:inset 0 0 0 2px var(--fond)}
+</style>
+</head>
+<body>
+<p class="micro secondaire avertissement">Maquette : contenu de remplissage, non canonique. Seule la forme est en decision.</p>
+<div class="commande" role="group" aria-label="Commandes de la maquette">
+  <div class="groupe">
+    <span class="micro secondaire">Style</span>
+    <button type="button" class="ctl bascule" data-set="style" data-val="reticule" aria-pressed="true"><span class="puce a"></span>Réticule</button>
+    <button type="button" class="ctl bascule" data-set="style" data-val="cuivre" aria-pressed="false"><span class="puce b"></span>Billet cuivre</button>
+    <button type="button" class="ctl bascule" data-set="style" data-val="gravure" aria-pressed="false"><span class="puce c"></span>Gravure</button>
+    <button type="button" class="ctl bascule" data-set="style" data-val="nahant" aria-pressed="false"><span class="puce d"></span>Nahant</button>
+    <button type="button" class="ctl bascule" data-set="style" data-val="vitre" aria-pressed="false"><span class="puce e"></span>Vitre</button>
+    <button type="button" class="ctl bascule" data-set="style" data-val="signal" aria-pressed="false"><span class="puce f"></span>Signal</button>
+  </div>
+  <div class="groupe">
+    <span class="micro secondaire">Écran</span>
+    <button type="button" class="ctl bascule" data-set="screen" data-val="crise" aria-pressed="true"><span class="glyphe">◆</span>Crise</button>
+    <button type="button" class="ctl bascule" data-set="screen" data-val="fiche" aria-pressed="false"><span class="glyphe">▤</span>Fiche</button>
+    <button type="button" class="ctl bascule" data-set="screen" data-val="supermarche" aria-pressed="false"><span class="glyphe">▦</span>Supermarché</button>
+    <button type="button" class="ctl bascule" data-set="screen" data-val="lecture" aria-pressed="false"><span class="glyphe">≡</span>Lecture</button>
+  </div>
+  <div class="groupe basc">
+    <button type="button" class="ctl bascule" data-set="blocs" data-val="4" aria-pressed="true"><span class="glyphe">▚</span>Blocs 4</button>
+    <button type="button" class="ctl bascule" data-set="blocs" data-val="3" aria-pressed="false"><span class="glyphe">▚</span>Blocs 3</button>
+    <button type="button" class="ctl bascule" data-set="gris" data-val="on" aria-pressed="false"><span class="glyphe">◐</span>Niveaux de gris <span class="etat">off</span></button>
+    <button type="button" class="ctl bascule" data-set="photo" data-val="on" aria-pressed="false"><span class="glyphe">▧</span>Photocopie <span class="etat">off</span></button>
+  </div>
+</div>
+
+<div class="grille">
+  <div class="zone">
+
+  <!-- ===== SEMAPHORE (JS) ===== -->
+  <div class="semaphore" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- ================================================== ECRAN 1 : CRISE === -->
+  <section class="ecran" data-ecran="crise" aria-label="Écran de crise">
+    <div class="pile pile-fond">
+      <div class="bandeau">
+        <span class="micro">Crise · round 3</span>
+        <span class="micro secondaire chiffre">1 s = 1 round</span>
+      </div>
+
+      <div class="grille-2">
+        <div class="col">
+          <h2 class="micro titre-section">Initiative</h2>
+          <ul class="liste">
+            <li class="ligne ligne-active">
+              <span class="indice chiffre">01</span>
+              <span class="corps"><span class="glyphe g12">◆</span> Mars 2</span>
+              <span class="meta"><span class="glyphe">▰</span><span class="chiffre">5</span> Corps</span>
+            </li>
+            <li class="ligne">
+              <span class="indice chiffre">02</span>
+              <span class="corps"><span class="glyphe">◇</span> Torque</span>
+              <span class="meta"><span class="glyphe">▰</span><span class="chiffre">4</span> Corps</span>
+            </li>
+            <li class="ligne">
+              <span class="indice chiffre">03</span>
+              <span class="corps"><span class="glyphe">◇</span> Flare</span>
+              <span class="meta"><span class="glyphe">▰</span><span class="chiffre">3</span> Corps</span>
+            </li>
+          </ul>
+
+          <h2 class="micro titre-section">Pools de dés</h2>
+          <ul class="liste">
+            <li class="ligne ligne-forte">
+              <span class="corps">Corps</span>
+              <span class="des chiffre" role="img" aria-label="cinq dés">● ● ● ● ●</span>
+            </li>
+            <li class="ligne">
+              <span class="corps">Processeur</span>
+              <span class="des chiffre" role="img" aria-label="cinq dés">● ● ● ● ●</span>
+            </li>
+            <li class="ligne">
+              <span class="corps">Esprit</span>
+              <span class="des chiffre secondaire" role="img" aria-label="trois dés">○ ○ ○</span>
+            </li>
+            <li class="ligne">
+              <span class="corps">Empathie</span>
+              <span class="des chiffre secondaire" role="img" aria-label="quatre dés">○ ○ ○ ○</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="col">
+          <h2 class="micro titre-section">Mars 2</h2>
+          <ul class="liste">
+            <li class="ligne"><span class="corps">Corps</span><span class="meta chiffre">5</span></li>
+            <li class="ligne"><span class="corps">Processeur</span><span class="meta chiffre">5</span></li>
+            <li class="ligne"><span class="corps">Esprit</span><span class="meta chiffre">3</span></li>
+            <li class="ligne"><span class="corps">Empathie</span><span class="meta chiffre">4</span></li>
+          </ul>
+
+          <h2 class="micro titre-section">PNJ</h2>
+          <ul class="liste">
+            <li class="ligne">
+              <span class="corps"><span class="losange" aria-hidden="true"></span> Phalanx</span>
+              <span class="meta secondaire">Spaceport Security</span>
+            </li>
+            <li class="ligne">
+              <span class="corps"><span class="losange" aria-hidden="true"></span> Omen</span>
+              <span class="meta secondaire">Skav Leader</span>
+            </li>
+          </ul>
+
+          <h2 class="micro titre-section">Localisation blessée</h2>
+          <div class="appel">
+            <p class="corps"><span class="glyphe">▣</span> Poitrine <span class="chiffre">2</span> · douleur <span class="chiffre">3</span></p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="micro titre-section">Action</h2>
+      <button type="button" class="action chiffre">► Tirer · Mars 2 <span class="micro">5 dés Corps · difficulté 5</span></button>
+    </div>
+  </section>
+
+  <!-- ================================================== ECRAN 2 : FICHE === -->
+  <section class="ecran" data-ecran="fiche" aria-label="Fiche de personnage" hidden>
+    <div class="pile pile-fond">
+      <div class="bandeau">
+        <span class="micro">Fiche</span>
+        <span class="micro secondaire chiffre">Mars 2 · dernière mise à jour round 3</span>
+      </div>
+
+      <div class="grille-2">
+        <div class="col">
+          <h2 class="micro titre-section">Identité</h2>
+          <ul class="liste">
+            <li class="ligne"><span class="corps">Mars 2</span><span class="meta secondaire">Mercenaire</span></li>
+            <li class="ligne"><span class="corps">Transhumain</span><span class="meta secondaire">lignée II</span></li>
+            <li class="ligne"><span class="corps">Crédits</span><span class="meta chiffre">18 ₡</span></li>
+          </ul>
+
+          <h2 class="micro titre-section">Caractéristiques</h2>
+          <div class="carac">
+            <div class="case"><span class="micro">Corps</span><span class="v chiffre">5</span></div>
+            <div class="case"><span class="micro">Processeur</span><span class="v chiffre">5</span></div>
+            <div class="case"><span class="micro">Esprit</span><span class="v chiffre">3</span></div>
+            <div class="case"><span class="micro">Empathie</span><span class="v chiffre">4</span></div>
+          </div>
+        </div>
+
+        <div class="col">
+          <h2 class="micro titre-section">Compétences</h2>
+          <ul class="liste serree dense">
+            <li class="ligne"><span class="corps">Aérospatiale</span><span class="jauge" role="img" aria-label="6 sur 6"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="val chiffre">6</span></li>
+            <li class="ligne"><span class="corps">Communication</span><span class="jauge" role="img" aria-label="6 sur 6"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="val chiffre">6</span></li>
+            <li class="ligne"><span class="corps">Militaire</span><span class="jauge" role="img" aria-label="6 sur 6"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="val chiffre">6</span></li>
+            <li class="ligne"><span class="corps">Biologie</span><span class="jauge" role="img" aria-label="4 sur 6"><i></i><i></i><i></i><i></i><i class="vide"></i><i class="vide"></i></span><span class="val chiffre">4</span></li>
+            <li class="ligne"><span class="corps">Culture</span><span class="jauge" role="img" aria-label="4 sur 6"><i></i><i></i><i></i><i></i><i class="vide"></i><i class="vide"></i></span><span class="val chiffre">4</span></li>
+            <li class="ligne"><span class="corps">Économie</span><span class="jauge" role="img" aria-label="4 sur 6"><i></i><i></i><i></i><i></i><i class="vide"></i><i class="vide"></i></span><span class="val chiffre">4</span></li>
+            <li class="ligne"><span class="corps">Électronique</span><span class="jauge" role="img" aria-label="4 sur 6"><i></i><i></i><i></i><i></i><i class="vide"></i><i class="vide"></i></span><span class="val chiffre">4</span></li>
+            <li class="ligne"><span class="corps">Ingénierie</span><span class="jauge" role="img" aria-label="4 sur 6"><i></i><i></i><i></i><i></i><i class="vide"></i><i class="vide"></i></span><span class="val chiffre">4</span></li>
+            <li class="ligne"><span class="corps">Réputation</span><span class="jauge" role="img" aria-label="4 sur 6"><i></i><i></i><i></i><i></i><i class="vide"></i><i class="vide"></i></span><span class="val chiffre">4</span></li>
+            <li class="ligne"><span class="corps">Sciences</span><span class="jauge" role="img" aria-label="4 sur 6"><i></i><i></i><i></i><i></i><i class="vide"></i><i class="vide"></i></span><span class="val chiffre">4</span></li>
+            <li class="ligne"><span class="corps">Sécurité</span><span class="jauge" role="img" aria-label="4 sur 6"><i></i><i></i><i></i><i></i><i class="vide"></i><i class="vide"></i></span><span class="val chiffre">4</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="micro titre-section">Santé par localisation</h2>
+      <div class="grille-2">
+        <ul class="liste">
+          <li class="ligne"><span class="corps">Tête</span><span class="meta"><span class="glyphe ok">▮</span><span class="chiffre">3</span></span></li>
+          <li class="ligne"><span class="corps">Poitrine</span><span class="meta"><span class="glyphe blesse">▮</span><span class="chiffre">2</span> <span class="micro secondaire">blessé</span></span></li>
+        </ul>
+        <ul class="liste">
+          <li class="ligne"><span class="corps">Abdomen</span><span class="meta"><span class="glyphe ok">▮</span><span class="chiffre">3</span></span></li>
+          <li class="ligne"><span class="corps">Jambes</span><span class="meta"><span class="glyphe ok">▮</span><span class="chiffre">3</span></span></li>
+        </ul>
+      </div>
+
+      <h2 class="micro titre-section">Possessions</h2>
+      <ul class="liste serree dense">
+        <li class="ligne"><span class="corps">Armure composite</span><span class="meta secondaire">Tête 3 · Poitrine 3 · Abdomen 3 · Jambes 3</span></li>
+        <li class="ligne"><span class="corps">Pistolet cinétique</span><span class="meta secondaire">portée 5 m · taille −3</span></li>
+        <li class="ligne"><span class="corps">Interface neurale</span><span class="meta secondaire">implant · mods &amp; implants</span></li>
+        <li class="ligne"><span class="corps">Monowire</span><span class="meta secondaire">arme cinétique</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================ ECRAN 3 : SUPERMARCHE === -->
+  <section class="ecran" data-ecran="supermarche" aria-label="Écran supermarché" hidden>
+    <div class="pile pile-fond">
+      <div class="bandeau">
+        <span class="micro">Supermarché · rayon armement</span>
+        <span class="micro secondaire chiffre">6 articles · permis M requis sur 2</span>
+      </div>
+
+      <div class="articles">
+        <article class="article">
+          <div class="a-tete">
+            <h3 class="a-nom">Ares Legion</h3>
+            <span class="micro prix chiffre">18 ₡</span>
+          </div>
+          <p class="micro secondaire">Starter pack</p>
+          <div class="permis"><span class="micro">Permis M</span></div>
+        </article>
+
+        <article class="article">
+          <div class="a-tete">
+            <h3 class="a-nom">Monowire</h3>
+            <span class="micro prix chiffre">5 ₡</span>
+          </div>
+          <p class="micro secondaire">Armes cinétiques · dégâts 0+ · perforation 5 · portée 5 m · taille −3</p>
+        </article>
+
+        <article class="article">
+          <div class="a-tete">
+            <h3 class="a-nom">Interface neurale</h3>
+            <span class="micro prix chiffre">0 ₡</span>
+          </div>
+          <p class="micro secondaire">Mods &amp; implants</p>
+        </article>
+
+        <article class="article">
+          <div class="a-tete">
+            <h3 class="a-nom">Détection passive</h3>
+            <span class="micro prix chiffre">0 ₡</span>
+          </div>
+          <p class="micro secondaire">Mods &amp; implants</p>
+        </article>
+
+        <article class="article">
+          <div class="a-tete">
+            <h3 class="a-nom">High-g</h3>
+            <span class="micro prix chiffre">2 ₡</span>
+          </div>
+          <p class="micro secondaire">Mods &amp; implants</p>
+        </article>
+
+        <article class="article">
+          <div class="a-tete">
+            <h3 class="a-nom">Lockpick</h3>
+            <span class="micro prix chiffre">1 ₡</span>
+          </div>
+          <p class="micro secondaire">Outils · usage restreint</p>
+          <div class="permis"><span class="micro">Permis M</span></div>
+        </article>
+      </div>
+
+      <h2 class="micro titre-section">Panier</h2>
+      <ul class="liste">
+        <li class="ligne ligne-active">
+          <span class="corps"><span class="glyphe">◆</span> Monowire <span class="chiffre">×1</span></span>
+          <span class="meta chiffre">5 ₡</span>
+        </li>
+        <li class="ligne ligne-forte">
+          <span class="corps">Total</span>
+          <span class="meta chiffre">5 ₡</span>
+        </li>
+      </ul>
+      <button type="button" class="action">► Payer <span class="micro">crédits disponibles 18 ₡</span></button>
+    </div>
+  </section>
+
+  <!-- ================================================= ECRAN 4 : LECTURE == -->
+  <section class="ecran" data-ecran="lecture" aria-label="Écran de lecture" hidden>
+    <div class="pile pile-fond">
+      <div class="bandeau">
+        <span class="micro">Règles · extrait</span>
+        <span class="micro secondaire chiffre">Crise · skillcheck</span>
+      </div>
+
+      <div class="article-lecture">
+        <h2 class="titre-lecture">Le skillcheck</h2>
+        <p class="lecture">Pour résoudre une action incertaine, on lance autant de dés que la caractéristique mobilisée : Corps pour forcer, Processeur pour calculer, Esprit pour comprendre, Empathie pour convaincre. Chaque dé dont le résultat est inférieur ou égal au niveau de la compétence concernée rapporte un succès. Un 1 rapporte un succès de plus, quel que soit le niveau : la maladresse n'existe pas, seule compte la précision. Un personnage peut être aidé par un autre, mais l'aide est plafonnée au niveau de la compétence de celui qui aide — un spécialiste de niveau 2 n'apportera jamais plus de deux dés à la tentative d'un autre, même s'il en possède davantage. La difficulté est fixée par le meneur avant le jet et ne se négocie pas après.</p>
+
+        <p class="lecture">La crise est le régime serré du jeu. Un round dure une seconde, pas davantage : le temps de lever une arme, de franchir un seuil, de comprendre que la porte ne s'ouvrira plus. Au début de chaque round, chaque participant dispose de deux pools de dés égaux à son Corps et à son Processeur. On ne cumule pas les deux — on choisit lequel on dépense, et un dé dépensé ne revient pas. Un corps fatigué se vide vite ; un processeur sollicité chauffe et laisse des traces. C'est cette réserve qui fait la tension : à la troisième seconde, tout le monde compte ses dés restants, et personne ne tire deux fois.</p>
+      </div>
+
+      <div class="journal">
+        <span class="micro">Journal · Omen</span>
+        <p class="serif">« Tu comptes encore tes dés, Mars. Moi je compte déjà tes os. »</p>
+      </div>
+    </div>
+  </section>
+
+  </div>
+</div>
+<script>
+(function(){
+  "use strict";
+  var racine = document.documentElement;
+  var etat = { style:"reticule", screen:"crise", blocs:"4", gris:"off", photo:"off" };
+
+  function rendre(){
+    racine.setAttribute("data-style", etat.style);
+    racine.setAttribute("data-screen", etat.screen);
+    racine.setAttribute("data-blocs", etat.blocs);
+    racine.setAttribute("data-gris", etat.gris);
+    racine.setAttribute("data-photo", etat.photo);
+    /* Rail de navigation : uniquement en Gravure, ecran etroit uniquement. */
+    racine.setAttribute("data-rail", etat.style === "gravure" ? "oui" : "non");
+    /* Le dither Bayer accompagne le cuivre ; il est tramé a l'impression. */
+    racine.setAttribute("data-dither", etat.style === "cuivre" ? "on" : "off");
+    /* Les trois propositions douces partagent une seule couche de formes. */
+    var douce = etat.style === "nahant" || etat.style === "vitre" || etat.style === "signal";
+    racine.setAttribute("data-forme", douce ? "douce" : "nette");
+
+    var boutons = document.querySelectorAll(".bascule");
+    for (var i = 0; i < boutons.length; i++){
+      var b = boutons[i], cle = b.getAttribute("data-set"), val = b.getAttribute("data-val");
+      var actif = etat[cle] === val;
+      b.setAttribute("aria-pressed", actif ? "true" : "false");
+      var marque = b.querySelector(".etat");
+      if (marque && (cle === "gris" || cle === "photo")){
+        marque.textContent = actif ? "on" : "off";
+      }
+    }
+    var ecrans = document.querySelectorAll(".ecran");
+    for (var j = 0; j < ecrans.length; j++){
+      ecrans[j].hidden = ecrans[j].getAttribute("data-ecran") !== etat.screen;
+    }
+  }
+
+  document.addEventListener("click", function(e){
+    var b = e.target.closest ? e.target.closest(".bascule") : null;
+    if (!b) return;
+    var cle = b.getAttribute("data-set"), val = b.getAttribute("data-val");
+    if (cle === "gris" || cle === "photo"){ etat[cle] = etat[cle] === "on" ? "off" : "on"; }
+    else { etat[cle] = val; }
+    rendre();
+  });
+
+  rendre();
+})();
+</script>
+</body>
+</html>

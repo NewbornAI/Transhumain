@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Dossier — Transhumains</title>
+<style>
+/* ============================================================================
+   MAQUETTE — fiche de personnage (Personnages), style Signal, un seul écran.
+   Grammaire identique à crise-table.html (gelée Q47) : EXPAND = section qui se
+   déplie sur place ; POPUP = HUD transitoire (seule la fenêtre « changer de
+   corps »), plafonnée à 55 % de la hauteur, la fiche reste visible au-dessus.
+
+   Données : transhumains/Personnages/Transhumains - Personnages.md (dump de la
+   feuille de calcul, 14 fiches nommées = PJs, Q36). Chaque valeur lisible est
+   reprise au mot près (« réflexes câblés », « Pompe adrenaline », « noir »,
+   « storm shield ») ; ce qui est absent ou douteux reste champ vide, jamais
+   inventé. Corps et Processeur sont un équipement (Q46) : ils se changent.
+   Colonnes énergie : où la source donne un coût (« Energie -1 »), il est repris.
+   Cohérence crise/fiche : Mars 2 5/5, Golem 2 6/6, Ludo 2 7/3 (mêmes lignes
+   que le relevé fait pour la table de crise).
+   Jetons Signal : Source/_design/styles.html [data-style=signal].
+   ========================================================================== */
+:root{
+  --fond:#06090f; --surface:#0d1420; --surface-2:#0d1420; --ligne:#3f88bd;
+  --texte:#d5e3ee; --texte-2:#7f97ad;
+  --accent:#63e0ff; --accent-2:#3d86b4;
+  --critique:#ff7867; --alerte:#ffbb55; --outil:#5fdcae;
+  --inversion-fond:#dff2ff; --inversion-texte:#061019;
+  --rayon:6px; --equerre:10px;
+  --trait:1px; --u:8px; --u2:16px; --demi:4px;
+  --sans:system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
+  --courbe:cubic-bezier(.32,.72,0,1); --t2:220ms;
+  --barre-h:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--fond);color:var(--texte);font:16px/1.5 var(--sans)}
+body{background:var(--fond);color:var(--texte);min-height:100vh;
+  -webkit-text-size-adjust:100%;overscroll-behavior-y:none;
+  padding-bottom:calc(24px + env(safe-area-inset-bottom));max-width:560px;margin:0 auto}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+select,input,textarea{font:inherit;color:inherit}
+h1{font-size:15px;font-weight:700;letter-spacing:.02em}
+.chiffre{font-family:var(--mono);font-variant-numeric:tabular-nums lining-nums}
+.micro{font:600 11px/1.45 var(--sans);letter-spacing:.09em;color:var(--texte-2)}
+.secondaire{color:var(--texte-2)}
+input:focus-visible,textarea:focus-visible,button:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* ---------- bandeau + rail des fiches ---------- */
+header.barre{position:sticky;top:0;z-index:40;background:rgba(6,9,15,.92);
+  backdrop-filter:blur(6px);border-bottom:var(--trait) solid var(--surface-2)}
+.barre-h{display:flex;align-items:center;gap:var(--u2);min-height:var(--barre-h);padding:var(--u) var(--u2)}
+.rail{display:flex;gap:var(--demi);overflow-x:auto;padding:0 var(--u2) var(--u);
+  scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.rail::-webkit-scrollbar{display:none}
+.chip{flex:none;min-height:44px;padding:0 var(--u2);border-radius:var(--rayon);border:var(--trait) solid var(--ligne);
+  background:var(--surface);color:var(--texte-2);font:650 13px/1.1 var(--sans);display:inline-flex;
+  align-items:center;white-space:nowrap}
+.chip[aria-current=true]{color:var(--inversion-texte);background:var(--accent);border-color:var(--accent);font-weight:700}
+.chip:active{border-color:var(--accent);color:var(--accent)}
+.chip.legacy{opacity:.55}
+.chip.legacy[aria-current=true]{opacity:.85}
+.tag{font:700 9px/1 var(--mono);border:var(--trait) solid var(--texte-2);border-radius:999px;
+  padding:3px 5px;margin-left:var(--u);color:var(--texte-2)}
+.chip[aria-current=true] .tag{border-color:var(--inversion-texte);color:var(--inversion-texte)}
+.badge{font:600 10px/1.4 var(--sans);letter-spacing:.06em;border:var(--trait) solid var(--texte-2);
+  border-radius:999px;padding:1px var(--u);color:var(--texte-2)}
+
+/* ---------- en-tete dossier : un coup d'oeil, meme replie ---------- */
+.entete{padding:var(--u2) var(--u2) var(--u);border-bottom:var(--trait) solid var(--surface-2);position:relative}
+.entete::before{content:"";position:absolute;inset:var(--demi);pointer-events:none;
+  background:
+   linear-gradient(var(--ligne),var(--ligne)) var(--equerre) 0/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) 0 var(--equerre)/var(--trait) var(--equerre) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) calc(100% - var(--equerre)) 0/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) 100% var(--equerre)/var(--trait) var(--equerre) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) var(--equerre) 100%/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) 0 calc(100% - var(--equerre))/var(--trait) var(--equerre) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) calc(100% - var(--equerre)) 100%/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) 100% calc(100% - var(--equerre))/var(--trait) var(--equerre) no-repeat}
+.entete .n{font-size:19px;font-weight:700;line-height:1.25}
+.entete .alias{color:var(--texte-2);font-weight:500;font-size:14px}
+.entete .l2{display:flex;flex-wrap:wrap;gap:var(--u);align-items:baseline;margin-top:2px}
+.entete .palier{font:600 11px/1.5 var(--sans);letter-spacing:.06em;border:var(--trait) solid var(--ligne);
+  border-radius:999px;padding:0 var(--u);color:var(--texte-2)}
+.entete .hist{font-size:13px;color:var(--texte-2);flex:1 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.entete .credo{margin-left:auto;flex:none;font:700 14px/1.2 var(--mono);color:var(--accent)}
+.entete .credo i{font:600 10px/1 var(--sans);letter-spacing:.05em;color:var(--texte-2);font-style:normal;margin-right:3px}
+
+/* ---------- sections : ca se plie et se deplie sur place ---------- */
+main{padding:0 var(--u2)}
+.sec{border-bottom:var(--trait) solid var(--surface-2)}
+.sec-tope{width:100%;display:flex;align-items:center;gap:var(--u);min-height:56px;padding:var(--u) 0;text-align:left}
+.chevron{flex:none;width:22px;text-align:center;color:var(--texte-2);font-size:13px}
+.sec[data-ouvert=true] .chevron{color:var(--accent)}
+.sec-t{flex:1;min-width:0;font:650 14px/1.3 var(--sans);letter-spacing:.03em}
+.sec-r{flex:none;max-width:52%;font:600 12px/1.35 var(--mono);color:var(--texte-2);text-align:right;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sec-corps{position:relative;padding:0 0 var(--u2)}
+.sec-corps::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:var(--rayon);
+  background:
+   linear-gradient(var(--ligne),var(--ligne)) var(--equerre) 0/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) 0 var(--equerre)/var(--trait) var(--equerre) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) calc(100% - var(--equerre)) 0/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) 100% var(--equerre)/var(--trait) var(--equerre) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) var(--equerre) 100%/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) 0 calc(100% - var(--equerre))/var(--trait) var(--equerre) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) calc(100% - var(--equerre)) 100%/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) 100% calc(100% - var(--equerre))/var(--trait) var(--equerre) no-repeat}
+
+/* ---------- champs ---------- */
+.ch-gr{display:grid;grid-template-columns:1fr 1fr;gap:var(--u) var(--u2);margin-bottom:var(--u)}
+.ch-f{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ch-f label{font:600 10px/1.3 var(--sans);letter-spacing:.07em;color:var(--texte-2)}
+.ch-f input,.ch-f select{width:100%;min-height:44px;background:var(--surface);border:var(--trait) solid var(--ligne);
+  border-radius:var(--rayon);color:var(--texte);font:600 15px/1.2 var(--sans);padding:0 var(--u)}
+.ch-f input.num{font-family:var(--mono);font-variant-numeric:tabular-nums lining-nums}
+.ch-f input::-webkit-outer-spin-button,.ch-f input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.ch-f input[type=number]{appearance:textfield;-moz-appearance:textfield}
+
+/* ---------- corps actuel : chassis + energie ---------- */
+.kv{display:flex;align-items:center;gap:var(--u);min-height:48px;border-bottom:var(--trait) dashed var(--surface-2)}
+.kv .k{flex:1;min-width:0;font-size:14px;font-weight:600}
+.kv .k .d{display:block;font:400 11.5px/1.35 var(--sans);color:var(--texte-2)}
+.kv .v{font:700 16px/1 var(--mono);color:var(--accent);flex:none;min-width:34px;text-align:right}
+.kv .v.vide{color:var(--texte-2);font-weight:400}
+.kv .e{flex:none;font:600 11px/1.3 var(--mono);color:var(--alerte);min-width:52px;text-align:right}
+.stp{display:flex;align-items:center;gap:var(--demi);flex:none}
+.stp .v{min-width:44px;height:44px;border-radius:var(--rayon);border:var(--trait) solid var(--surface-2);
+  background:var(--surface);display:grid;place-items:center;font:700 17px/1 var(--mono);color:var(--accent)}
+.stp .v.vide{color:var(--texte-2)}
+.step{width:44px;height:44px;border-radius:var(--rayon);border:var(--trait) solid var(--ligne);
+  background:var(--surface);color:var(--texte);font:700 20px/1 var(--mono);flex:none}
+.step:active{background:var(--surface-2)}
+.step:disabled{opacity:.35}
+.bande{min-height:56px;width:100%;border-radius:var(--rayon);border:var(--trait) solid var(--accent);
+  background:var(--surface);color:var(--accent);font-weight:700;font-size:15px;
+  display:flex;align-items:center;justify-content:space-between;gap:var(--u2);padding:0 var(--u2);margin-top:var(--u2)}
+.bande:active{background:var(--surface-2)}
+.bande .droite{font:600 11px/1.35 var(--sans);color:var(--texte-2);text-align:right;max-width:47%}
+.bande:disabled{opacity:.45}
+
+/* ---------- etat de crise ---------- */
+.pools{display:grid;grid-template-columns:1fr 1fr;gap:var(--u)}
+.pool{min-height:82px;border-radius:var(--rayon);background:var(--surface);border:var(--trait) solid var(--surface-2);
+  padding:var(--u) var(--u2);display:flex;flex-direction:column;gap:var(--demi)}
+.pool .k{font:600 10px/1 var(--sans);letter-spacing:.06em;color:var(--texte-2)}
+.pool .v{font:700 26px/1.1 var(--mono);color:var(--accent)}
+.pool .v .x{font-size:12px;color:var(--texte-2)}
+.pool .adj{display:flex;gap:var(--demi);margin-top:auto}
+.pool .adj .step{width:44px;height:44px}
+/* blessures — silhouette + rangee de boutons. Composant en copie partagee avec
+   fiche-perso.html ; a factoriser en module dans l'app reelle. Les zones du
+   corps ne sont pas des cibles tactiles ; l'edition reste sur les boutons. */
+.bles-pan{padding:var(--u) 0 0;text-align:center}
+.sil-wrap{position:relative;display:inline-block;background:var(--surface);
+  border:var(--trait) solid var(--surface-2);border-radius:var(--rayon);padding:calc(var(--u2) - 2px) var(--u2)}
+.sil-wrap::before{content:"";position:absolute;inset:3px;pointer-events:none;
+  background:
+   linear-gradient(var(--ligne),var(--ligne)) var(--equerre) 0/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) 0 var(--equerre)/var(--trait) var(--equerre) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) calc(100% - var(--equerre)) 0/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) 100% var(--equerre)/var(--trait) var(--equerre) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) var(--equerre) 100%/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) 0 calc(100% - var(--equerre))/var(--trait) var(--equerre) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) calc(100% - var(--equerre)) 100%/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--ligne),var(--ligne)) 100% calc(100% - var(--equerre))/var(--trait) var(--equerre) no-repeat}
+.sil{display:block}
+/* l'attribut hidden doit gagner contre toute regle display d'etat */
+[hidden]{display:none !important}
+.sil .zone rect:not(.flash),.sil .zone circle:not(.flash){stroke:var(--ligne);stroke-width:1.5;fill:var(--outil);fill-opacity:.18}
+.sil .zone[data-sv="1"] rect:not(.flash),.sil .zone[data-sv="1"] circle:not(.flash){fill-opacity:.35}
+.sil .zone[data-sv="2"] rect:not(.flash),.sil .zone[data-sv="2"] circle:not(.flash){fill:var(--alerte);fill-opacity:.6}
+.sil .zone[data-sv="3"] rect:not(.flash),.sil .zone[data-sv="3"] circle:not(.flash){fill:var(--critique);fill-opacity:.85}
+.sil .val{fill:var(--inversion-texte);font:700 11px var(--mono);text-anchor:middle;display:none}
+.sil .zone:not([data-sv="0"]) .val{display:block}
+.sil .flash{fill:var(--accent);stroke:none;opacity:0}
+.sil .zone.puls .flash{animation:eclair .3s ease-out}
+@keyframes eclair{from{opacity:.6}to{opacity:0}}
+.zbtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--demi);margin-top:var(--u);text-align:left}
+button.zb{min-height:44px;border:var(--trait) solid var(--ligne);border-radius:var(--rayon);background:var(--surface);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer}
+button.zb:active{background:var(--surface-2)}
+.zb .zn{font:600 10px/1.2 var(--sans);letter-spacing:.04em;color:var(--texte-2)}
+.zb .zc{font:700 16px/1 var(--mono);color:var(--texte)}
+.zb[data-sv="2"] .zc{color:var(--alerte)}
+.zb[data-sv="3"] .zc{color:var(--critique)}
+.zb.remettre{grid-column:1/-1;border-style:dashed;color:var(--texte-2);font:700 13px/1 var(--sans)}
+
+/* ---------- reseau ---------- */
+.interrupteur{min-height:44px;min-width:132px;border-radius:var(--rayon);border:var(--trait) solid var(--accent);
+  background:var(--surface);color:var(--accent);display:inline-flex;align-items:center;gap:var(--u);
+  padding:0 var(--u);font:650 12px/1 var(--sans)}
+.interrupteur .led{width:34px;height:18px;border-radius:999px;background:var(--accent);position:relative;flex:none}
+.interrupteur .led::after{content:"";position:absolute;top:2px;left:18px;width:14px;height:14px;
+  border-radius:50%;background:var(--inversion-texte)}
+.interrupteur[data-on=false]{border-color:var(--ligne);color:var(--texte-2)}
+.interrupteur[data-on=false] .led{background:var(--surface-2);box-shadow:inset 0 0 0 var(--trait) var(--ligne)}
+.interrupteur[data-on=false] .led::after{left:2px;background:var(--texte-2)}
+
+/* ---------- notes ---------- */
+textarea.notes{width:100%;min-height:132px;background:var(--surface);border:var(--trait) solid var(--ligne);
+  border-radius:var(--rayon);color:var(--texte);font:400 14px/1.55 var(--sans);padding:var(--u) var(--u2);resize:vertical}
+
+/* ---------- liste editable ---------- */
+.aj{width:100%;min-height:44px;border:var(--trait) dashed var(--ligne);border-radius:var(--rayon);
+  color:var(--texte);font-weight:600;font-size:13px;margin-top:var(--u)}
+.aj:active{border-color:var(--accent);color:var(--accent)}
+.lig{display:flex;align-items:center;gap:var(--demi);min-height:48px;border-bottom:var(--trait) dashed var(--surface-2)}
+.lig input.txt{flex:1;min-width:0;background:transparent;border:var(--trait) solid transparent;border-radius:var(--rayon);
+  color:var(--texte);font:500 13.5px/1.3 var(--sans);padding:var(--demi) var(--u);min-height:44px}
+.lig input.txt:focus{border-color:var(--ligne);background:var(--surface)}
+.lig .sup{width:44px;height:44px;flex:none;color:var(--texte-2);font-size:16px;display:grid;place-items:center;border-radius:var(--rayon)}
+.lig .sup:active{color:var(--critique)}
+
+/* ---------- pop-up « changer de corps » : seule couche transitoire ---------- */
+#popups{position:fixed;inset:0;z-index:60;pointer-events:none}
+.pop{position:absolute;left:0;right:0;bottom:0;max-height:min(55vh,464px);margin:0 auto;max-width:560px;
+  pointer-events:auto;display:flex;flex-direction:column;background:var(--fond);
+  border:var(--trait) solid var(--ligne);border-bottom:0;border-radius:calc(var(--rayon) * 1.6) calc(var(--rayon) * 1.6) 0 0;
+  box-shadow:0 -20px 50px rgba(0,0,0,.55);transform:translateY(103%);transition:transform var(--t2) var(--courbe)}
+.pop[data-pos=true]{transform:translateY(0)}
+.pop::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:calc(var(--rayon) * 1.6) calc(var(--rayon) * 1.6) 0 0;
+  background:
+   linear-gradient(var(--accent),var(--accent)) var(--equerre) 0/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--accent),var(--accent)) 0 var(--equerre)/var(--trait) var(--equerre) no-repeat,
+   linear-gradient(var(--accent),var(--accent)) calc(100% - var(--equerre)) 0/var(--equerre) var(--trait) no-repeat,
+   linear-gradient(var(--accent),var(--accent)) 100% var(--equerre)/var(--trait) var(--equerre) no-repeat}
+.pop-tete{flex:none;display:flex;align-items:center;gap:var(--u);padding:var(--u) var(--u2);
+  border-bottom:var(--trait) solid var(--surface-2)}
+.pop-tete h2{font-size:15px;font-weight:700;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.x{margin-left:auto;flex:none;width:44px;height:44px;border-radius:999px;background:var(--surface);
+  color:var(--texte);font-size:16px;display:grid;place-items:center}
+.pop-corps{flex:1;overflow:auto;padding:var(--u) var(--u2) calc(var(--u2) + env(safe-area-inset-bottom));
+  -webkit-overflow-scrolling:touch}
+.chassis{border:var(--trait) solid var(--ligne);border-radius:var(--rayon);background:var(--surface);
+  padding:var(--u) var(--u2);margin-top:var(--u)}
+.chassis[data-en-place=true]{border-color:var(--accent)}
+.chassis .t{display:flex;align-items:center;gap:var(--u);min-height:44px}
+.chassis .t input.nom{flex:1;min-width:0;background:transparent;border:0;border-bottom:var(--trait) dashed var(--surface-2);
+  color:var(--texte);font:650 14px/1.3 var(--sans);padding:0 var(--demi);min-height:44px}
+.chassis .t .marq{flex:none;font:600 10px/1 var(--sans);letter-spacing:.06em;color:var(--accent)}
+.chassis .d{display:flex;align-items:center;gap:var(--u2);flex-wrap:wrap;padding:var(--demi) 0}
+.chassis .d .f{display:flex;align-items:center;gap:var(--demi)}
+.chassis .d .f label{font:600 10px/1 var(--sans);letter-spacing:.06em;color:var(--texte-2)}
+.chassis .d .f input{width:64px;min-height:44px;background:var(--fond);border:var(--trait) solid var(--ligne);
+  border-radius:var(--rayon);color:var(--accent);font:700 16px/1 var(--mono);text-align:center;padding:0;
+  appearance:textfield;-moz-appearance:textfield}
+.chassis .d .f input::-webkit-outer-spin-button,.chassis .d .f input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.chassis .prendre{min-height:44px;width:100%;border-radius:var(--rayon);border:var(--trait) solid var(--accent);
+  background:transparent;color:var(--accent);font-weight:700;font-size:14px;margin-top:var(--demi)}
+.chassis .prendre:active{background:var(--surface-2)}
+.chassis .prendre:disabled{opacity:.4}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:1ms!important;animation-duration:1ms!important}
+}
+</style>
+</head>
+<body>
+<header class="barre">
+  <div class="barre-h"><h1>Dossier</h1></div>
+  <div class="rail" id="rail" role="tablist" aria-label="Fiches"></div>
+</header>
+<main id="plan"></main>
+<div id="popups"></div>
+<script>
+(function(){
+'use strict';
+/* ---- modèle ----
+   Chaque valeur vient de Personnages.md, transcrite au mot près.
+   null = case vide ou douteuse de la source — jamais inventée.
+   « niv: null » dans une compétence = la source ne permet pas de trancher
+   entre niveau et coût xp ; le champ reste libre. */
+var PALIERS=['','Adolescent','Etudiant','Adulte','Veteran'];
+function P0(){return {'Aérospatiale':null,'Biologie':null,'Communication':null,'Culture':null,'Économie':null,'Électronique':null,'Ingénierie':null,'Militaire':null,'Réputation':null,'Sciences':null,'Sécurité':null}}
+function C(o){return Object.assign(P0(),o)}
+var FICHES=[
+{id:'mars2', puce:'Mars 2', tete:{nom:'Mars 2',alias:'',nation:'Hazat',statut:'officier de la Legion',palier:'Etudiant',histo:'Posthumain',credits:20},
+ car:{corps:5,proc:5,esprit:3,empathie:4}, aug:{ref:2,oc:1},
+ comp:C({'Aérospatiale':6,'Communication':6,'Militaire':6,'Biologie':4,'Culture':4,'Économie':4,'Électronique':4,'Ingénierie':4,'Réputation':4,'Sciences':4,'Sécurité':4}),
+ mods:[{t:'Corps 5',e:-1},{t:'Processeur 5',e:-1},{t:'Pompe adrenaline — Réflexes +2',e:-2},{t:'Overclock +1',e:-1},
+   {t:'Ossature renforcée (tête, torse, abdomen, jambes)',e:null},{t:'Smartblood',e:null},{t:'Régénération',e:null}],
+ armes:['Monolame','Pistolet laser','Fusil d’assaut'],
+ objets:['Skillsoft 5 Aérospatiale','Skillsoft 5 Communication','Skillsoft 5 Militaire','Nano-armure','Plans fusil laser'],
+ reseauItems:[],
+ notes:'Passion : Wargame (50k, neochess, Hunter…). Permis : Militaire (Ares), Hazat. Historique : Posthumain Hazat — officier de la Legion ; +1D en Corps ; +1 en Empathie ; immun vieillesse / maladies / toxines ; augments, mods et implants à −1 crédit.'},
+{id:'gabdark', puce:'gabdark', tete:{nom:'gabdark',alias:'',nation:'',statut:'IA · Chercheur',palier:'Adulte',histo:'IA · Chercheur',credits:null},
+ car:{corps:null,proc:null,esprit:null,empathie:null}, aug:{ref:null,oc:null},
+ comp:C({'Aérospatiale':6,'Communication':3,'Électronique':6,'Ingénierie':6,'Réputation':1,'Sécurité':6}),
+ mods:[{t:'Jet suit',e:null},{t:'Tinker',e:null}],
+ armes:[], objets:['Stratios','CPU +'], reseauItems:[],
+ notes:'IA (Étudiant) · Chercheur (Adulte), avantage « Cout / 2 (aerospatiale) ». Possède un Stratios.'},
+{id:'golem2', puce:'Golem 2', tete:{nom:'Golem 2',alias:'David Drumond Estevez',nation:'Ares',statut:'Militaire',palier:'Adulte',histo:'Cyborg · Spec Ops',credits:4},
+ car:{corps:6,proc:6,esprit:6,empathie:2}, aug:{ref:4,oc:2},
+ comp:C({'Aérospatiale':4,'Biologie':4,'Communication':3,'Culture':3,'Économie':3,'Électronique':5,'Ingénierie':3,'Militaire':6,'Réputation':3,'Sciences':3,'Sécurité':6}),
+ mods:[{t:'Réflexes 4',e:null},{t:'Overclock 2',e:null},{t:'Batterie 6',e:null},{t:'Jambes cyber',e:null},{t:'Hermétique',e:null},{t:'Smartblood',e:null},{t:'Nopain',e:null},{t:'Interface neurale',e:null},{t:'Datajack',e:null},{t:'Lockpick',e:null},{t:'Injecteur',e:null},{t:'Régénération',e:null},{t:'Vision IR / Sonar / Radio / X-Ray',e:null},{t:'Scanner Biometrique Implémenté',e:null},{t:'Glande',e:null},{t:'Gecko',e:null},{t:'Armor Plating (Full body)',e:null},{t:'Ossature Renforcée (Full Body)',e:null},{t:'Double mantis blade implanté',e:null},{t:'monowire implanté',e:null}],
+ armes:['Poings choc','Pistolet','Fusils d’assault','Maglame','Fusils de Precision','Grenade frag','Scalpel laser implanté'],
+ objets:['Armure Ares','Combi et Bottes','Vetements renforcés','combi predator','Dopant du Doc +1 C/E/P'],
+ reseauItems:[],
+ notes:'Profession : Mercenaire, employeur Patrol. Expertises : Combat 5 · Cyber-sec 5 (+1D). Passion : sports violents (Hunter, Motorball). Armure externe 3 / dermale 3 / interne 3 sur les six localisations. Âge propre 57, 2m23, 390.'},
+{id:'sam', puce:'SAM', tete:{nom:'SAM',alias:'',nation:'Alpha',statut:'citoyen',palier:'Veteran',histo:'Spider · Fantôme · Homme d’affaire',credits:46},
+ car:{corps:5,proc:5,esprit:6,empathie:3}, aug:{ref:3,oc:2},
+ comp:C({'Aérospatiale':2,'Biologie':1,'Communication':4,'Culture':1,'Économie':3,'Électronique':5,'Ingénierie':5,'Militaire':4,'Réputation':0,'Sciences':1,'Sécurité':5}),
+ mods:[{t:'nerf renforcé',e:null},{t:'exosquelette renforcé',e:null},{t:'peau synthétique caméléon nanoskin',e:null},{t:'paume finger niggler (paume droite)',e:null},{t:'lockpick (index droit)',e:null},{t:'fouet nanofilament (index gauche)',e:null},{t:'armure dermale',e:null},{t:'smart blood',e:null},{t:'cyberleg',e:null},{t:'injecteur avec poche — anti douleur',e:null},{t:'batterie 7',e:null},{t:'refroidissement 6',e:null}],
+ armes:['maglame','pistolet balle gel','pistolet laser','fusil rail gun (fusil précision) + plan','katana nanofilament','combi predator'],
+ objets:['clé USB','jammer','6 clones','bricokit','1 dose d’antidote du painkiller','2 doses de pain killer'],
+ reseauItems:['noir','glace 3','virus 2'],
+ notes:'Avantage spider : 1D électronique et sécurité. Fantôme, gimmick parano. Homme d’affaire. Casier : a fait tomber la Corpo orasaka 23ème. Passion : 60k. Âge 150 / 150.'},
+{id:'stark', puce:'Stark', tete:{nom:'Stark',alias:'',nation:'Alpha',statut:'citoyen',palier:'Veteran',histo:'Spider · Fantôme · Homme d’affaire',credits:249},
+ car:{corps:6,proc:6,esprit:6,empathie:3}, aug:{ref:6,oc:6},
+ comp:C({'Aérospatiale':0,'Biologie':0,'Communication':5,'Culture':0,'Économie':4,'Électronique':5,'Ingénierie':6,'Militaire':4,'Réputation':6,'Sciences':0,'Sécurité':6}),
+ mods:[{t:'réflexe 6',e:null},{t:'overclock 6',e:null},{t:'batterie 6',e:null},{t:'smart blood',e:null},{t:'lock pick (index droit)',e:null},{t:'processeur 6',e:null},{t:'jambes cyber',e:null},{t:'régénération',e:null},{t:'visage programmable',e:null},{t:'glace 6',e:null},{t:'virus 6',e:null}],
+ armes:['monoblade','shockfist','shotgun','pistolet beam','assaut riffle','fusil laser lourd','fouet nanofilament majeur main droite'],
+ objets:['10 clone','medikit','bricokit','tenu holographique','scanner','imprimante 3D','jaming smoke','drone','drone backta','labo portable +1D +4 aide','cuve backta (autopilot 5 aide en prog)','contrôle de la station UVCETI','IA parfaite PHOENIX','virus fabriqué (5 dégâts, 5 compétences)'],
+ reseauItems:['noir'],
+ notes:'Dossier jumeau de SAM (mêmes historiques, même casier). Power armor : corp 6 +1 stimulant · processeur 4 · batterie grapphin · réflexe 4 +1 stimulant · overclock 2 · storm shield · fouet monofilament 10 m ap6 · autocanon 3 tir munitions ap · 4 lances missile HM · genoux shock x2 · daemon breath · gatling fire 6 200 m · balle explosive. Âge 176 / 176.'},
+{id:'jb', puce:'JB', tete:{nom:'JB',alias:'Daemon <John Carter>',nation:'Xenos',statut:'Xénobiologiste · Mercenaire',palier:'Veteran',histo:'Xénobiologiste · Mercenaire · Symbiote',credits:14},
+ car:{corps:5,proc:4,esprit:5,empathie:4}, aug:{ref:6,oc:null},
+ comp:C({'Aérospatiale':4,'Biologie':6,'Communication':3,'Culture':3,'Économie':1,'Électronique':1,'Ingénierie':1,'Militaire':5,'Réputation':0,'Sciences':2,'Sécurité':5}),
+ mods:[{t:'Réflexes +6',e:null},{t:'Dermal armor',e:null},{t:'Injecteur monofilament dans le doigt (index main droite)',e:null},{t:'Skillsoft tout a 3',e:null},{t:'skillsoft a 6 Biologie',e:null},{t:'skillsoft a 4 Aérospatiale/Sécurité',e:null},{t:'Skillsoft 6 militaire',e:null},{t:'Skillsoft 6 Aérospatial',e:null},{t:'Glande Dopant/Stimulant +1C/+1P/+1 Reflex sans Dépendance',e:null}],
+ armes:['Pistolet (gel)','Needler — munition en tout genre toxine/drogue/soins/Virus','Katana monolame','Fusil laser','Fusil précision railgun'],
+ objets:['Cuve bakta','Combi Solis Prédator (prototype intégrant la nano armor)','Tenue Holographique','Drone Souris équipement: Injecteur/camouflage optique (toute sorte de spectre)','Drone Bakta classique','Scanner Xenos','Échantilloneur Biologique','Stock de MaxDoc','Toxine/Stimulant/Soins en tout genre','Toxine Spécial (créé pour affecter les Smartblood et le sang classique)','Toxine -6 Emphatie gaz 1 seconde d’incubation 3 de paralysie','Medkit','Schéma Fusil précision rail genre et kugelblitz pour vaisseaux','information volé cf Mission Casino Vito','Donnée volé (vault recherche arasaka sur la base arasaka)'],
+ reseauItems:[],
+ notes:'Ancien militaire scientifique, devenu xenobiologiste ; mercenaire pour l’argent. Oublie des choses de son passé, dates floues. Expertises : Soldat · Explorateur · Éloquent. Passions : Wargame en compétitif, coach d’une équipe 50k, Vaisseaux. Casier : Instrument de la chute de Saburo/Arasaka. Âge propre 140, 185 cm, 90 kg. (Note de dossier, cellule décalée : « Ressemble au chat de combat de Hanako, il est noir avec 9 queues » — prénom Hanakuma, démon de la fleur.)'},
+{id:'toro', puce:'Toro', tete:{nom:'Toro',alias:'D.E.R.D.I.S.',nation:'Alpha',statut:'Citoyen · Wall Street',palier:'Veteran',histo:'Fantôme · Cloné · Netrunner',credits:0},
+ car:{corps:5,proc:5,esprit:3,empathie:2}, aug:{ref:1,oc:null},
+ comp:{'Aérospatiale':null,'Biologie':null,'Diplomatie':1,'Économie':3,'Électronique':5,'Ingénierie':1,'Médias':null,'Militaire':1,'Recherche':3,'Richesse':6,'Sécurité':5},
+ mods:[{t:'Reflexes cablés 1',e:null},{t:'infrarouge (2)',e:null},{t:'Nopain',e:null},{t:'Armure dermale (tête)',e:null},{t:'Armure énergétique de collection (Taille 1 (corps/processeur), hermétique (24h))',e:null},{t:'Skillsoft Militaire Indice 4',e:null},{t:'Hot sim (débride la connexion conscience-processeur. En RV, +1D en initiative et aux actions. Si proc réduit à 0, excédent = douleur)',e:null}],
+ armes:['Fusil à pompe (D2 Portée courte, −1 succès / 5m de distance)','Maglame (Dégâts +1, AP 1, Magnétique (couteau). Offline : D0)'],
+ objets:['Hot sim','Armure énergétique +1','Hot sim +1','Historique Netrunner +1'],
+ reseauItems:['Firewall éveillé ind 1 (Armure matricielle +N (cybercombat))','Virus éveillé ind 1 (Dégâts matriciels +N (cybercombat))','Jammer ind 5 (Surcharge les ondes sauf sur une bande, −N à toutes communications non autorisées)'],
+ notes:'Clone d’un riche un peu taré — plusieurs clones de lui-même se baladent (illégal) ; guerre de succession entre ses clones. Age Corp original 100+ · Sexe cf Clone · Taille cf Clone · Poids cf Clone · Age connu 101. Fantôme : conscience digitalisée (altered carbon), défaut Frénésie (IA de Halo). Cloné : −50% sur les clones, défaut Guerre de succession. Netrunner : +1D sur les actions de Processeur, défaut Addict (2h/jour). Piratage : 8D pool de dés que tu peux diviser en plusieurs actions (5 de Processeur). Cybercombat : Def +1 Firewall, Attaque +1 Virus. Passion : Trading haute fréquence (wall street) — bonus possible : relancer un jet d’Initiative. Limite de 12D lancé (2x Caract + taille). Permis : Clonage, Power armor, Hot sim, CV. Corps de base relevé de la fiche ancienne : Physique 1 · Intuition 3 · Processeur 5 · Social 2.'},
+{id:'golem', puce:'Golem', tete:{nom:'Golem',alias:'',nation:'Ares',statut:'Militaire',palier:'',histo:'Cyborg · Augmenté',credits:null},
+ car:{corps:6,proc:1,esprit:2,empathie:0}, aug:{ref:2,oc:null},
+ comp:{'Aérospatiale':1,'Biologie':null,'Diplomatie':1,'Économie':null,'Électronique':null,'Ingénierie':null,'Médias':3,'Militaire':5,'Recherche':3,'Richesse':3,'Sécurité':3},
+ mods:[{t:'Réflexes cablés 2',e:null},{t:'Nopain',e:null},{t:'Blindage (tête, torse)',e:null},{t:'Smartblood',e:null},{t:'Injecteurs',e:null},{t:'Datajack',e:null},{t:'Vision infrarouge',e:null},{t:'Ossature renforcée (tête)',e:null},{t:'Gecko',e:null},{t:'Runner',e:null},{t:'Armure ares',e:null},{t:'Poing choc',e:null},{t:'Skillsoft (Economie) 3',e:null}],
+ armes:['Maglame — Mêlée, Dégâts Succès+1, AP 1 (ignore 1 pt d’armure, +1D pour détruire l’armure)','Pistolet'],
+ objets:['Vêtements — Armure kinétique 1, armure thermique 1 (sauf tête)','Combinaison, bottes magnétiques'],
+ reseauItems:[],
+ notes:'Cyborg : +1D aux actions physiques, corps full cyber, hermétique 1h, permis militaire, antipathique. Augmenté : 10 crédits en cyberware, connaissance des implants, dispo +1 pour le cyber, entretien régulier. Spécialisations : Mêlée 1 · Course 1 (jambes). Passion : sports violents (Hunter, Motorball). Permis : Militaire (Ares). Armure relevée (grille ancienne, zones dupliquées) : tête 4, torse 3, bras 2, jambes 2. Source : Physique 6 · Instinct 2 · Processeur 1 · Social 0.'},
+{id:'vincent', puce:'Vincent', tete:{nom:'Vincent',alias:'Toubib',nation:'Xenos',statut:'Militaire',palier:'',histo:'Augmenté · Interfacé · Médecin',credits:null},
+ car:{corps:2,proc:5,esprit:3,empathie:1}, aug:{ref:null,oc:null},
+ comp:{'Aérospatiale':2,'Biologie':6,'Diplomatie':2,'Économie':null,'Électronique':2,'Ingénierie':4,'Médias':null,'Militaire':3,'Recherche':1,'Richesse':2,'Sécurité':1},
+ mods:[{t:'Medkit implanté — permet de soigner, 10 charges, produit des drogues (1 min)',e:null},{t:'Hot Sim 1',e:null},{t:'SmartBlood',e:null},{t:'Ossature Renforcée (Tête/Torse)',e:null}],
+ armes:['Pistolet — Rafales 3 (−1 succès = +1 projectile touché, max 3) ; balles standard dégâts 1, balles gel 1 gel + 1 douleur'],
+ objets:['Vêtements renforcés — Armure 1 sauf tête','BricoKit 10 charges','Cuve Bakta — opérations, clonage, traitements génétiques ; Autopilot Proc 4+1 / Biologie 4 (peut Aider)'],
+ reseauItems:[],
+ notes:'Augmenté : 10 crédits en cyberware, permis militaire, défaut PTSD. Interfacé : +1D en plongée, reste conscient même interfacé, défaut virtuel > réel. Médecin : +1D pour médecine, contacts, réputation. Passion : fan des séries rétro préspatiales. Budget : 10 crédits cyberware · 3 crédits richesse · 5 crédits d’avance. Armure : tête 1, torse 2, bras 1, jambes 1. Source : Corps 2 · Instinct 3 · Processeur 5 · Social 1 ; spécialisation Médecine 1.'},
+{id:'ludo', puce:'Ludo', tete:{nom:'Ludo',alias:'',nation:'Alpha Azat',statut:'Militaire',palier:'',histo:'Fantôme · Cyborg',credits:null},
+ car:{corps:5,proc:2,esprit:null,empathie:null}, aug:{ref:2,oc:null},
+ comp:C({}),
+ mods:[{t:'Réflexes augmentées 2',e:null},{t:'No pain',e:null},{t:'Interface neurale',e:null},{t:'Injecteur',e:null},{t:'Cyberplating',e:null},{t:'Reinforced skeleton',e:null},{t:'Bio moniteur',e:null}],
+ armes:['Fusil d’assaut','Maglame'],
+ objets:['Ares Armor (tête, poitrine, bras, abdomen, jambes)'],
+ reseauItems:[],
+ notes:'Spécialisation : Tir. Passions : la grande vitesse et l’adrénaline ; les fusées. Permis : Militaire. Défaut : choc post-traumatique. 60 ans, 1m85, 180 kg. Bonus « +4D » noté auprès de Corps dans la source — non tranché. Armure externe : Ares Armor, Cyberplating et reinforced skeleton (tête, poitrine).'},
+{id:'ludo2', puce:'Ludo 2', tete:{nom:'Ludo 2',alias:'',nation:'Alpha Azat',statut:'Militaire',palier:'Adulte',histo:'Cyborg · Fantôme',credits:14},
+ car:{corps:7,proc:3,esprit:6,empathie:2}, aug:{ref:2,oc:null},
+ comp:C({'Aérospatiale':2,'Biologie':3,'Électronique':2,'Ingénierie':3,'Militaire':6,'Sécurité':1}),
+ mods:[{t:'Réflexes +2D',e:null},{t:'Batterie 4',e:null},{t:'No pain',e:null},{t:'Datajack',e:null},{t:'Injecteur',e:null},{t:'Bio moniteur',e:null},{t:'Cyber-legs',e:null},{t:'Vision IR',e:null},{t:'Smartblood',e:null},{t:'Armor plating x6',e:null},{t:'Ossature renforcée x6',e:null}],
+ armes:['Fusil d’assaut','Monolame','Pistolet laser implanté (bouche)','Grenade EM'],
+ objets:['Armure de combat'],
+ reseauItems:[],
+ notes:'Cyborg (Étudiant) : coût augments et mods −1, gimmick prototype. Fantôme (Adulte) : peut transposer sa conscience, gimmick choc post-traumatique. Passions : la grande vitesse et l’adrénaline ; les fusées. Permis : Militaire. Âge propre 62, âge réel 100+. La source note aussi une ligne Mods « Corps 6 — 5 » non rattachée à une colonne claire.'},
+{id:'marsog', puce:'Mars (og)', tete:{nom:'Mars (og)',alias:'Liam Hazat',nation:'Hazat',statut:'Militaire · Armada Hazat',palier:'Etudiant',histo:'Transhumain · Éveillé',credits:null},
+ car:{corps:3,proc:4,esprit:2,empathie:3}, aug:{ref:null,oc:null},
+ comp:{'Aérospatiale':2,'Biologie':null,'Diplomatie':2,'Économie':null,'Électronique':1,'Ingénierie':null,'Médias':1,'Militaire':3,'Recherche':null,'Richesse':6,'Sécurité':null},
+ mods:[{t:'Pompe Adrenaline 2',e:null},{t:'Skill Militaire 5',e:null},{t:'Skill Aéro 5',e:null},{t:'Skill Diplo 5',e:null}],
+ armes:['Monolame','Pistolet laser'],
+ objets:['Nano-armure','Plans de fusil d’assaut (incomplets)'],
+ reseauItems:[],
+ notes:'Soldat genoforgé (+1D action physique) ; corps parfait, immunisé maladies/toxines/vieillissement, contacts Alpha ; arrogant. Éveillé : processeur sentient, copie parfaite de sa pensée, continue d’utiliser son Processeur même inconscient, peut devenir un fantôme après la mort — « ils ne connaitront pas la peur (illusion d’immortalité) ». Passion : Wargame (50k, neochess). Permis : Militaire (Ares), Hazat (nanotech militaire). Spécialisation : Tactique 2. 20 ans, 1,80 m, 90 kg. Skillsofts relevés : Aérospatiale 3, Diplomatie 3, Militaire 6. Source : Physique 3 · Instinct 2 · Processeur 4 · Social 3.'},
+{id:'cruiser', puce:'cruiser', tete:{nom:'cruiser',alias:'Ares cruiser',nation:'Ares',statut:'',palier:'',histo:'',credits:null},
+ car:{corps:null,proc:null,esprit:null,empathie:null}, aug:{ref:null,oc:null},
+ comp:C({}), mods:[], armes:[], objets:[], reseauItems:[],
+ notes:'Ares cruiser — Prix moyen 150. La fiche est celle d’un vaisseau, pas d’un personnage ; la source ne donne rien d’autre.'},
+{id:'hanako', puce:'Hanako', tete:{nom:'Hanako',alias:'Hanako Arasaka',nation:'Ares',statut:'',palier:'Veteran',histo:'Femme d’affaire · Fantôme · Scientifique',credits:null},
+ car:{corps:3,proc:4,esprit:4,empathie:5}, aug:{ref:null,oc:null},
+ comp:C({'Aérospatiale':0,'Biologie':5,'Communication':5,'Culture':3,'Économie':5,'Électronique':0,'Ingénierie':3,'Militaire':0,'Réputation':0,'Sciences':5,'Sécurité':0}),
+ mods:[], armes:[], objets:[], reseauItems:[],
+ notes:'Fille de Saburo Arasaka, sœur de Yurinobu ; a perdu le goût de la vie après de nombreuses années, puis a décidé de vivre une vie libre. Femme d’affaire (Étudiant) : passif en argent 1/mois éveil, 1/an en sommeil ; pokerface. Fantôme (Adulte) : lassitude. Scientifique (Vétéran) : double XP science/biologie ; casual. Passion : Science. Âge propre 100+, âge réel 300+, 1m70, 65 kg.'}
+];
+/* viviers de corps — ce que la source nomme ; le reste est a saisir dans la fenetre */
+var VIVIERS={
+  mars2:[],
+  gabdark:[{nom:'corps de rechange (IA — châssis?)',c:null,p:null}],
+  golem2:[],
+  sam:[{nom:'clone',c:null,p:null},{nom:'clone',c:null,p:null}],
+  stark:[{nom:'clone',c:null,p:null},{nom:'clone',c:null,p:null}],
+  jb:[],
+  toro:[{nom:'corps original 100+',c:null,p:null},{nom:'clone Ares Trooper — Corps 5, réflexes cablés 1',c:5,p:null},{nom:'clone',c:null,p:null}],
+  golem:[], vincent:[], ludo:[],
+  ludo2:[{nom:'corps de rechange (transposition)',c:null,p:null}],
+  marsog:[], cruiser:[],
+  hanako:[{nom:'corps de rechange (fantôme)',c:null,p:null}]
+};
+/* ---- etat + persistance ---- */
+var CLE='th.perso.proto.v1';
+var PAL=['','Adolescent','\u00c9tudiant','Adulte','V\u00e9t\u00e9ran'];
+var LEGACY={marsog:'v1',golem:'v1',ludo:'v1',sam:'v1'};
+function normalPal(p){return p==='Etudiant'?'\u00c9tudiant':(p==='Veteran'?'V\u00e9t\u00e9ran':p)}
+function graine(f){
+  var car={corps:f.car.corps,proc:f.car.proc,esprit:f.car.esprit,empathie:f.car.empathie};
+  var comp=[];for(var k in f.comp){comp.push({nom:k,niv:f.comp[k]})}
+  return {car:car,aug:{ref:f.aug.ref,oc:f.aug.oc},
+    pool:{corps:car.corps,proc:car.proc},bles:{},
+    comp:comp,mods:f.mods.map(function(m){return {t:m.t,e:m.e}}),
+    armes:f.armes.slice(),objets:f.objets.slice(),reseauItems:f.reseauItems.slice(),
+    reseauOn:true,notes:f.notes,tete:{nom:f.tete.nom,alias:f.tete.alias,nation:f.tete.nation,
+      statut:f.tete.statut,palier:normalPal(f.tete.palier),histo:f.tete.histo,credits:f.tete.credits},
+    chassis:'corps en place',
+    vivier:(VIVIERS[f.id]||[]).map(function(v){return {nom:v.nom,c:v.c,p:v.p}})}
+}
+var sheets={},actif=FICHES[0].id,ouvert={};
+function charger(){
+  try{var r=localStorage.getItem(CLE);if(r){var e=JSON.parse(r);
+    if(e&&e.sheets&&e.actif){sheets=e.sheets;actif=e.actif;ouvert=e.ouvert||{};
+      FICHES.forEach(function(f){if(!sheets[f.id])sheets[f.id]=graine(f)});
+      return true}}
+  }catch(err){}
+  return false
+}
+function sauver(){try{localStorage.setItem(CLE,JSON.stringify({sheets:sheets,actif:actif,ouvert:ouvert}))}catch(err){}}
+if(!charger()){FICHES.forEach(function(f){sheets[f.id]=graine(f)})}
+function S(){return sheets[actif]}
+function F(){return FICHES.find(function(f){return f.id===actif})}
+/* ---- outillage DOM ---- */
+function el(t,c,x){var n=document.createElement(t);if(c)n.className=c;if(x!==undefined&&x!==null)n.textContent=x;return n}
+function champText(pere,label,val,onSet){
+  var f=el('div','ch-f');var l=el('label',null,label);
+  var i=document.createElement('input');i.type='text';i.value=val==null?'':String(val);
+  i.id='i'+Math.random().toString(36).slice(2,8);l.setAttribute('for',i.id);
+  i.addEventListener('change',function(){onSet(i.value.trim())});
+  f.appendChild(l);f.appendChild(i);pere.appendChild(f);return i
+}
+function champNum(pere,label,val,min,max,onSet){
+  var f=el('div','ch-f');var l=el('label',null,label);
+  var i=document.createElement('input');i.type='number';i.className='num';
+  i.min=String(min);i.max=String(max);if(val!==null&&val!==undefined)i.value=String(val);
+  i.placeholder='';i.inputMode='numeric';
+  i.id='i'+Math.random().toString(36).slice(2,8);l.setAttribute('for',i.id);
+  i.addEventListener('change',function(){
+    if(i.value===''){onSet(null);return}
+    var v=Math.max(min,Math.min(max,Math.round(+i.value||0)));i.value=String(v);onSet(v)});
+  f.appendChild(l);f.appendChild(i);pere.appendChild(f);return i
+}
+function stepper(get,set,min,max,fmt){
+  var w=el('span','stp');
+  var m1=el('button','step','\u2212');m1.type='button';m1.setAttribute('aria-label','moins');
+  var cur=get();
+  var v=el('span','v chiffre'+((cur===null||cur===undefined)?' vide':''),(cur===null||cur===undefined)?'\u2014':(fmt?fmt(cur):String(cur)));
+  var p1=el('button','step','+');p1.type='button';p1.setAttribute('aria-label','plus');
+  function maj(){var x=get();v.textContent=(x===null||x===undefined)?'\u2014':(fmt?fmt(x):String(x));
+    v.classList[(x===null||x===undefined)?'add':'remove']('vide')}
+  m1.addEventListener('click',function(){var x=get();set(Math.max(min,(x===null||x===undefined)?min+0:x-1));maj()});
+  p1.addEventListener('click',function(){var x=get();set(Math.min(max,(x===null||x===undefined)?min:x+1));maj()});
+  w.appendChild(m1);w.appendChild(v);w.appendChild(p1);
+  maj();
+  return {noeud:w,maj:maj}
+}
+function liste(pere,titre,arr,placeholder){
+  pere.appendChild(el('p','micro secondaire',titre));
+  arr.forEach(function(txt,k){
+    var r=el('div','lig');
+    var i=document.createElement('input');i.type='text';i.className='txt';i.value=txt;i.setAttribute('value',txt);i.placeholder=placeholder||'';
+    i.setAttribute('aria-label',titre+' '+(k+1));
+    i.addEventListener('change',function(){arr[k]=i.value.trim()});
+    var x=el('button','sup','\u00d7');x.type='button';x.setAttribute('aria-label','retirer '+(k+1)+' \u2014 '+titre);
+    x.addEventListener('click',function(){arr.splice(k,1);sauver();rendre()});
+    r.appendChild(i);r.appendChild(x);pere.appendChild(r);
+  });
+  var b=el('button','aj','+ ligne');b.type='button';
+  b.addEventListener('click',function(){arr.push('');sauver();rendre();
+    var inputs=pere.querySelectorAll('input.txt');if(inputs.length)inputs[inputs.length-1].focus()});
+  pere.appendChild(b);
+}
+/* ---- composant « silhouette des blessures » ----
+   copie partagee crise-table.html / fiche-perso.html ; factoriser en module
+   dans l'app reelle. getter(z) -> nombre ; setter(z,nv), setter(null) = tout remettre */
+function silhouetteBles(ZONES,getter,setter){
+  var w=el('div','bles-pan');
+  var sil=el('div','sil-wrap');
+  sil.innerHTML='<svg class="sil" width="150" height="164" viewBox="0 0 150 164" aria-hidden="true">'
+   +'<g class="zone" data-z="Tête" data-sv="0"><circle cx="75" cy="22" r="13"/><circle class="flash" cx="75" cy="22" r="13"/><text class="val" x="75" y="26">0</text></g>'
+   +'<g class="zone" data-z="Poitrine" data-sv="0"><rect x="57" y="39" width="36" height="29" rx="3"/><rect class="flash" x="57" y="39" width="36" height="29" rx="3"/><text class="val" x="75" y="57">0</text></g>'
+   +'<g class="zone" data-z="Bras droit" data-sv="0"><rect x="37" y="41" width="16" height="55" rx="3"/><rect class="flash" x="37" y="41" width="16" height="55" rx="3"/><text class="val" x="45" y="72">0</text></g>'
+   +'<g class="zone" data-z="Bras gauche" data-sv="0"><rect x="97" y="41" width="16" height="55" rx="3"/><rect class="flash" x="97" y="41" width="16" height="55" rx="3"/><text class="val" x="105" y="72">0</text></g>'
+   +'<g class="zone" data-z="Abdomen" data-sv="0"><rect x="57" y="70" width="36" height="27" rx="3"/><rect class="flash" x="57" y="70" width="36" height="27" rx="3"/><text class="val" x="75" y="87">0</text></g>'
+   +'<g class="zone" data-z="Jambes" data-sv="0"><rect x="57" y="99" width="36" height="57" rx="3"/><rect class="flash" x="57" y="99" width="36" height="57" rx="3"/><text class="val" x="75" y="131">0</text></g>'
+   +'</svg>';
+  w.appendChild(sil);
+  var zoneEls={},zcEls={},zbEls={};
+  function sev(n){return n===0?0:(n<=2?1:(n<=4?2:3))}
+  function sync(){
+    ZONES.forEach(function(z){
+      var n=Math.max(0,Math.min(9,getter(z)||0)),sv=sev(n);
+      zoneEls[z].setAttribute('data-sv',String(sv));
+      zoneEls[z].querySelector('.val').textContent=String(n);
+      zcEls[z].textContent=String(n);
+      zbEls[z].setAttribute('data-sv',String(sv));
+    });
+  }
+  function puls(z){var e=zoneEls[z];e.classList.remove('puls');void e.getBoundingClientRect();
+    requestAnimationFrame(function(){e.classList.add('puls')});}
+  var zb=el('div','zbtns');
+  ZONES.forEach(function(z){
+    var b=el('button','zb');b.type='button';b.setAttribute('data-z',z);
+    b.appendChild(el('span','zn',z));
+    var v=el('span','zc chiffre','0');
+    b.appendChild(v);
+    b.addEventListener('click',function(){setter(z,Math.min(9,(getter(z)||0)+1));sync();puls(z)});
+    zbEls[z]=b;zcEls[z]=v;
+    zb.appendChild(b);
+  });
+  var rm=el('button','zb remettre','remettre');rm.type='button';
+  rm.addEventListener('click',function(){setter(null,null);sync()});
+  zb.appendChild(rm);
+  w.appendChild(zb);
+  Array.prototype.forEach.call(sil.querySelectorAll('.zone'),function(g){zoneEls[g.getAttribute('data-z')]=g});
+  sync();
+  return w
+}
+
+/* ---- registre plie/deplie sur place ---- */
+var plan=document.getElementById('plan');
+var popups=document.getElementById('popups');
+function cle(k){return actif+':'+k}
+function section(id,titre,resume,contenu){
+  var sec=el('section','sec');sec.setAttribute('data-ouvert',String(!!ouvert[cle(id)]));
+  var tp=el('button','sec-tope');tp.type='button';tp.setAttribute('aria-expanded',String(!!ouvert[cle(id)]));
+  tp.appendChild(el('span','chevron',ouvert[cle(id)]?'\u25be':'\u25b8'));
+  tp.appendChild(el('span','sec-t',titre));
+  if(resume)tp.appendChild(el('span','sec-r secondaire',resume));
+  tp.addEventListener('click',function(){ouvert[cle(id)]=!ouvert[cle(id)];sauver();rendre()});
+  sec.appendChild(tp);
+  if(ouvert[cle(id)]){var c=el('div','sec-corps');contenu(c);sec.appendChild(c)}
+  return sec
+}
+function carTexte(v){return (v===null||v===undefined)?'\u2014':String(v)}
+function sommeEnergie(s){var n=0;s.mods.forEach(function(m){if(m.e)n+=m.e});return n}
+function nbBles(s){var n=0;for(var k in s.bles)n+=s.bles[k];return n}
+var ZONES6=['T\u00eate','Poitrine','Bras droit','Bras gauche','Abdomen','Jambes'];
+function resumeCrise(s){return 'C '+carTexte(s.pool.corps)+'/'+carTexte(s.car.corps)+'  \u00b7  P '+carTexte(s.pool.proc)+'/'+carTexte(s.car.proc)+(nbBles(s)?'  \u00b7  \u2588 '+nbBles(s):'')}
+function rendre(){
+  var rail=document.getElementById('rail');
+  rail.textContent='';
+  FICHES.forEach(function(f){
+    var b=el('button','chip');b.type='button';b.setAttribute('role','tab');
+    b.appendChild(el('span',null,f.puce));
+    if(LEGACY[f.id])b.classList.add('legacy');
+    if(LEGACY[f.id]||f.id==='cruiser')b.appendChild(el('span','tag',LEGACY[f.id]?'v1':'vaisseau'));
+    b.setAttribute('aria-current',String(f.id===actif));
+    b.addEventListener('click',function(){
+      if(f.id===actif)return;actif=f.id;sauver();rendre();window.scrollTo(0,0)});
+    rail.appendChild(b);
+  });
+  var s=S(),t=s.tete;
+  plan.textContent='';
+  /* 1 · en-tete dossier — un coup d'oeil, meme replie */
+  var h=el('div','entete');
+  var n=el('div','n');n.appendChild(document.createTextNode(t.nom||'\u2014'));
+  if(t.alias)n.appendChild(el('span','alias','  \u00b7  '+t.alias));
+  h.appendChild(n);
+  var l2=el('div','l2');
+  l2.appendChild(el('span','palier',(t.palier||'\u2014').toUpperCase()));
+  if(LEGACY[actif])l2.appendChild(el('span','badge','archive \u00b7 v1'));
+  if(actif==='cruiser')l2.appendChild(el('span','badge','vaisseau'));
+  l2.appendChild(el('span','hist',(t.histo||t.statut||'')));
+  var cr=el('span','credo');cr.appendChild(el('i',null,'\u20a1'));
+  cr.appendChild(document.createTextNode(t.credits===null||t.credits===undefined?'\u2014':String(t.credits)));
+  l2.appendChild(cr);h.appendChild(l2);
+  var l3=el('div','l2');
+  l3.appendChild(el('span','hist secondaire',(t.nation||'')+(t.statut?'  \u00b7  '+t.statut:'')));
+  h.appendChild(l3);
+  plan.appendChild(h);
+  /* identite */
+  plan.appendChild(section('identite','identite du dossier',t.nation||t.statut||'',function(c){
+    var g=el('div','ch-gr');
+    champText(g,'NOM',t.nom,function(v){t.nom=v;sauver();rendre()});
+    champText(g,'ALIAS',t.alias,function(v){t.alias=v;sauver();rendre()});
+    champText(g,'NATION',t.nation,function(v){t.nation=v;sauver();rendre()});
+    champText(g,'STATUT',t.statut,function(v){t.statut=v;sauver();rendre()});
+    var f=el('div','ch-f');var l=el('label',null,'PALIER');
+    var sel=document.createElement('select');
+    PAL.forEach(function(p){var o=document.createElement('option');o.value=p;o.textContent=p||'\u2014';sel.appendChild(o)});
+    sel.value=t.palier||'';l.setAttribute('for',sel.id='i'+Math.random().toString(36).slice(2,8));
+    sel.addEventListener('change',function(){t.palier=sel.value;sauver();rendre()});
+    f.appendChild(l);f.appendChild(sel);g.appendChild(f);
+    champText(g,'HISTORIQUE',t.histo,function(v){t.histo=v;sauver();rendre()});
+    c.appendChild(g);
+    champNum(g,'CR\u00c9DITS \u20a1',t.credits,0,9999,function(v){t.credits=v;sauver();rendre()});
+  }));
+  /* 2 · corps actuel */
+  plan.appendChild(section('corps','corps actuel',
+    'Corps '+carTexte(s.car.corps)+'  \u00b7  Proc '+carTexte(s.car.proc)+'  \u00b7  \u00e9nergie '+sommeEnergie(s),
+    function(c){
+    var g=el('div','ch-gr');
+    champText(g,'CH\u00c2SSIS',s.chassis,function(v){s.chassis=v||'corps en place';sauver()});
+    champNum(g,'CORPS',s.car.corps,1,20,function(v){s.car.corps=v;
+      if(s.pool.corps===null||(v!==null&&s.pool.corps>v))s.pool.corps=v;sauver();rendre()});
+    champNum(g,'PROCESSEUR',s.car.proc,1,20,function(v){s.car.proc=v;
+      if(s.pool.proc===null||(v!==null&&s.pool.proc>v))s.pool.proc=v;sauver();rendre()});
+    champNum(g,'ESPRIT',s.car.esprit,1,20,function(v){s.car.esprit=v;sauver();rendre()});
+    champNum(g,'EMPATHIE',s.car.empathie,1,20,function(v){s.car.empathie=v;sauver();rendre()});
+    champNum(g,'R\u00c9FLEXES',s.aug.ref,0,6,function(v){s.aug.ref=v;sauver();rendre()});
+    champNum(g,'OVERCLOCK',s.aug.oc,0,6,function(v){s.aug.oc=v;sauver();rendre()});
+    var fE=el('div','ch-f');var lE=el('label',null,'BUDGET \u00c9NERGIE');
+    var iE=document.createElement('input');iE.type='number';iE.className='num';iE.min='0';iE.max='99';
+    if(s.budgetE!==null&&s.budgetE!==undefined)iE.value=String(s.budgetE);
+    iE.id='i'+Math.random().toString(36).slice(2,8);lE.setAttribute('for',iE.id);
+    iE.addEventListener('change',function(){s.budgetE=(iE.value===''||isNaN(+iE.value))?null:Math.max(0,Math.round(+iE.value));sauver();rendre()});
+    fE.appendChild(lE);fE.appendChild(iE);g.appendChild(fE);
+    c.appendChild(g);
+    var dep=sommeEnergie(s);
+    var kv=el('div','kv');
+    kv.appendChild(el('span','k','d\u00e9pens\u00e9es'));
+    kv.appendChild(el('span','e chiffre',(dep===0?'\u2014':String(dep))));
+    c.appendChild(kv);
+    var b=el('button','bande');b.type='button';
+    b.appendChild(el('span',null,'changer de corps'));
+    b.appendChild(el('span','droite','corps et processeur suivent le ch\u00e2ssis'));
+    b.addEventListener('click',popupCorps);
+    c.appendChild(b);
+  }));
+  /* 3 · etat de crise */
+  var secCrise=section('crise','\u00e9tat de crise',resumeCrise(s),
+    function(c){
+    var ps=el('div','pools');
+    [['corps','CORPS'],['proc','PROCESSEUR']].forEach(function(cc){
+      var card=el('div','pool');
+      card.appendChild(el('span','k',cc[1]));
+      var v=el('span','v chiffre');v.appendChild(document.createTextNode(carTexte(s.pool[cc[0]])));
+      if(s.car[cc[0]]!==null&&s.car[cc[0]]!==undefined)v.appendChild(el('span','x','/'+s.car[cc[0]]));
+      card.appendChild(v);
+      var adj=el('div','adj');
+      var m1=el('button','step','\u2212');m1.type='button';m1.setAttribute('aria-label','retirer un d\u00e9 '+cc[1]);
+      var p1=el('button','step','+');p1.type='button';p1.setAttribute('aria-label','rendre un d\u00e9 '+cc[1]);
+      function maj(){v.textContent=carTexte(s.pool[cc[0]]);
+        if(s.car[cc[0]]!==null&&s.car[cc[0]]!==undefined){var x=el('span','x','/'+s.car[cc[0]]);v.appendChild(x)}}
+      m1.addEventListener('click',function(){s.pool[cc[0]]=Math.max(0,(s.pool[cc[0]]===null?0:s.pool[cc[0]])-1);sauver();maj()});
+      p1.addEventListener('click',function(){var mx=s.car[cc[0]]===null?20:s.car[cc[0]];
+        s.pool[cc[0]]=Math.min(mx,(s.pool[cc[0]]===null?0:s.pool[cc[0]])+1);sauver();maj()});
+      adj.appendChild(m1);adj.appendChild(p1);card.appendChild(adj);
+      ps.appendChild(card);
+    });
+    c.appendChild(ps);
+    c.appendChild(silhouetteBles(ZONES6,
+      function(z){return s.bles[z]||0},
+      function(z,nv){
+        if(nv===null)s.bles={};
+        else if(nv===0)delete s.bles[z];
+        else s.bles[z]=nv;
+        sauver();
+        var rs=secCrise.querySelector('.sec-r');
+        if(rs)rs.textContent=resumeCrise(s);
+      }));
+  });
+  plan.appendChild(secCrise);
+  /* 4 · competences — triees, niveau non plafonne */
+  var tri=s.comp.slice().sort(function(a,b){
+    var av=(a.niv===null||a.niv===undefined)?-1:a.niv,bv=(b.niv===null||b.niv===undefined)?-1:b.niv;
+    return bv-av||String(a.nom).localeCompare(String(b.nom))});
+  var top=-1;tri.forEach(function(r){if(typeof r.niv==='number'&&r.niv>top)top=r.niv});
+  plan.appendChild(section('comp','comp\u00e9tences','sommet '+(top<0?'\u2014':top)+'  \u00b7  '+s.comp.length+' lignes',function(c){
+    tri.forEach(function(r){
+      var k=s.comp.indexOf(r);
+      var li=el('div','lig');
+      var lbl=el('span','k');lbl.style.flex='1';lbl.style.minWidth='0';
+      var i=document.createElement('input');i.type='text';i.className='txt';i.value=r.nom;i.setAttribute('value',r.nom);
+      i.setAttribute('aria-label','comp\u00e9tence '+(k+1));
+      i.addEventListener('change',function(){r.nom=i.value.trim()||r.nom;sauver()});
+      li.appendChild(i);
+      var st=stepper(function(){return r.niv},function(v){r.niv=v;sauver()},0,20);
+      li.appendChild(st.noeud);
+      c.appendChild(li);
+    });
+    var b=el('button','aj','+ comp\u00e9tence');b.type='button';
+    b.addEventListener('click',function(){s.comp.push({nom:'comp\u00e9tence',niv:0});sauver();rendre()});
+    c.appendChild(b);
+  }));
+  /* 5 · equipement */
+  plan.appendChild(section('equip','\u00e9quipement',(s.mods.length+s.armes.length+s.objets.length+s.reseauItems.length)+' lignes',function(c){
+    c.appendChild(el('p','micro secondaire','augmentations'));
+    s.mods.forEach(function(m,k){
+      var li=el('div','lig');
+      var i=document.createElement('input');i.type='text';i.className='txt';i.value=m.t;i.setAttribute('value',m.t);
+      i.setAttribute('aria-label','augmentation '+(k+1));
+      i.addEventListener('change',function(){m.t=i.value.trim();sauver()});
+      li.appendChild(i);
+      var e=document.createElement('input');e.type='number';e.min='-9';e.max='0';e.step='1';
+      e.style.width='64px';e.style.minHeight='44px';e.style.background='var(--surface)';
+      e.style.border='var(--trait) solid var(--ligne)';e.style.borderRadius='var(--rayon)';
+      e.style.color='var(--alerte)';e.style.font='700 13px var(--mono)';e.style.textAlign='center';
+      if(m.e!==null&&m.e!==undefined)e.value=String(m.e);
+      e.placeholder='\u2014';
+      e.setAttribute('aria-label','\u00e9nergie '+(k+1));
+      e.addEventListener('change',function(){m.e=(e.value===''||isNaN(+e.value))?null:Math.max(-9,Math.min(0,Math.round(+e.value)));sauver();rendre()});
+      li.appendChild(e);
+      var x=el('button','sup','\u00d7');x.type='button';x.setAttribute('aria-label','retirer augmentation '+(k+1));
+      x.addEventListener('click',function(){s.mods.splice(k,1);sauver();rendre()});
+      li.appendChild(x);
+      c.appendChild(li);
+    });
+    var add=el('button','aj','+ augmentation');add.type='button';
+    add.addEventListener('click',function(){s.mods.push({t:'nom de l’augment',e:null});sauver();rendre();});
+    c.appendChild(add);
+    liste(c,'armes',s.armes,'arme');
+    /* reseau */
+    c.appendChild(el('p','micro secondaire','r\u00e9seau'));
+    var r=el('div','lg');r.style.display='flex';r.style.alignItems='center';r.style.gap='var(--u)';r.style.minHeight='48px';
+    var it=el('button','interrupteur');it.type='button';
+    it.appendChild(el('span','led'));
+    it.appendChild(el('span',null,s.reseauOn?'connect\u00e9':'hors r\u00e9seau'));
+    it.setAttribute('data-on',String(s.reseauOn));it.setAttribute('aria-pressed',String(s.reseauOn));
+    it.addEventListener('click',function(){s.reseauOn=!s.reseauOn;
+      it.setAttribute('data-on',String(s.reseauOn));it.setAttribute('aria-pressed',String(s.reseauOn));
+      it.children[1].textContent=s.reseauOn?'connect\u00e9':'hors r\u00e9seau';sauver()});
+    r.appendChild(it);c.appendChild(r);
+    liste(c,'lignes r\u00e9seau',s.reseauItems,'indice');
+    liste(c,'objets et possessions',s.objets,'objet');
+  }));
+  /* 6 · notes */
+  plan.appendChild(section('notes','notes du dossier',(s.notes||'').slice(0,26)+'\u2026',function(c){
+    var ta=document.createElement('textarea');ta.className='notes';ta.value=s.notes||'';
+    ta.setAttribute('aria-label','notes du dossier');
+    ta.addEventListener('change',function(){s.notes=ta.value;sauver()});
+    c.appendChild(ta);
+  }));
+}
+/* ---- pop-up « changer de corps » : HUD transitoire a 55 %, la fiche
+       reste visible au-dessus ; rien d'autre ne se pose sur l'ecran ---- */
+var enPile=null;
+function ouvrirPop(pop){
+  popups.textContent='';enPile=null;
+  var h=Math.floor(window.innerHeight*0.55);
+  pop.style.maxHeight=h+'px';
+  var avant=document.activeElement&&document.activeElement.closest?document.activeElement.closest('.sec'):null;
+  popups.appendChild(pop);
+  function repos(){
+    var bande=document.querySelector('.bande');
+    var entete=document.querySelector('.entete');
+    if(entete){var r=entete.getBoundingClientRect();
+      var hd=document.querySelector('header.barre').getBoundingClientRect();
+      if(r.top<hd.bottom){window.scrollTo(window.scrollX,window.scrollY+r.top-Math.round(hd.bottom)-6)}}
+  }
+  repos();
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+    pop.setAttribute('data-pos','true');
+    var pr=pop.getBoundingClientRect();
+    var t=document.querySelector('.sec[data-ouvert=true] .sec-tope')||document.querySelector('.entete');
+    if(t){var r=t.getBoundingClientRect();
+      if(r.bottom>pr.top-8)window.scrollTo(window.scrollX,window.scrollY+r.bottom-pr.top+8)}})});
+  enPile=pop;
+}
+function fermerPop(){
+  if(!enPile)return;
+  var p=enPile;enPile=null;
+  p.setAttribute('data-pos','false');
+  setTimeout(function(){if(p.parentNode)p.parentNode.removeChild(p)},240);
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&enPile)fermerPop()});
+document.addEventListener('pointerdown',function(e){
+  if(enPile&&!enPile.contains(e.target)&&!popups.contains(e.target)){
+    e.preventDefault();e.stopPropagation();fermerPop()}
+},true);
+function popupCorps(){
+  var s=S();
+  var pop=el('div','pop');
+  var t=el('div','pop-tete');
+  t.appendChild(el('h2',null,'changer de corps \u00b7 '+(s.tete.nom||'\u2014')));
+  var x=el('button','x','\u2715');x.type='button';x.setAttribute('aria-label','fermer');
+  x.addEventListener('click',fermerPop);t.appendChild(x);
+  pop.appendChild(t);
+  var c=el('div','pop-corps');
+  function ligneChassis(nomValeur,cValeur,pValeur,enPlace,ecr){
+    var card=el('div','chassis');
+    if(enPlace)card.setAttribute('data-en-place','true');
+    var th=el('div','t');
+    var i=document.createElement('input');i.type='text';i.className='nom';i.value=nomValeur==null?'':nomValeur;
+    i.placeholder='nom du ch\u00e2ssis';i.setAttribute('aria-label','nom du ch\u00e2ssis');
+    i.addEventListener('change',function(){ecr.nom=i.value.trim()});
+    th.appendChild(i);
+    if(enPlace)th.appendChild(el('span','marq','EN PLACE'));
+    card.appendChild(th);
+    var d=el('div','d');
+    [['CORPS','c'],['PROCESSEUR','p']].forEach(function(cc){
+      var f=el('div','f');var l=el('label',null,cc[0]);
+      var n=document.createElement('input');n.type='number';n.min='1';n.max='20';n.inputMode='numeric';
+      if(cc[1]==='c'?cValeur!=null:pValeur!=null)n.value=String(cc[1]==='c'?cValeur:pValeur);
+      n.placeholder='\u2014';l.setAttribute('for',n.id='i'+Math.random().toString(36).slice(2,8));
+      n.addEventListener('change',function(){
+        ecr[cc[1]]=(n.value===''||isNaN(+n.value))?null:Math.max(1,Math.min(20,Math.round(+n.value)))});
+      f.appendChild(l);f.appendChild(n);d.appendChild(f)});
+    card.appendChild(d);
+    if(!enPlace){
+      var b=el('button','prendre','prendre ce corps');b.type='button';
+      b.addEventListener('click',function(){
+        s.vivier[ecr._k]={nom:ecr.nom,c:ecr.c,p:ecr.p};
+        var v=s.vivier[ecr._k];
+        if(v.c!==null&&v.c!==undefined)s.car.corps=v.c;
+        if(v.p!==null&&v.p!==undefined)s.car.proc=v.p;
+        s.pool.corps=s.car.corps;s.pool.proc=s.car.proc;
+        s.chassis=v.nom&&v.nom!==''?v.nom:s.chassis;
+        sauver();fermerPop();rendre();
+      });
+      card.appendChild(b);
+    }
+    return card;
+  }
+  c.appendChild(ligneChassis(s.chassis,s.car.corps,s.car.proc,true,{nom:s.chassis,c:s.car.corps,p:s.car.proc}));
+  c.appendChild(el('p','micro secondaire','vivier'));
+  s.vivier.forEach(function(v,k){
+    var ecr={nom:v.nom,c:v.c,p:v.p,_k:k};
+    c.appendChild(ligneChassis(v.nom,v.c,v.p,false,ecr));
+  });
+  var add=el('button','aj','+ corps');add.type='button';
+  add.addEventListener('click',function(){s.vivier.push({nom:'',c:null,p:null});sauver();fermerPop();popupCorps()});
+  c.appendChild(add);
+  pop.appendChild(c);
+  ouvrirPop(pop);
+}
+/* ---- demarrage ---- */
+window.__fiche={etat:function(){return{sheets:sheets,actif:actif}},sauver:sauver,rendre:rendre};
+rendre();
+}());
+</script>
+</body>
+</html>

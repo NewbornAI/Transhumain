@@ -1,0 +1,164 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:141.0) Gecko/20100101 Firefox/141.0" version="28.0.7">
+  <diagram name="Page-1" id="uFGfbnkiwPuzhQxu8Dyk">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="8rTfS2ikIlfR6d946OIm-14" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-6" target="8rTfS2ikIlfR6d946OIm-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-6" value="&lt;div&gt;Vaisseau de transport&lt;/div&gt;&lt;div&gt;&quot;Serenity&quot;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="355" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-13" target="8rTfS2ikIlfR6d946OIm-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-13" target="8rTfS2ikIlfR6d946OIm-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-13" value="&lt;div&gt;Attaqué à la douane en arrivant sur la colonie.&lt;/div&gt;Capitaine active l&#39;alarme, envoie escape pod sur planète avec son clone" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="345" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-15" target="8rTfS2ikIlfR6d946OIm-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-15" target="8rTfS2ikIlfR6d946OIm-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-15" value="&lt;div&gt;Capsule de secours crash sur la planète.&amp;nbsp;&lt;/div&gt;&lt;div&gt;Contient vêtements et matos de base.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Impacts de laser (souligné par l&#39;IA de bord).&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="525" y="320" width="255" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-17" target="8rTfS2ikIlfR6d946OIm-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-17" value="&lt;div align=&quot;left&quot;&gt;Vêtements&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;Combinaisons&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;Bouteilles d&#39;oxygène&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;Matériel de camping&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;Lampe torche&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;Maglame&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;Générateur (Carbon14 1kg, 1W)&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;1 mois de nourriture (lourd)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;Eau (lourd)&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;Medkit&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;Scanner&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;Pistolet&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;Balles gel (1 chargeur)&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;rounded=0;align=left;" vertex="1" parent="1">
+          <mxGeometry x="460" y="20" width="230" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-19" target="8rTfS2ikIlfR6d946OIm-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-19" value="&lt;div&gt;Vous vous réveillez dans un caisson d&#39;hibernation, encore gluant de biogel.&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Entre les secousses et la température anormalement élevée, quelque chose vous dit que la situation est anormale.&lt;/div&gt;&lt;div&gt;Ca, ou le gros warning rouge qui clignote en réalité augmentée.&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;L&#39;IA de bord vous informe d&#39;un atterrissage imminent et brutal.&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.roundRectCallout;dx=30;dy=15;size=5;boundedLbl=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="240" y="570" width="390" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-20" value="Pourquoi pas détruit ?????" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="130" y="130" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-26" value="&lt;div&gt;Vos muscles sont raides, et le simple effort de vous lever vous laisse à court de souffle.&lt;/div&gt;&lt;div&gt;Classique mal d&#39;hibernation : vous y êtes habitué, ça passera avec une bonne nuit de repos.&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.roundRectCallout;dx=30;dy=15;size=5;boundedLbl=1;" vertex="1" parent="1">
+          <mxGeometry x="937.5" y="600" width="275" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-30" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-27" target="8rTfS2ikIlfR6d946OIm-29">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1010" y="255" />
+              <mxPoint x="870" y="255" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-27" target="8rTfS2ikIlfR6d946OIm-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-27" target="8rTfS2ikIlfR6d946OIm-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-38" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-27" target="8rTfS2ikIlfR6d946OIm-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.9;entryY=0.992;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-27" target="GDcSQ-y1RcjGkifnNb_F-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1010" y="-30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-27" target="GDcSQ-y1RcjGkifnNb_F-1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1120" y="-30" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1075" y="140" />
+              <mxPoint x="1140" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-27" value="&lt;div&gt;Jungle épaisse et humide. Plantes bleues. 0.2g (~Luna).&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="950" y="320" width="250" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-29" value="&lt;div&gt;Atmosphère respirable mais taux d&#39;oxygène trop élevé.&lt;/div&gt;&lt;div&gt;Filtre respiratoire conseillé.&lt;br&gt;&lt;/div&gt;&lt;div&gt;- Risque d&#39;incendie&lt;br&gt;&lt;/div&gt;&lt;div&gt;- Possibles migraines et confusion&lt;/div&gt;&lt;div&gt;- Problèmes respiratoires (long terme)&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="750" y="80" width="240" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-32" value="Datastick crypté dans une poche" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.roundRectCallout;dx=30;dy=15;size=5;boundedLbl=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="480" y="-160" width="190" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-34" value="&lt;div&gt;Si touche un arbre, 1 chance sur 2 collé&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Grimper&lt;/div&gt;&lt;div&gt;&amp;lt;= 3 : tombe, blessé (6-succes) &lt;br&gt;&lt;/div&gt;&lt;div&gt;5-6 : grimpe mais piqué par insecte caméléon (toxine 1 dégat / heure)&lt;/div&gt;&lt;div&gt;7+ no problem&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Peut voir ascenseur orbital au loin (plusieurs jours de marche)&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="40" width="240" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-37">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1380" y="610" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1485" y="510" />
+              <mxPoint x="1381" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-37" target="GDcSQ-y1RcjGkifnNb_F-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1660" y="385" />
+              <mxPoint x="1660" y="435" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-37" target="GDcSQ-y1RcjGkifnNb_F-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="8rTfS2ikIlfR6d946OIm-37" value="Petite ville au pied de l&#39;ascenseur orbital" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1350" y="355" width="270" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-1" value="Animaux étranges :&lt;div&gt;long cou&lt;/div&gt;&lt;div&gt;gros oiseaux&lt;/div&gt;&lt;div&gt;araignées crabes&lt;/div&gt;&lt;div&gt;singes volants&lt;/div&gt;&lt;div&gt;insectes démesurés&lt;/div&gt;&lt;div&gt;anguilles de 3m&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="1070" y="-175" width="250" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-3" value="&lt;div&gt;Arbres très hauts (100+m) mais fins,&lt;/div&gt;&lt;div&gt;Végétation que en haut mais épaisse (sombre)&lt;br&gt;&lt;/div&gt;&lt;div&gt;Pas d&#39;herbe mais beaucoup de mousse, fluorescente la nuit&lt;/div&gt;&lt;div&gt;Champignons qui explosent au toucher (toxique)&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="780" y="-170" width="250" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-8" value="&lt;div&gt;Mall&lt;/div&gt;&lt;div&gt;(GLaDOS)&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1275" y="610" width="250" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-9" value="&lt;div&gt;Bar&lt;/div&gt;&lt;div&gt;(DDE)&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="70" width="250" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-10" value="Piste d&#39;atterissage" style="whiteSpace=wrap;html=1;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1600" y="595" width="250" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-11" value="&lt;div&gt;Clinique&lt;/div&gt;&lt;div&gt;(Chrome)&lt;br&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1760" y="130" width="250" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="GDcSQ-y1RcjGkifnNb_F-12">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2200" y="435" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-12" value="Space elevator" style="whiteSpace=wrap;html=1;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="1770" y="370" width="250" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.292;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-37" target="GDcSQ-y1RcjGkifnNb_F-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="GDcSQ-y1RcjGkifnNb_F-18" target="GDcSQ-y1RcjGkifnNb_F-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-18" value="Station orbitale" style="whiteSpace=wrap;html=1;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="2200" y="370" width="250" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-19" value="Vaisseau" style="whiteSpace=wrap;html=1;rounded=0;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="2610" y="370" width="250" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="GDcSQ-y1RcjGkifnNb_F-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.076;entryY=0.008;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="8rTfS2ikIlfR6d946OIm-37" target="GDcSQ-y1RcjGkifnNb_F-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1485" y="510" />
+              <mxPoint x="1619" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

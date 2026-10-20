@@ -1,0 +1,1214 @@
+{
+  "meta": {
+    "role": "per-item render briefs for the marketplace images; the shared recipe lives in the render script",
+    "paletteSource": "Medias/Transhumains - Corporate identity.md (house palettes resolved at render time)",
+    "size": "1024x576"
+  },
+  "items": {
+    "Ares Legion": {
+      "house": "Legion",
+      "subject": "a military load-out laid out in an open black case: faceted armour plate, an assault rifle, a monomolecular knife and a compact power cell, all in the same dark kit",
+      "view": "flat lay of one kit, seen from a high three-quarter angle, centred"
+    },
+    "Alpha Scholarship": {
+      "house": "Hardvard",
+      "subject": "a student kit laid out on a pale table: a slim tool kit, a small fabricator, a folded case and a neat stack of thin learning cartridges",
+      "view": "flat lay of one kit, seen from a high three-quarter angle, centred"
+    },
+    "Xenos Explorer": {
+      "house": "Guilde",
+      "subject": "an explorer kit laid out on a worn deck: a folded industrial-white pressure suit, a drum-shaped scanner, a medical case and a long knife",
+      "view": "flat lay of one kit, seen from a high three-quarter angle, centred"
+    },
+    "Union Spider": {
+      "house": "NetWatch",
+      "subject": "a cyber kit laid out in a porcelain tray: a low black deck console, two sealed modules and a neatly coiled cable",
+      "view": "flat lay of one kit, seen from a high three-quarter angle, centred"
+    },
+    "Interface neurale": {
+      "house": "Neumann",
+      "subject": "a neural interface implant: a flat brushed aluminium plate with gold contact pads and one short ribbon cable"
+    },
+    "Datajack": {
+      "house": "Neumann",
+      "subject": "a datajack: a neat coil of black cable ending in a chrome plug with a threaded collar"
+    },
+    "Hermétique": {
+      "house": "Neumann",
+      "subject": "a sealed port implant: a ring-shaped collar with a gasketed seat and a magnetically held cap"
+    },
+    "Autopilote (mod)": {
+      "house": "Neumann",
+      "subject": "a nerve shunt implant: a slim grey capsule with two electrode leads and a fine mesh sleeve"
+    },
+    "Smartblood": {
+      "house": "Neumann",
+      "subject": "a smartblood implant: a small glass reservoir of dark fluid with a platinum collar and a needle housing"
+    },
+    "Nopain": {
+      "house": "Neumann",
+      "subject": "a pain-blocker implant: a flat ceramic chip in a sterile blister with two hair-thin contacts"
+    },
+    "Lockpick": {
+      "house": "Macrotek",
+      "subject": "a force-connect implant: a small hub from which four short articulated cables reach out, each ending in a plug tip"
+    },
+    "Injecteur": {
+      "house": "Neumann",
+      "subject": "an injector implant: a chrome cylinder with a glass dose window and a seated ampoule"
+    },
+    "High-g": {
+      "house": "Hazat",
+      "subject": "a g-tolerance implant: a ribbed titanium brace segment with a pressure valve and woven straps"
+    },
+    "Adaptation": {
+      "house": "Guilde",
+      "subject": "an environment adaptation module: a compact sealed regulator with a finned exchanger and two hose ports"
+    },
+    "Régénération": {
+      "house": "Bakta",
+      "subject": "a regeneration implant: a pale curved plate with fine capillary channels and a soft glow along its seam"
+    },
+    "Yeux de félin": {
+      "house": "Neumann",
+      "subject": "a pair of low-light eye implants: two small lenses with amber irises and thin gold rims, seated in a padded dish"
+    },
+    "Glande": {
+      "house": "Skavs",
+      "subject": "a chemical gland implant: a small ribbed sac with three glass dose windows and an auto-injection port"
+    },
+    "Gecko": {
+      "house": "Neumann",
+      "subject": "a grip implant: a palm-sized pad of fine grey setae set in a machined frame"
+    },
+    "Decatopus": {
+      "house": "Neumann",
+      "subject": "a dectopus hand rig: a palm plate from which ten slim modular manipulators deploy in a fan"
+    },
+    "Tardigrade": {
+      "house": "Neumann",
+      "subject": "a radiotolerance implant: a dense dark capsule in a lead-lined cradle with a fine mesh surface"
+    },
+    "Veille": {
+      "house": "Neumann",
+      "subject": "a wakefulness implant: a small two-chamber module with a slow indicator pulse on its face"
+    },
+    "Filtre auditif": {
+      "house": "Son-Y",
+      "subject": "an auditory filter implant: two small earpiece modules with perforated grilles and a slim tuning collar"
+    },
+    "Vampire « SAD »": {
+      "house": "Ares",
+      "subject": "a vampire bio-mod: a dark ribbed unit with a contact siphoning pad, a glowing energy gauge and a coiled transfer line"
+    },
+    "Nanotat": {
+      "house": "Neumann",
+      "subject": "a programmable tattoo applicator working on a forearm in a cradle: fine luminous linework in nerve blue and gold running just under the skin",
+      "view": "close-up of one arm only, centred, the rest of the frame empty",
+      "exclusions": [
+        "no people",
+        "no hands",
+        "no bodies",
+        "no extra limbs"
+      ]
+    },
+    "Coupe augmentée": {
+      "house": "Neumann",
+      "subject": "a hair implant styler: a slim dispenser with a bundle of fine fibre-optic strands spilling out in shifting colours"
+    },
+    "Chirurgie esthétique": {
+      "house": "Bakta",
+      "subject": "an aesthetic surgery suite: a reclining cradle under a soft ring light, sterile trays beside it and a hovering scanning arm",
+      "view": "one room, wide three-quarter view, no occupant"
+    },
+    "Nanoskin": {
+      "house": "Neumann",
+      "subject": "a nanoskin applicator: a slim wand trailing a shimmering film of shifting colour over a bare form"
+    },
+    "Thérapie génique": {
+      "house": "Bakta",
+      "subject": "a gene therapy set: three sealed vials of graduated tint in a chilled tray beside a small cooler"
+    },
+    "Splicing": {
+      "house": "Skavs",
+      "subject": "a splicing sample set: sealed gene vials beside a patch of fine grey fur and a pair of pointed ear forms on a steel tray"
+    },
+    "Visage programmable": {
+      "house": "Neumann",
+      "subject": "a programmable face unit: a matte blank facial shell in a cradle, faintly iridescent at the edges, with a fine connector at the jaw"
+    },
+    "Crash course": {
+      "house": "Hardvard",
+      "subject": "a learning cartridge: a short matte ivory cartridge with a brass contact band, seated in a simple holder"
+    },
+    "Autopilote (skillsoft)": {
+      "house": "Hardvard",
+      "subject": "a learning cartridge: a longer cartridge with a fine copper spiral visible through a glass band, in a machined cradle"
+    },
+    "Tuteur": {
+      "house": "Hardvard",
+      "subject": "a learning set: three cartridges of increasing length standing in a brass rack"
+    },
+    "Mentor": {
+      "house": "Hardvard",
+      "subject": "a master learning cartridge: a heavy black cartridge with oxblood leather trim and gold contacts, in a velvet recess"
+    },
+    "Formation": {
+      "house": "Hardvard",
+      "subject": "an immersion learning rig: a slim visor over a padded induction headrest on an ivory desk"
+    },
+    "Wiki": {
+      "house": "Hardvard",
+      "subject": "a reference wafer set: a thin polished disc standing upright in a brass cradle with three more wafers stacked beside it, their edges catching the light",
+      "view": "one small set of objects on a bench, three-quarter view, centred"
+    },
+    "Prêt à porter": {
+      "house": "Alpha",
+      "subject": "a plain garment: a neutral grey jacket over a shirt on a pale hanger"
+    },
+    "Magline": {
+      "house": "Alpha",
+      "subject": "a pair of magnetic zero-g boots with one glove: grey woven uppers with sole plates visible, on a pale bench"
+    },
+    "Mode": {
+      "house": "Alpha",
+      "subject": "a leather jacket with a holo-cape: a dark coat on a dress form with a faint light veil drifting around it"
+    },
+    "Renforcés": {
+      "house": "Alpha",
+      "subject": "a reinforced jacket: fine carbon weave visible under olive fabric, stiff collar, on a hanger"
+    },
+    "Haute couture": {
+      "house": "Alpha",
+      "subject": "a nanocombi on a display form: a floor-length pale gold garment with a slow shifting sheen"
+    },
+    "Combi": {
+      "house": "Alpha",
+      "subject": "a standard pressure overall: a plain sealed coverall with a chest ring, folded on a bench"
+    },
+    "Alpha Skinsuit": {
+      "house": "Alpha",
+      "subject": "a thin sealed skinsuit: a white seamless suit folded into a shallow case"
+    },
+    "Combi Xenos": {
+      "house": "Guilde",
+      "subject": "an exploration pressure suit laid out flat on a deck plate, folded once with its sleeves tucked in: industrial-white sealed shell, brass buckles, patched pockets and a coiled tether laid beside it, the helmet ring open and empty",
+      "view": "one garment laid out flat on a deck, seen from a high three-quarter angle, centred",
+      "exclusions": [
+        "no person",
+        "no wearer",
+        "no human figure",
+        "no silhouette of a person",
+        "no mannequin head",
+        "no face",
+        "no hands",
+        "no standing figure"
+      ]
+    },
+    "Combi Predator": {
+      "house": "Legion",
+      "subject": "a stealth pressure suit folded on a workshop bench: dark patterned shell with the hood flattened across its shoulders, sleeves folded back and the faceplate laid beside it, nothing inside",
+      "view": "one garment folded on a bench, seen from a high three-quarter angle, centred",
+      "exclusions": [
+        "no person",
+        "no wearer",
+        "no human figure",
+        "no silhouette of a person",
+        "no mannequin head",
+        "no face",
+        "no hands",
+        "no standing figure"
+      ]
+    },
+    "Ares Turtle": {
+      "house": "Ares",
+      "subject": "a heavy descent shell: a squat barrel-shaped armoured pod with a dark visor band, resting on a cradle"
+    },
+    "Cercueil (mensuel)": {
+      "house": "Union",
+      "subject": "a sleep capsule: a minimal coffin-sized recess in a station wall with a curtain and a small vent",
+      "view": "one interior, seen straight on from the corridor, no occupant"
+    },
+    "Hôtel": {
+      "house": "Union",
+      "subject": "a compact hotel room: a made bed, a narrow window and a small fabricator on the desk",
+      "view": "one interior, wide three-quarter view, no occupant"
+    },
+    "Vacances": {
+      "house": "Union",
+      "subject": "a resort deck under a dome: loungers, a still pool and a festival stage in the distance",
+      "view": "one wide establishing view, no people"
+    },
+    "Résidence de luxe": {
+      "house": "Union",
+      "subject": "a luxury residence lounge: low seating, a lit bar and a wide window onto a city at night",
+      "view": "one interior, wide three-quarter view, no occupant"
+    },
+    "Suite présidentielle": {
+      "house": "Union",
+      "subject": "a presidential suite: a large salon with cascading light, a table set for dinner and a wall of glass",
+      "view": "one interior, wide establishing view, no occupant"
+    },
+    "Abonnement": {
+      "house": "YouPub",
+      "subject": "a domestic media wall: a large soft-glowing panel surface showing abstract colour fields in a warm room",
+      "view": "one device in a room, three-quarter view"
+    },
+    "Appartement (colonie)": {
+      "house": "Union",
+      "subject": "a residential module block on a colony street: stacked printed-concrete housing with lit windows, balconies carrying planters and drying laundry, and a covered walkway at street level",
+      "view": "one building seen from the street, three-quarter view",
+      "exclusions": [
+        "no office building",
+        "no glass tower",
+        "no vehicle",
+        "no signage"
+      ]
+    },
+    "Appartement (astéroïde)": {
+      "house": "Union",
+      "subject": "housing cut into an asteroid: cylindrical rooms behind a broad viewing wall, a rock face and work lamps behind them",
+      "view": "one interior seen wide, no people"
+    },
+    "Maison": {
+      "house": "Union",
+      "subject": "a low house on a terraced hillside: a stone base, wooden screens and a planted garden",
+      "view": "one house seen from the garden, three-quarter view"
+    },
+    "Villa orbitale": {
+      "house": "Union",
+      "subject": "an orbital villa seen from inside: a curved wall of tall glass with a garden bed of low plants along it, a lounge seat and a low table, and stars beyond the glass",
+      "view": "one interior seen wide, no occupant",
+      "exclusions": [
+        "no person",
+        "no figures",
+        "no spacecraft",
+        "no engine",
+        "no barrels"
+      ]
+    },
+    "Appartement (Mars)": {
+      "house": "Union",
+      "subject": "a Mars dome apartment: a curved window wall looking out on an ochre plain, warm light inside",
+      "view": "one interior seen wide, no people"
+    },
+    "Villa (Venus)": {
+      "house": "Union",
+      "subject": "a floating Venus villa: a low platform house with wide glass shutters resting on buoyant pontoons above a golden cloud sea",
+      "view": "one structure seen from the air, three-quarter view",
+      "exclusions": [
+        "no vehicle",
+        "no bus",
+        "no wheels",
+        "no legs",
+        "no tracks"
+      ]
+    },
+    "Terra VIP": {
+      "house": "Union",
+      "subject": "a Terran arcology for the very rich: a terraced garden tower with pools and glass, seen from a garden walkway",
+      "view": "one structure seen from a walkway, wide"
+    },
+    "Scanner": {
+      "house": "Guilde",
+      "subject": "a field scanner: a small handheld unit with a square glass window and a folding antenna"
+    },
+    "Bricokit": {
+      "house": "Skavs",
+      "subject": "a tool kit case open on its lid: hand tools in foam cut-outs, some slots empty, a printed part set aside"
+    },
+    "Recharge bricokit": {
+      "house": "Skavs",
+      "subject": "a consumable magazine: a flat sealed pack of grey printing compound with a simple clip"
+    },
+    "Scalpel laser": {
+      "house": "TherMoss",
+      "subject": "a precision cutting tool: a pen-sized rod in a charging cradle with a fine emitter tip"
+    },
+    "Outils spécialisés": {
+      "house": "Macrotek",
+      "subject": "a specialist tool roll unrolled on a bench: a set of machined instruments in a row"
+    },
+    "Gel de chantier": {
+      "house": "Skavs",
+      "subject": "a construction gel canister: a dinged spray can with a capped nozzle and frost at the valve"
+    },
+    "Imprimante industrielle": {
+      "house": "Macrotek",
+      "subject": "an industrial fabricator: a large white cabinet with a wide build chamber and a gantry rail across its mouth"
+    },
+    "Nano-assembleur": {
+      "house": "Son-Y",
+      "subject": "a nano-assembler: a sealed matte black monolith with a single hairline seam and a fine manipulation port at its base"
+    },
+    "Senseur": {
+      "house": "Guilde",
+      "subject": "a sensor drum on a folding tripod: a machined cylinder with a glass window and a coiled cable"
+    },
+    "Skavs « Retapé » — Senseur i1": {
+      "house": "Skavs",
+      "subject": "a patched sensor unit: a small mismatched drum with taped seams and a salvaged lens"
+    },
+    "Guilde « Guette-roc » — Senseur i2": {
+      "house": "Guilde",
+      "subject": "a banded sensor unit: a compact drum with brass straps and a short whip antenna"
+    },
+    "TherMoss « Vision » — Senseur i3": {
+      "house": "TherMoss",
+      "subject": "a thermal sensor: a ceramic-white drum with copper heat fins and a dark germanium window"
+    },
+    "SETI « Grande Ourse » — Senseur i4": {
+      "house": "SETI",
+      "subject": "a multispectral sensor head: a faceted drum with three different apertures and a coolant line"
+    },
+    "Macrotek « Veilleur » — Senseur i5": {
+      "house": "Macrotek",
+      "subject": "an armoured sensor pod: a thick-plated drum with a shuttered window and a heavy mount"
+    },
+    "Zarya « Orbital » — Senseur i6": {
+      "house": "Zarya",
+      "subject": "a long-range sensor array: a slender drum on a gimbal with a deep hooded aperture"
+    },
+    "Thermal smoke": {
+      "house": "Skavs",
+      "subject": "a heat-absorbing smoke grenade: a ribbed cylinder with a pull ring and a vented cap"
+    },
+    "Scanner biométrique": {
+      "house": "Bakta",
+      "subject": "a biometric scanner: a small handheld plate reader with a palm rest and a soft amber glow"
+    },
+    "Capsule de biogel": {
+      "house": "Bakta",
+      "subject": "a biogel capsule: a sealed glass cylinder of pale green gel seated in a machined cradle"
+    },
+    "Patch anti-douleur": {
+      "house": "Bakta",
+      "subject": "a pain patch: a small translucent adhesive pad in a plain sterile foil sleeve, one pad laid on top"
+    },
+    "Biomoniteur": {
+      "house": "Bakta",
+      "subject": "a vital-signs monitor: a small worn band with a soft readout glow and a charging clip"
+    },
+    "Cuve Bakta": {
+      "house": "Bakta",
+      "subject": "a medical tank: a tall glass-walled cylinder on a machined base with hoses, its lid raised and its interior empty and clean"
+    },
+    "Croix Rouge": {
+      "house": "Bakta",
+      "subject": "a trauma spray: a compact canister with a wide nozzle and a blob of gel forming at the tip"
+    },
+    "Jesus": {
+      "house": "Bakta",
+      "subject": "an emergency auto-injector: a sealed cylinder with a bright cap and a clear dose window"
+    },
+    "Scanner Xenos": {
+      "house": "Guilde",
+      "subject": "a field scanner in a heavy rubber cage: a ruggedised drum with a folding handle"
+    },
+    "Labo portable": {
+      "house": "Bakta",
+      "subject": "a portable laboratory: a backpack case open to show racks of vials, a small centrifuge and a folding bench"
+    },
+    "Drone Bakta": {
+      "house": "Bakta",
+      "subject": "a medical drone: a white soft-shelled flying unit with a docked kit underneath and one small folded arm"
+    },
+    "Design virtuel": {
+      "house": "NetWatch",
+      "subject": "an avatar designer: a slim deck console with two abstract humanoid light figures forming above it, one masculine and one feminine",
+      "exclusions": [
+        "no realistic people",
+        "no faces",
+        "no hands"
+      ]
+    },
+    "Virus éveillé": {
+      "house": "Skavs",
+      "subject": "a program module: a small matte black cartridge with a copper contact edge and a fine etched spiral on its face"
+    },
+    "Skavs « Pique-carcasse » — Virus éveillé i1": {
+      "house": "Skavs",
+      "subject": "a cheap program module: a scuffed black cartridge with exposed contacts and a taped seam"
+    },
+    "Voodoos « Malédiction » — Virus éveillé i2": {
+      "house": "Voodoos",
+      "subject": "a hexed program module: a dark cartridge wrapped in a braided cord charm with a bone bead"
+    },
+    "Utopia « Désarroi » — Virus éveillé i3": {
+      "house": "Ares",
+      "subject": "a protest program module: a scratched cartridge in a plain sleeve marked with a hand-painted smear"
+    },
+    "Ten-Cents « Viral » — Virus éveillé i4": {
+      "house": "Ten-Cents",
+      "subject": "a bright program module: a glossy coral cartridge with candy-pink trim and a rounded shell"
+    },
+    "NetWatch « Exorcisme » — Virus éveillé i5": {
+      "house": "NetWatch",
+      "subject": "a licensed program module: a sealed porcelain-white cartridge with a lacquer-black band"
+    },
+    "70R « Réveil » — Virus éveillé i6": {
+      "house": "Voodoos",
+      "subject": "an unverified program module: a plain grey cartridge with a hand-scratched mark and no finish at all"
+    },
+    "ICE": {
+      "house": "NetWatch",
+      "subject": "a matrix defence appliance: a sealed black slab with a single hairline seam and one small status light"
+    },
+    "Son-Y « HomeGuard » — ICE i1": {
+      "house": "Son-Y",
+      "subject": "a domestic defence appliance: a small matte black box with a copper heat channel and one hairline light"
+    },
+    "Skavs « Grille-rouille » — ICE i2": {
+      "house": "Skavs",
+      "subject": "a salvaged defence appliance: a patched grey box with mismatched screws and a taped vent"
+    },
+    "X-Cell « Vaultlight » — ICE i3": {
+      "house": "X-Cell",
+      "subject": "a vault appliance: a heavy steel box with a recessed door and a ring handle"
+    },
+    "Neumann « Zen » — ICE i4": {
+      "house": "Neumann",
+      "subject": "a calm defence appliance: a pale porcelain slab with a soft nerve-blue seam"
+    },
+    "NetWatch « Bastion » — ICE i5": {
+      "house": "NetWatch",
+      "subject": "an enterprise defence appliance: a tall porcelain tower with a lacquer-black face and a vermilion hairline"
+    },
+    "Hazat « Chevalier assermenté » — ICE i6": {
+      "house": "Hazat",
+      "subject": "a naval defence appliance: a white enamelled slab with brass banding and a cobalt seam"
+    },
+    "ICE noire": {
+      "house": "NetWatch",
+      "subject": "a black-ICE module: a sealed matte black slab with a barbed cable stub and no marking of any kind"
+    },
+    "Hub": {
+      "house": "LEG GO",
+      "subject": "a network hub: a squat modular box with a fan bank and two rows of ports"
+    },
+    "Son-Y « Homehub » — Hub i1": {
+      "house": "Son-Y",
+      "subject": "a home hub: a small matte black puck with a copper ring and one light"
+    },
+    "LEG GO « Hub modulaire » — Hub i2": {
+      "house": "LEG GO",
+      "subject": "a modular hub: two clip-together boxes stacked with exposed side rails"
+    },
+    "YouPub « Feed hub » — Hub i3": {
+      "house": "YouPub",
+      "subject": "a broadcast hub: a glossy red box with a ring light and rounded corners"
+    },
+    "Radiance « Relais » — Hub i4": {
+      "house": "Radiance",
+      "subject": "a relay hub: a grey tower with teal light channels and a cooling stack"
+    },
+    "X-Cell « Clearing hub » — Hub i5": {
+      "house": "X-Cell",
+      "subject": "a clearing hub: a heavy steel frame unit with a slotted face and a heavy hinge"
+    },
+    "Stategrid Combine « Nexus » — Hub i6": {
+      "house": "Stategrid Combine",
+      "subject": "a grid nexus: a concrete-grey cabinet with a red band and thick power lugs"
+    },
+    "Jammer": {
+      "house": "Macrotek",
+      "subject": "a jamming unit: a squat armoured box with a copper coil antenna on top"
+    },
+    "Cowboy « Crache-bande » — Jammer i1": {
+      "house": "Ares",
+      "subject": "a junk jammer: a small dented box with a hand-wound coil and a toggle antenna"
+    },
+    "Voodoos « Voile » — Jammer i2": {
+      "house": "Voodoos",
+      "subject": "a concealing jammer: a dark box wrapped in braided cord with a bone toggle"
+    },
+    "Skavs « Chausse-trappe » — Jammer i3": {
+      "house": "Skavs",
+      "subject": "a tripwire jammer: a spiked flat box with a wire spool and a salvaged emitter"
+    },
+    "Ten-Cents « Blanc publicitaire » — Jammer i4": {
+      "house": "Ten-Cents",
+      "subject": "a commercial jammer: a pastel coral box with a candy-pink grille"
+    },
+    "Legion « Muselière » — Jammer i5": {
+      "house": "Legion",
+      "subject": "a police jammer: a black box with a red band and a heavy clamp mount"
+    },
+    "NetWatch « Silence radio » — Jammer i6": {
+      "house": "NetWatch",
+      "subject": "a censorship jammer: a porcelain cabinet with a lacquer-black face and a vermilion hairline"
+    },
+    "Jamming smoke": {
+      "house": "Macrotek",
+      "subject": "a jamming smoke grenade: a ribbed cylinder with a pull ring and a vented cap"
+    },
+    "Peinture anti-wifi": {
+      "house": "Son-Y",
+      "subject": "a signal-blocking spray: a plain aerosol can with a matte black body and a copper cap"
+    },
+    "Mail interstellaire": {
+      "house": "Zarya",
+      "subject": "an interstellar mail terminal: a slender dish on a gimbal with a bundle of fibre running to a sealed box"
+    },
+    "Drone / Droide": {
+      "house": "Son-Y",
+      "subject": "a bare service drone chassis: a small unit with a blank sensor cluster and open option bays"
+    },
+    "Clone standardisé": {
+      "house": "Bakta",
+      "subject": "two clones in plain coveralls standing side by side, one man and one woman, identical in build and feature",
+      "exclusions": [
+        "no hands",
+        "no collage",
+        "no extra figures"
+      ],
+      "view": "two figures, full length, side by side, centred"
+    },
+    "Clone personnalisé": {
+      "house": "Bakta",
+      "subject": "two clones in tailored clothes, one man and one woman, deliberately different in feature, height and dress",
+      "exclusions": [
+        "no hands",
+        "no collage",
+        "no extra figures"
+      ],
+      "view": "two figures, full length, side by side, centred"
+    },
+    "Réparateur": {
+      "house": "Skavs",
+      "subject": "a repair drone: a squat tracked unit with a tool cluster at the front and a crate of parts on its back"
+    },
+    "Majordome": {
+      "house": "Son-Y",
+      "subject": "a butler droid: a tall slim domestic unit in pale porcelain with lacquer-black panel lines"
+    },
+    "Cyberdog": {
+      "house": "Son-Y",
+      "subject": "a cyberdog: a quadruped domestic unit with scuffed plated flanks and worn pads"
+    },
+    "Légionnaire": {
+      "house": "Legion",
+      "subject": "two legionaries in black lamellar with one red pauldron each, one man and one woman, both bare-headed and standing at ease",
+      "exclusions": [
+        "no hands",
+        "no collage",
+        "no extra figures",
+        "no helmets"
+      ],
+      "view": "two figures, full length, side by side, centred"
+    },
+    "Bug": {
+      "house": "NetWatch",
+      "subject": "a surveillance drone: a tiny matte black disc no bigger than a thumb with a single lens"
+    },
+    "Bouncer": {
+      "house": "Macrotek",
+      "subject": "a bouncer bot: a heavy two-legged unit with a holstered sidearm and a gull-wing chest panel"
+    },
+    "Pack Exosuit": {
+      "house": "Macrotek",
+      "subject": "an exosuit: an open motorised frame with hydraulic limbs and an empty control harness"
+    },
+    "Pack Power armor": {
+      "house": "Macrotek",
+      "subject": "heavy power armour: a sealed plated suit standing on a support stand, shoulder plates thick, visor dark and empty"
+    },
+    "Pokebot (basique)": {
+      "house": "Ares",
+      "subject": "a small chunky quadruped bot in bright yellow plates over exposed machinery"
+    },
+    "Pokebot (évolution)": {
+      "house": "Ares",
+      "subject": "a larger quadruped bot with layered armour plates, a reinforced frame and a scarred flank"
+    },
+    "Sur mesure (esprit)": {
+      "house": "NetWatch",
+      "subject": "an artificial mind core: a finned black canister on a stand with a soft cyan heart"
+    },
+    "Chat virtuel": {
+      "house": "Ten-Cents",
+      "subject": "a companion projector: a small rounded pastel device projecting a simple abstract animal form in light",
+      "exclusions": [
+        "no realistic people",
+        "no faces"
+      ]
+    },
+    "Composé (100 doses)": {
+      "house": "Ten-Cents",
+      "subject": "a chemical compound set: a sturdy case of sealed dose ampoules, a small mixer and a stack of soft gel capsules"
+    },
+    "Dopant": {
+      "house": "Ten-Cents",
+      "subject": "a stimulant dose: a small amber vial with a graduated band in a foam recess"
+    },
+    "Stim": {
+      "house": "Ten-Cents",
+      "subject": "a combat stim dose: a sealed syringe ampoule of clear fluid with a red collar"
+    },
+    "Toxine": {
+      "house": "Skavs",
+      "subject": "a toxin dose: a sealed vial of cloudy green fluid with a plain cap"
+    },
+    "Sédatif": {
+      "house": "Bakta",
+      "subject": "a sedative dose: a milky white ampoule with a soft blue band"
+    },
+    "Effet rapide": {
+      "house": "Ten-Cents",
+      "subject": "a fast-acting additive: a slim vial with a small coiled mix element inside"
+    },
+    "Incubation lente": {
+      "house": "Ten-Cents",
+      "subject": "a slow-release additive: a squat vial of thick honey-coloured fluid"
+    },
+    "Persistant": {
+      "house": "Ten-Cents",
+      "subject": "a persistent additive: a two-chamber ampoule with a breakable seal between the halves"
+    },
+    "Antidouleur": {
+      "house": "Bakta",
+      "subject": "a painkiller dose: a small white capsule in a blister beside a dropper bottle"
+    },
+    "Antidote": {
+      "house": "Bakta",
+      "subject": "an antidote dose: a clear vial with a bright violet band and a sealed cap"
+    },
+    "Contagieux": {
+      "house": "Skavs",
+      "subject": "a contact dose: a sealed vial inside a padded double sleeve"
+    },
+    "Aéroporté": {
+      "house": "Ten-Cents",
+      "subject": "an aerosol dose: a small pressurised canister with a fine nozzle and a pressure gauge"
+    },
+    "Déclencheur": {
+      "house": "Skavs",
+      "subject": "a triggered dose: an ampoule seated in a small timer collar with a wire loop"
+    },
+    "Ingéré": {
+      "house": "Ten-Cents",
+      "subject": "an ingestible dose: two small clear capsules in a twist of paper"
+    },
+    "Évolutif": {
+      "house": "Skavs",
+      "subject": "an adaptive dose: a vial with a two-stage seal and a fluid that shifts colour along its length"
+    },
+    "Discret": {
+      "house": "Skavs",
+      "subject": "a covert dose: a plain ampoule in a dissolving sleeve"
+    },
+    "Replicant": {
+      "house": "Skavs",
+      "subject": "a self-replicating dose: a vial of grey suspension that has visibly crept up its own glass"
+    },
+    "Essaim": {
+      "house": "Skavs",
+      "subject": "a swarm canister: a squat jar of dense grey motes with one thin cloud rising from the open lid"
+    },
+    "Guerre électronique": {
+      "house": "NetWatch",
+      "subject": "a data dose: a small black cartridge ampoule with a copper contact band"
+    },
+    "Smarter « JC »": {
+      "house": "Ares",
+      "subject": "a smartblood additive: a small dark vial with a hand-scratched mark and a platinum collar"
+    },
+    "Non addictif": {
+      "house": "Bakta",
+      "subject": "a clean dose: a clear sealed ampoule with a pale blue band and a plain cap"
+    },
+    "Ultra addictif": {
+      "house": "Ten-Cents",
+      "subject": "a potent dose: a vial of deep amber fluid with a bright band and a worn stopper"
+    },
+    "Contrôle": {
+      "house": "NetWatch",
+      "subject": "a control dose: a vial of clear fluid with a small magnetised ring set into its cap"
+    },
+    "Malware": {
+      "house": "Voodoos",
+      "subject": "a malware carrier: a slim black ampoule with a copper contact and a braided cord tied around it"
+    },
+    "Nanobots": {
+      "house": "Son-Y",
+      "subject": "a nanobot ampoule: a small glass vial of grey suspension in a machined cradle"
+    },
+    "Deuterium (100 t)": {
+      "house": "Radiance",
+      "subject": "fuel drums: three ribbed steel drums with frost on their valves, chained together on a pallet",
+      "view": "one pallet of drums, three-quarter view, centred"
+    },
+    "Scraps (10 t)": {
+      "house": "Skavs",
+      "subject": "a heap of sorted scrap on a pallet: cut plate, pipe ends and coiled cable of clearly different origin",
+      "view": "one pallet of scrap, three-quarter view, centred"
+    },
+    "Nanomatériaux (1 t)": {
+      "house": "Macrotek",
+      "subject": "nanotube spools: two black spools of near-invisible filament on a steel rack"
+    },
+    "Composants (1 t)": {
+      "house": "Son-Y",
+      "subject": "a component crate: shallow trays of packaged chips, gold contact strips and small machined parts"
+    },
+    "Biogel (1 kg)": {
+      "house": "Bakta",
+      "subject": "a biogel container: a sealed steel drum of pale green gel with a sample jar beside it"
+    },
+    "Hydrogène métallique": {
+      "house": "TherMoss",
+      "subject": "a metallic hydrogen canister: a squat heavily lagged cylinder with brass valves and frost at the outlet"
+    },
+    "Antimatière (valise)": {
+      "house": "Stategrid Combine",
+      "subject": "an antimatter case: a small lead-grey armoured case clamped alone on its own pallet, a thin violet shimmer escaping one seam",
+      "view": "one case on a pallet, three-quarter view, centred"
+    },
+    "Corps · Athlète": {
+      "house": "Macrotek",
+      "subject": "an athletic prosthetic body frame on a fitting rig: a bare articulated skeleton of machined limbs with visible actuators and cables running to the rig, no armour and no head",
+      "view": "one bare frame on a rig, three-quarter view, centred",
+      "exclusions": [
+        "no armour",
+        "no soldier",
+        "no face",
+        "no head",
+        "no skin",
+        "no weapon"
+      ]
+    },
+    "Corps · Transhumain": {
+      "house": "Macrotek",
+      "subject": "an enhanced prosthetic body frame on a fitting rig: a denser bare frame with thicker machined limbs and an exposed spine coupling, no armour and no head",
+      "view": "one bare frame on a rig, three-quarter view, centred",
+      "exclusions": [
+        "no armour",
+        "no soldier",
+        "no face",
+        "no head",
+        "no skin",
+        "no weapon"
+      ]
+    },
+    "Corps · Métahumain": {
+      "house": "Macrotek",
+      "subject": "a heavy prosthetic body frame on a fitting rig: a massive bare frame with thick hydraulic limbs and a reinforced ribcage, no armour and no head",
+      "view": "one bare frame on a rig, three-quarter view, centred",
+      "exclusions": [
+        "no armour",
+        "no soldier",
+        "no face",
+        "no head",
+        "no skin",
+        "no weapon"
+      ]
+    },
+    "Énergie · Transhumain": {
+      "house": "Son-Y",
+      "subject": "an implant battery: a ribbed slab with brass terminals and a luminous charge seam"
+    },
+    "Processeur · Pro": {
+      "house": "Neumann",
+      "subject": "a processor core: a flat finned module with a copper heat plate in a machined cradle"
+    },
+    "Processeur · Gamer": {
+      "house": "Neumann",
+      "subject": "a high-output processor: a dense black module with a copper heat plate and a glowing seam"
+    },
+    "Processeur · Hacker": {
+      "house": "Neumann",
+      "subject": "a custom processor rig: a heavy block of stacked modules with a coiled cable and a bare contact array"
+    },
+    "Réflexes · Basic": {
+      "house": "Neumann",
+      "subject": "a reflex implant: a small paired module with one fine nerve lead"
+    },
+    "Réflexes · Pro": {
+      "house": "Neumann",
+      "subject": "a reflex implant pair: two slim modules joined by a ribbon lead"
+    },
+    "Réflexes · Sport": {
+      "house": "Neumann",
+      "subject": "a reflex implant set: three modules on a ribbon lead in a padded tray"
+    },
+    "Bras · Mantis": {
+      "house": "Macrotek",
+      "subject": "a mantis arm: a thin matte black prosthetic forearm with a long blade folded along its length and an open coupling ring"
+    },
+    "Bras · Heavy duty": {
+      "house": "Macrotek",
+      "subject": "a heavy duty arm: a massive painted lifting arm with exposed hydraulics and oversized knuckles"
+    },
+    "Jambes · Speedrun": {
+      "house": "Macrotek",
+      "subject": "a running leg: a long prosthetic leg with a piston calf and a carbon sprint foot"
+    },
+    "Jambes · Cheetah": {
+      "house": "Macrotek",
+      "subject": "an animal-form leg pair: two curved prosthetics with backward knees and sprung blades"
+    },
+    "Roues · Chenilles": {
+      "house": "Macrotek",
+      "subject": "a tracked leg replacement: a compact tread unit with a drive hub and a coupling ring"
+    },
+    "Ailes · Falcon": {
+      "house": "Macrotek",
+      "subject": "a wing implant: a folded wing of layered blade-like feathers on a shoulder mount"
+    },
+    "Ailes · Dragonfly": {
+      "house": "Macrotek",
+      "subject": "a wing implant: four slim membrane wings on a back harness with a thin frame"
+    },
+    "Hélices · Thopter": {
+      "house": "Macrotek",
+      "subject": "a rotor implant: a ducted fan pod on a harness mount"
+    },
+    "Hélices · Microdrone": {
+      "house": "Son-Y",
+      "subject": "a micro rotor implant: a tiny ducted rotor inside a machined capsule"
+    },
+    "Booster « DDE »": {
+      "house": "Ares",
+      "subject": "a back booster: a slim thruster pack with two vents and a chest harness"
+    },
+    "Jet pack F-16": {
+      "house": "Ares",
+      "subject": "a jet pack: a broad thruster pack with twin nozzles and a chest harness"
+    },
+    "Réflexes « Military »": {
+      "house": "Hazat",
+      "subject": "a military reflex implant: an armoured module with cobalt banding on a brass mount"
+    },
+    "Max-Tak « Response » — Réflexes « Military » i4": {
+      "house": "Max-Tak",
+      "subject": "an armoured reflex implant: a heavy black module with a red band and a stiff nerve lead"
+    },
+    "Templiers « Preux » — Réflexes « Military » i5": {
+      "house": "Templars",
+      "subject": "a knightly reflex implant: a dark steel module with a brass sigil plate and a red seam"
+    },
+    "Hazat « Palatin » — Réflexes « Military » i6": {
+      "house": "Hazat",
+      "subject": "a noble reflex implant: a white enamelled module with cobalt banding and a brass mount"
+    },
+    "SMG": {
+      "house": "Macrotek",
+      "subject": "a compact submachine gun: a stubby dark receiver, a short barrel shroud and a skeletal folding stock"
+    },
+    "Fusil d'assaut": {
+      "house": "Legion",
+      "subject": "an assault rifle: a black slab-sided receiver with a ceramic handguard, a red band on the stock and a box magazine"
+    },
+    "Revolver": {
+      "house": "Ares",
+      "subject": "a heavy revolver: a thick cylinder, a chrome barrel and a worn wooden grip"
+    },
+    "Gatling": {
+      "house": "Macrotek",
+      "subject": "a rotary gatling: six barrels in a shroud with a drum of linked rounds and a belt spilling off it"
+    },
+    "Autocannon": {
+      "house": "Macrotek",
+      "subject": "an autocannon: a short brutal barrel with a large muzzle brake and a heavy feed mechanism"
+    },
+    "Artillerie": {
+      "house": "Macrotek",
+      "subject": "a field gun: a long barrel on a braced carriage with one shell standing beside it"
+    },
+    "Needler (coilgun)": {
+      "house": "Skavs",
+      "subject": "a needler: a small coil weapon with exposed windings and a slotted magazine of fine needles"
+    },
+    "Precision rifle": {
+      "house": "Max-Tak",
+      "subject": "a precision coil rifle: a long slender barrel with exposed coil rings and a folded bipod"
+    },
+    "Sniper (coil)": {
+      "house": "Max-Tak",
+      "subject": "a coil sniper rifle: an extremely long barrel with coil rings, a stabilising brace and a heavy stock"
+    },
+    "Tank buster": {
+      "house": "Macrotek",
+      "subject": "an anti-vehicle coil rifle: a thick breech with coil rings and a shoulder brace, brass cases beside it"
+    },
+    "Defense Point « SAD »": {
+      "house": "Ares",
+      "subject": "a point defence turret: a compact multi-barrel mount on a swivel base with a drum magazine"
+    },
+    "Shotgun": {
+      "house": "Ares",
+      "subject": "a shotgun: a broad-bore barrel with a ribbed pump and a wooden stock"
+    },
+    "Lance-grenades": {
+      "house": "Macrotek",
+      "subject": "a grenade launcher: a fat single barrel with a break-open breech and a drum of rounds"
+    },
+    "Nail gun": {
+      "house": "Skavs",
+      "subject": "a construction nailer: a squat tool body with a coil magazine of steel pins"
+    },
+    "Taser": {
+      "house": "Legion",
+      "subject": "a taser: a compact launcher with two dart cartridges and a coiled wire"
+    },
+    "Improvisé": {
+      "house": "Skavs",
+      "subject": "improvised weapons: a length of steel pipe, a heavy spanner and a broken bottle laid on a workbench, spaced apart",
+      "view": "three unrelated objects spaced apart on a workbench, seen from a high three-quarter angle"
+    },
+    "Magknife": {
+      "house": "Ares",
+      "subject": "a magknife: a folding utility blade with a monomolecular edge and a magnetic grip"
+    },
+    "Monoblade": {
+      "house": "Ares",
+      "subject": "a monoblade: a slim dagger with a bright monomolecular edge and a guarded grip, held in an invisible field cradle"
+    },
+    "Monowire": {
+      "house": "Skavs",
+      "subject": "a monowire: a fine filament spooled inside a finger cap with one translucent line catching the light"
+    },
+    "Shock fist": {
+      "house": "Macrotek",
+      "subject": "a shock gauntlet: an armoured fist with a bladed knuckle and exposed EMP contacts"
+    },
+    "Thunder hammer": {
+      "house": "Macrotek",
+      "subject": "a thunder hammer: a heavy squared warhammer with a capacitor block in its head and an EMP coil"
+    },
+    "Monosting « JC »": {
+      "house": "Ares",
+      "subject": "a stinging blade: a slim hand blade with a fine barbed point and a hand-scratched grip"
+    },
+    "Power fist « SC »": {
+      "house": "Macrotek",
+      "subject": "a power fist: a massive armoured gauntlet with a hydraulic ram and a scored knuckle plate"
+    },
+    "Laser mini": {
+      "house": "Son-Y",
+      "subject": "a miniature laser: a palm-sized matte black unit with a tiny aperture and a copper ring"
+    },
+    "Pistolet laser": {
+      "house": "Son-Y",
+      "subject": "a laser pistol: a slim ceramic-white body with a cylindrical emitter head and a pulse cell"
+    },
+    "Fusil lourd": {
+      "house": "TherMoss",
+      "subject": "a heavy laser rifle: a bulky ceramic-white body with a tall stack of copper heat fins and a thick emitter shroud"
+    },
+    "Canon laser": {
+      "house": "TherMoss",
+      "subject": "a laser cannon: a long barrel with a wide emitter aperture and a bank of cooling conduits"
+    },
+    "Tourelle laser": {
+      "house": "Macrotek",
+      "subject": "a laser turret: an armoured drum on a gimbal ring with a recessed emitter"
+    },
+    "Tourelle +1": {
+      "house": "Macrotek",
+      "subject": "a larger laser turret: a broad plated drum on a heavy gimbal with two emitter apertures"
+    },
+    "Tourelle +2": {
+      "house": "Macrotek",
+      "subject": "a capital laser mount: a massive segmented drum on a braced ring with a deep aperture and thick pipe runs"
+    },
+    "Fusil à électrons": {
+      "house": "Radiance",
+      "subject": "an electron rifle: a long tube with a brass accelerator stack and a heavy capacitor on its back"
+    },
+    "EMP": {
+      "house": "Radiance",
+      "subject": "an EMP projector: a boxy grey unit with copper coils, a parabolic mouth and a carry handle"
+    },
+    "Bouclier riot": {
+      "house": "Legion",
+      "subject": "a riot shield: a scarred polycarbonate slab with woven carbon edges and a black grip, standing on a frame"
+    },
+    "Bouclier storm": {
+      "house": "Macrotek",
+      "subject": "a breaching shield: a thick plated slab with a firing slit and a reinforced boss, standing on a frame"
+    },
+    "Peau de carbone": {
+      "house": "Alpha",
+      "subject": "carbon clothing: a folded dark garment with a fine woven surface"
+    },
+    "Reinforcé": {
+      "house": "Alpha",
+      "subject": "reinforced clothing: an olive jacket with a stiff carbon undergrid showing at the collar"
+    },
+    "Skinsuit": {
+      "house": "Alpha",
+      "subject": "a skinsuit: a thin white seamless suit folded on a bench"
+    },
+    "Kevlar": {
+      "house": "Skavs",
+      "subject": "an old flak vest: a worn vest with frayed edges and a scuffed plate pocket"
+    },
+    "Combat suit": {
+      "house": "Legion",
+      "subject": "a combat suit laid out flat on a workshop bench: matte black shell with ceramic plates and red webbing, sleeves folded back, a pair of empty gloves beside it",
+      "view": "one garment laid out flat on a bench, seen from a high three-quarter angle, centred",
+      "exclusions": [
+        "no person",
+        "no wearer",
+        "no human figure",
+        "no silhouette of a person",
+        "no mannequin head",
+        "no face",
+        "no hands",
+        "no standing figure"
+      ]
+    },
+    "Nano-armor Hazat": {
+      "house": "Hazat",
+      "subject": "nano armour: a white enamelled chest plate with cobalt nano-weave over the shoulders and brass braid at the collar"
+    },
+    "Armure Ares": {
+      "house": "Ares",
+      "subject": "heavy field armour: a thick plated torso shell with layered shoulder sections on a stand"
+    },
+    "Exosuit": {
+      "house": "Macrotek",
+      "subject": "an exosuit frame: an open motorised skeleton with hydraulic actuators and titanium ribs"
+    },
+    "Power armor": {
+      "house": "Macrotek",
+      "subject": "a power armour kit laid out on a workshop bench: a thick black chest plate, a helmet shell, two shoulder plates and one gauntlet arranged side by side on a support frame",
+      "view": "one kit of armour pieces laid out on a bench, seen from a high three-quarter angle, centred",
+      "exclusions": [
+        "no person",
+        "no wearer",
+        "no human figure",
+        "no silhouette of a person",
+        "no mannequin head",
+        "no face",
+        "no hands",
+        "no standing figure"
+      ]
+    },
+    "Blindage de véhicule": {
+      "house": "Macrotek",
+      "subject": "vehicle armour plate: a stack of thick composite slabs with cut edges and mounting lugs"
+    },
+    "Synthskin": {
+      "house": "Neumann",
+      "subject": "a synthskin sheet: a pale flexible membrane sample held taut in a frame"
+    },
+    "Armure dermale": {
+      "house": "Neumann",
+      "subject": "a dermal armour implant: a thin grey plate set with fine anchor pins on a sterile tray"
+    },
+    "Plaquage dermique": {
+      "house": "Neumann",
+      "subject": "a dermal plating set: three thin curved plates in graduated sizes on a felt tray"
+    },
+    "Blindage interne": {
+      "house": "Macrotek",
+      "subject": "an internal armour implant: a curved thick plate with fixation lugs, laid on a tray"
+    },
+    "Squelette renforcé": {
+      "house": "Macrotek",
+      "subject": "a reinforced skeleton implant: a section of carbon-braced bone struts on a tray"
+    },
+    "Grenade gel": {
+      "house": "Legion",
+      "subject": "a gel grenade: a translucent sphere of green-blue gel with a simple pin and no fragmentation body"
+    },
+    "Grenade gaz": {
+      "house": "Ten-Cents",
+      "subject": "a gas grenade: a plain cylinder with a vented cap and a pin"
+    },
+    "Fumigène": {
+      "house": "Skavs",
+      "subject": "a smoke grenade: a ribbed cylinder with a pull ring and a scorched vent"
+    },
+    "TNT": {
+      "house": "Macrotek",
+      "subject": "a demolition charge: a dense rectangular block in waxed paper with a detonator cap set in one end and cord coiled beside it"
+    },
+    "Frag": {
+      "house": "Legion",
+      "subject": "a fragmentation grenade: a scored dark casing with a spoon and a pin"
+    },
+    "MH (charge)": {
+      "house": "TherMoss",
+      "subject": "a metal hydride charge: a squat steel flask with brass valves and frost on the shoulder"
+    },
+    "Beenade « JC »": {
+      "house": "Skavs",
+      "subject": "a bee canister: a small wire-mesh sphere on a pull ring with a dark swarm packed inside"
+    },
+    "Stinger (missile)": {
+      "house": "Legion",
+      "subject": "a shoulder missile: a dull olive tube with folding fins and a simple sight"
+    },
+    "Falaq": {
+      "house": "Ares",
+      "subject": "a frigate missile: a long cylindrical body with four fins and a banded seeker head"
+    },
+    "Fateh": {
+      "house": "Radiance",
+      "subject": "an excavation torpedo: a heavy blunt-nosed cylinder with a ring of drilling ports"
+    },
+    "Apoc": {
+      "house": "Macrotek",
+      "subject": "a heavy missile: a massive grey body with four large fins and a banded warhead section"
+    },
+    "Tête nucléaire": {
+      "house": "Stategrid Combine",
+      "subject": "a warhead casing: a plain banded cone resting in a cradle, unmarked"
+    },
+    "Charge MH façonnée": {
+      "house": "TherMoss",
+      "subject": "a shaped charge: a short cylinder with a copper cone visible at its mouth and an adhesive base"
+    },
+    "Micro-AM": {
+      "house": "Stategrid Combine",
+      "subject": "an antimatter micro-charge: a tiny armoured sphere in a shock frame with a thin violet shimmer"
+    },
+    "Pikashoot": {
+      "house": "Ares",
+      "subject": "a compact electric combat bot on four legs: yellow-painted modular plates over exposed machinery with a bank of small emitters across its shoulders"
+    },
+    "Grolem « SAD »": {
+      "house": "Ares",
+      "subject": "a rock-plated combat bot: a rounded boulder-like body of stacked plates on four stubby legs"
+    },
+    "Metalos « SC »": {
+      "house": "Macrotek",
+      "subject": "a wheeled combat bot: a heavy disc body with a circular saw on a swinging arm"
+    },
+    "Glocktopus": {
+      "house": "Ares",
+      "subject": "an eight-limbed combat bot: a central body with six extra limbs and a revolver mounted on each side"
+    },
+    "Laserhino": {
+      "house": "TherMoss",
+      "subject": "a heavy siege bot: a horned quadruped with a laser cannon along its spine and thick leg armour"
+    },
+    "Tortufleur": {
+      "house": "Ares",
+      "subject": "a domed walker bot: a shell-like body with a multicoloured laser aperture and small flowers sprouting from its vents"
+    },
+    "Pistolet": {
+      "house": "Macrotek",
+      "subject": "a service pistol: a compact slab-sided handgun in dark phosphate steel with a short barrel and a worn grip"
+    },
+    "Medkit": {
+      "house": "Bakta",
+      "subject": "a medical kit: a pale mint rugged case open to show folded tools, a compact scanner head and a small vial of pale liquid in a padded recess"
+    },
+    "Spider": {
+      "house": "Skavs",
+      "subject": "a spider repair drone: eight articulated legs around a patched body of mismatched salvaged plates, a tool cluster at the front and an oily joint at every knee"
+    },
+    "Imprimante": {
+      "house": "Guilde",
+      "subject": "a desktop fabricator: a squat industrial-white cabinet with a glass front opening on a printing bed where a half-formed bracket is being built"
+    },
+    "Fusil léger": {
+      "house": "TherMoss",
+      "subject": "a light laser rifle: a long slim ceramic-white body with a cylindrical emitter head, copper heat channels along the spine and a small aperture glowing pale cyan"
+    }
+  }
+}
